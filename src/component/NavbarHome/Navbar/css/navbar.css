@@ -1,0 +1,149 @@
+.navbar {
+  position: fixed !important;
+  z-index: 10;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 !important;
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.navbar .navbar__logo {
+  color: red;
+  justify-self: start;
+}
+
+.navbar .btn__show {
+  display: none;
+}
+
+.navbar .navbar__menu__center {
+  display: flex;
+  justify-self: center;
+}
+
+.navbar .navbar__menu__center .login__mobile {
+  display: none;
+}
+
+.navbar .navbar__menu__center .nav-links {
+  margin-left: 1.25rem;
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.navbar .navbar__menu__center .nav-links:hover {
+  color: #fb4226;
+}
+
+.navbar .navbar__menu__center .navbar__location__mobile {
+  display: none;
+}
+
+.navbar .navbar__menu__right {
+  justify-self: end;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar .navbar__menu__right i {
+  color: #9b9b9b;
+  margin-right: 0.3rem;
+  font-size: 1.3rem;
+}
+
+.navbar .navbar__menu__right .login__desktop {
+  padding-right: 0.5rem;
+  border-right: solid 1px #9b9b9b;
+}
+
+.navbar .navbar__menu__right .login__desktop .nav-links-login {
+  color: #9b9b9b;
+}
+
+.navbar .navbar__menu__right .navbar__location {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  padding-left: 0.5rem;
+}
+
+.navbar .navbar__menu__right .navbar__location .location__title {
+  color: #9b9b9b;
+  border: none;
+  padding: 0;
+  padding-right: 1rem;
+}
+
+.navbar .navbar__menu__right .navbar__location .location__title:focus {
+  border: none;
+  box-shadow: none;
+}
+
+@media only screen and (max-width: 46rem) {
+  .btn__show {
+    display: block !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-100%, 60%);
+    cursor: pointer;
+    transition: all 4s ease;
+  }
+  .btn__show i {
+    font-size: 1.5rem;
+  }
+  .navbar__menu__center {
+    background-color: #fff;
+    position: absolute;
+    flex-direction: column;
+    width: 45%;
+    height: 1000%;
+    top: 95%;
+    right: 50%;
+    z-index: 5;
+    opacity: 0;
+    transition: all 0.2s ease;
+  }
+  .navbar__menu__center.active {
+    right: 0;
+    opacity: 1;
+    z-index: 5;
+    transition: all 0.5s ease;
+  }
+  .navbar__menu__center li {
+    padding: 0.5rem 0;
+  }
+  .navbar__menu__center .login__mobile {
+    display: block !important;
+  }
+  .navbar__menu__center .login__mobile i {
+    padding: 0 1rem;
+  }
+  .navbar__menu__center .login__mobile a {
+    color: #000;
+  }
+  .navbar__menu__center .navbar__location__mobile {
+    display: block !important;
+    padding: 0;
+    margin-left: 1.25rem;
+  }
+  .navbar__menu__center .navbar__location__mobile .location__title {
+    color: #000;
+    font-weight: 500;
+    border: none;
+    padding: 0;
+    padding-right: 1rem;
+  }
+  .navbar__menu__center .navbar__location__mobile .location__title:focus {
+    border: none;
+    box-shadow: none;
+  }
+  .navbar__menu__right {
+    display: none !important;
+  }
+}
+/*# sourceMappingURL=navbar.css.map */

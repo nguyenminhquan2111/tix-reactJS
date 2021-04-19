@@ -1,0 +1,33 @@
+.list__movie {
+  margin-top: 3rem;
+  .list__movie__container {
+    .list__movie__slider {
+      .slick-prev {
+        left: -50px;
+        top: 50%;
+        &::before {
+          content: "<";
+          font-size: 3rem;
+        }
+      }
+      .slick-next {
+        top: 50%;
+        right: -40px;
+        &::before {
+          content: ">";
+          font-size: 3rem;
+        }
+      }
+
+      button {
+        &::before {
+          color: gray;
+          opacity: 1;
+          font-size: 4rem;
+          font-weight: bolder;
+          line-height: 0;
+        }
+      }
+    }
+  }
+}
