@@ -1,7 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
 html,
 body {
   height: 100%;
 }
+
 html {
   scroll-behavior: smooth;
 }
@@ -9,12 +17,7 @@ html {
 .full-height {
   height: 100%;
 }
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-size: 1rem;
-}
+
 a {
   text-decoration: none !important;
 }
@@ -24,5 +27,3 @@ li {
 @import "../scss/helpers/mixin";
 @import "../scss/helpers/variable";
 @import "../../HomePage/scss/components/banner";
-@import "../../HomePage/scss/components/listmovie";
-@import "../../HomePage/scss/components/movieitem";
