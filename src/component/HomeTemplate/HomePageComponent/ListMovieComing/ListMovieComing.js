@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { actFetchListMovie } from "./modules/actions";
+import { actFetchListMovieComing } from "./modules/actions";
 import MovieItem from "../MovieItem/MovieItem";
 import Slider from "react-slick";
 import styled from "styled-components";
+// import { Container } from "@material-ui/core";
 
 const ListContainer = styled.div`
   display:none;
   @media (min-width: 768px) {
-    display: block;
+    display:  block;
   }
   & .list__movie__slider {
     .slick-prev {
@@ -49,18 +50,18 @@ const ListMobile = styled.div`
   }
 `;
 
-export default function ListMovie() {
+export default function ListMovieComing() {
   const state = useSelector((state) => {
     return {
-      isLoading: state.listMovieReducer.loading,
-      data: state.listMovieReducer.data,
+      isLoading: state.listMovieComingReducer.loading,
+      data: state.listMovieComingReducer.data,
     };
   });
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(actFetchListMovie());
+    dispatch(actFetchListMovieComing());
   }, []);
 
   const settingSlick = {
@@ -98,7 +99,7 @@ export default function ListMovie() {
     ],
   };
 
-  const renderListMovie = () => {
+  const renderListMovieComing = () => {
     const { data } = state;
     return (
       data &&
@@ -111,9 +112,9 @@ export default function ListMovie() {
   return (
     <>
       <ListContainer>
-        <Slider {...settingSlick}>{renderListMovie()}</Slider>
+        <Slider {...settingSlick}>{renderListMovieComing()}</Slider>
       </ListContainer>
-      {/* <ListMobile>{renderListMovie()}</ListMobile> */}
+      {/* <ListMobile>{renderListMovieComing()}</ListMobile> */}
     </>
   );
 }
