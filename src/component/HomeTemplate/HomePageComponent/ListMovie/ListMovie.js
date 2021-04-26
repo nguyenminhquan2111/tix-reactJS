@@ -97,7 +97,7 @@ export default function ListMovie() {
     return (
       data &&
       data.map((item) => {
-        return <MovieItem key={item.maPhim} movie={item} />;
+        return <MovieItem key={item.maPhim} movie={item} status="nowShowing" />;
       })
     );
   };

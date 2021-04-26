@@ -1,19 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 
 const Item = styled.div`
   margin: 0.2rem 1rem;
   overflow: hidden;
   padding-top: 5px;
   cursor: pointer;
+  min-height: 24rem;
+  .buyButton {
+    width: 100%;
+    display: none;
+  }
+  &:hover {
+    .buyButton {
+      display: block;
+    }
+  }
 `;
 
 const ItemMedia = styled.div`
   position: relative;
+  opacity: 1;
+  ${Item}:hover & {
+    border-radius: 20px;
+    opacity: 0.7;
+  }
 `;
 
 const Image = styled.img`
-  vertical-align: top;
   width: 100%;
   height: 270px;
   border-radius: 20px;
@@ -52,24 +68,54 @@ const Title = styled.h3`
   height: 2.5rem;
   font-size: 1.2rem;
   margin-bottom: 0;
+  ${Item}:hover & {
+    display: none;
+  }
 `;
-
+const ComingSoonTitle = styled(Title)`
+  ${Item}:hover & {
+    display: block;
+  }
+`;
 const Time = styled.p`
   text-transform: capitalize;
   color: #4a4a4a;
   font-size: 13px;
+  ${Item}:hover & {
+    display: none;
+  }
 `;
-
+const ComingSoonTime = styled(Time)`
+  ${Item}:hover & {
+    display: block;
+  }
+`;
 export default function MovieItem(props) {
-  const { movie } = props;
+  const { movie, status } = props;
+
   return (
     <Item>
       <ItemMedia>
         <Image src={movie.hinhAnh} alt={movie.tenPhim}></Image>
         <ImageShadow src={movie.hinhAnh} alt={movie.tenPhim}></ImageShadow>
       </ItemMedia>
-      <Title>{movie.tenPhim}</Title>
-      <Time>{movie.danhGia}</Time>
+
+      {status === "nowShowing" ? (
+        <>
+          <Title>{movie.tenPhim}</Title>
+          <Time>{movie.danhGia}</Time>
+          <Button variant="contained" color="secondary" className="buyButton">
+            <Link to={`/detail/${movie.maPhim}`} style={{ color: "#fff" }}>
+              MUA VÉ
+            </Link>
+          </Button>
+        </>
+      ) : (
+        <>
+          <ComingSoonTitle>{movie.tenPhim}</ComingSoonTitle>
+          <ComingSoonTime>{movie.danhGia}</ComingSoonTime>
+        </>
+      )}
     </Item>
   );
 }
