@@ -97,7 +97,7 @@ export default function ListMovieComing() {
     return (
       data &&
       data.map((item) => {
-        return <MovieItem key={item.maPhim} movie={item} />;
+        return <MovieItem key={item.maPhim} movie={item} status="coming" />;
       })
     );
   };
