@@ -46,11 +46,13 @@ const NavbarMenu = styled.div`
   top: 105%;
   right: 10%;
   opacity: 0;
+  visibility: hidden;
   height: 30rem;
   width: 20rem;
   transition: all 0.5s;
   border: 1px solid #e8e3e3;
   &.active {
+    visibility: visible;
     opacity: 1;
     right: 1%;
   }
@@ -225,7 +227,7 @@ const DropdownItem = styled.li`
 // const LocationMobile = styled.div``;
 
 export default function NavbarHome() {
-  const [clicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useState(true);
   const [location, setLocation] = useState("Hồ Chí Minh");
   const [dropdown, setDropdown] = useState(false);
 

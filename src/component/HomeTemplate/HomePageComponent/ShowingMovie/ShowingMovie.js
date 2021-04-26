@@ -4,8 +4,11 @@ import ListMovie from "../ListMovie/ListMovie";
 import ListMovieComing from "../ListMovieComing/ListMovieComing";
 
 const List = styled.section`
-  max-width: 80%;
+  max-width: 100%;
   margin: 2rem auto;
+  @media (min-width: 768px) {
+    max-width: 60%;
+  }
 `;
 const TabTitle = styled.div`
   width: 100%;
@@ -32,16 +35,16 @@ const Nav = styled.div`
 `;
 
 export default function ShowingMovie() {
-  const [state, setState] = useState(true);
+  const [show, setShow] = useState(true);
 
   return (
     <List id="lichChieu">
       <TabTitle class="nav nav-tabs" id="nav-tab" role="tablist">
         <Nav
           onClick={() => {
-            setState(true);
+            setShow(true);
           }}
-          className={!state ? "nav-item nav-link" : "nav-item nav-link active"}
+          className={!show ? "nav-item nav-link" : "nav-item nav-link active"}
           id="nav-home-tab"
           data-toggle="tab"
           href="#nav-home"
@@ -53,9 +56,9 @@ export default function ShowingMovie() {
         </Nav>
         <Nav
           onClick={() => {
-            setState(false);
+            setShow(false);
           }}
-          className={state ? "nav-item nav-link" : "nav-item nav-link active"}
+          className={show ? "nav-item nav-link" : "nav-item nav-link active"}
           id="nav-profile-tab"
           data-toggle="tab"
           href="#nav-profile"
@@ -68,7 +71,7 @@ export default function ShowingMovie() {
       </TabTitle>
       <div className="tab-content" id="nav-tabContent">
         <div
-          className={!state ? "tab-pane fade" : "tab-pane fade show active"}
+          className={!show ? "tab-pane fade" : "tab-pane fade show active"}
           id="nav-home"
           role="tabpanel"
           aria-labelledby="nav-home-tab"
@@ -76,7 +79,7 @@ export default function ShowingMovie() {
           <ListMovie />
         </div>
         <div
-          className={state ? "tab-pane fade" : "tab-pane fade show active"}
+          className={show ? "tab-pane fade" : "tab-pane fade show active"}
           id="nav-profile"
           role="tabpanel"
           aria-labelledby="nav-profile-tab"

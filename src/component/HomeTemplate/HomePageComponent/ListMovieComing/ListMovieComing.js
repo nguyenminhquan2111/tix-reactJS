@@ -69,28 +69,21 @@ export default function ListMovieComing() {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 5,
+    slidesToShow: 4,
+    slidesToScroll: 4,
     slidesPerRow: 2,
     responsive: [
       {
         breakpoint: 1200,
         settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
+          slidesToShow: 3,
+          slidesToScroll: 3,
           infinite: true,
           dots: false,
         },
       },
       {
         breakpoint: 1000,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      },
-      {
-        breakpoint: 780,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
@@ -114,7 +107,7 @@ export default function ListMovieComing() {
       <ListContainer>
         <Slider {...settingSlick}>{renderListMovieComing()}</Slider>
       </ListContainer>
-      {/* <ListMobile>{renderListMovieComing()}</ListMobile> */}
+      <ListMobile>{renderListMovieComing()}</ListMobile>
     </>
   );
 }

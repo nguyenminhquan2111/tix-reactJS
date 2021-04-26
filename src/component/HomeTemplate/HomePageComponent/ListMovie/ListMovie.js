@@ -44,6 +44,7 @@ const ListContainer = styled.div`
 
 const ListMobile = styled.div`
   display: block;
+  width: 100%;
   @media (min-width: 768px) {
     display: none;
   }
@@ -68,28 +69,21 @@ export default function ListMovie() {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 5,
+    slidesToShow: 4,
+    slidesToScroll: 4,
     slidesPerRow: 2,
     responsive: [
       {
         breakpoint: 1200,
         settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
+          slidesToShow: 3,
+          slidesToScroll: 3,
           infinite: true,
           dots: false,
         },
       },
       {
         breakpoint: 1000,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      },
-      {
-        breakpoint: 780,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
@@ -113,7 +107,7 @@ export default function ListMovie() {
       <ListContainer>
         <Slider {...settingSlick}>{renderListMovie()}</Slider>
       </ListContainer>
-      {/* <ListMobile>{renderListMovie()}</ListMobile> */}
+      <ListMobile>{renderListMovie()}</ListMobile>
     </>
   );
 }

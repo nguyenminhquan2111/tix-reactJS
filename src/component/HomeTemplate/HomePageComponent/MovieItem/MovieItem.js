@@ -13,6 +13,7 @@ const ItemMedia = styled.div`
 `;
 
 const Image = styled.img`
+  vertical-align: top;
   width: 100%;
   height: 270px;
   border-radius: 20px;
