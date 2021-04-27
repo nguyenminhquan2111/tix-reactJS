@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
@@ -22,6 +22,11 @@ const Item = styled.div`
 
 const ItemMedia = styled.div`
   position: relative;
+  opacity: 1;
+  ${Item}:hover & {
+    border-radius: 20px;
+    opacity: 0.7;
+  }
 `;
 
 const Image = styled.img`
