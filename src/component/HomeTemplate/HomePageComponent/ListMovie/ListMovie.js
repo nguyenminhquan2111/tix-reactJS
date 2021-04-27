@@ -125,13 +125,12 @@ export default function ListMovie() {
   };
 
   const renderListMovieMobile = () => {
-    let list = [];
-    if (data) {
-      list = [...data].splice(0, number);
-    }
-    return list.map((item) => {
-      return <MovieItem key={item.maPhim} movie={item} status="nowShowing" />;
-    });
+    return (
+      data &&
+      [...data].splice(0, number).map((item) => {
+        return <MovieItem key={item.maPhim} movie={item} status="nowShowing" />;
+      })
+    );
   };
 
   return (
