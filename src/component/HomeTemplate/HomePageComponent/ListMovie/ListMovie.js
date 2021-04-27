@@ -60,7 +60,7 @@ const BtnViewMore = styled.div`
   align-items: center;
   justify-content: center;
   padding: 0.5rem;
-  border-radius: 1rem;
+  border-radius: 0.4rem;
   &.show {
     display: block;
   }
@@ -141,6 +141,7 @@ export default function ListMovie() {
       <ListMobile>
         {renderListMovieMobile()}
         <BtnViewMore
+          variant="outlined"
           className={data && +number >= +data.length ? "hidden" : "show"}
           onClick={() => {
             setNumber(number + 5);
