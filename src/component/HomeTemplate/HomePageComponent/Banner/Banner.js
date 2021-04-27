@@ -73,20 +73,10 @@ const CarouselItem = styled.div`
   width: 100%;
 `;
 
-const CarouselContainer = styled.div``;
-
 const Img = styled.img`
   width: 100%;
   position: relative;
   top: -100%;
-`;
-
-const Caption = styled.div`
-  position: absolute;
-  color: white;
-  bottom: 10%;
-  right: 50%;
-  z-index: 100;
 `;
 
 const settingSlick = {
@@ -104,19 +94,13 @@ export default function Banner() {
     <Carousel>
       <Slider {...settingSlick}>
         <CarouselItem>
-          <div>
-            <Img src="/images/falcon.jpg" alt="Falcon" />
-          </div>
+          <Img src="/images/falcon.jpg" alt="Falcon" />
         </CarouselItem>
         <CarouselItem>
-          <div>
-            <Img src="/images/fast9.jpg" alt="fast9" />
-          </div>
+          <Img src="/images/fast9.jpg" alt="fast9" />
         </CarouselItem>
         <CarouselItem>
-          <div>
-            <Img src="/images/godzillavskong.jpg" alt="godzillavskong" />
-          </div>
+          <Img src="/images/godzillavskong.jpg" alt="godzillavskong" />
         </CarouselItem>
       </Slider>
     </Carousel>

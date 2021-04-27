@@ -9,6 +9,9 @@ const List = styled.section`
   @media (min-width: 768px) {
     max-width: 60%;
   }
+  @media (min-width: 1500px) {
+    max-width: 50%;
+  }
 `;
 const TabTitle = styled.div`
   width: 100%;
