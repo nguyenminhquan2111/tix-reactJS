@@ -8,7 +8,7 @@ const Item = styled.div`
   overflow: hidden;
   padding-top: 5px;
   cursor: pointer;
-  min-height: 24rem;
+  // min-height: 24rem;
   .buyButton {
     width: 100%;
     display: none;
@@ -32,7 +32,7 @@ const ItemMedia = styled.div`
 const Image = styled.img`
   width: 100%;
   height: 270px;
-  border-radius: 20px;
+  border-radius: 0;
   object-fit: cover;
   margin-bottom: 30px;
   position: relative;
@@ -40,6 +40,9 @@ const Image = styled.img`
   transition: all 0.2s;
   ${Item}:hover & {
     transform: translateY(-2%);
+  }
+  @media (min-width: 768px) {
+    border-radius: 20px;
   }
 `;
 
@@ -52,13 +55,17 @@ const ImageShadow = styled.img`
   height: 100%;
   border-radius: 20px;
   transform: scale(0.85);
+  display: none;
+  @media (min-width: 768px) {
+    display: block;
+  }
 `;
 
 const Title = styled.h3`
   color: #050938;
   font-weight: 600;
   text-transform: capitalize;
-  display: -webkit-box;
+  display: none;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -71,6 +78,9 @@ const Title = styled.h3`
   ${Item}:hover & {
     display: none;
   }
+  @media (min-width: 768px) {
+    display: -webkit-box;
+  }
 `;
 const ComingSoonTitle = styled(Title)`
   ${Item}:hover & {
@@ -81,8 +91,12 @@ const Time = styled.p`
   text-transform: capitalize;
   color: #4a4a4a;
   font-size: 13px;
+  display: none;
   ${Item}:hover & {
     display: none;
+  }
+  @media (min-width: 768px) {
+    display: block;
   }
 `;
 const ComingSoonTime = styled(Time)`
