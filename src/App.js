@@ -1,18 +1,17 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import NavbarHome from "./component/NavbarHome/Navbar";
 import PageNotFound from "./containers/PageNotFound";
 import { routesHome } from "./routes";
-
+import HomeTemplate from "./containers/HomeTemplate";
 function App() {
   const renderRoutesHome = (routes) => {
     if (routes && routes.length > 0) {
       return routes.map((item, index) => {
         return (
-          <Route
+          <HomeTemplate
             key={index}
             exact={item.exact}
             path={item.path}
-            component={item.component}
+            Component={item.component}
           />
         );
       });
@@ -20,7 +19,6 @@ function App() {
   };
   return (
     <BrowserRouter>
-      <NavbarHome />
       <Switch>
         {renderRoutesHome(routesHome)}
 
