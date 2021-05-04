@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { actFetchListMovie } from "./modules/actions";
 import MovieItem from "../MovieItem/MovieItem";
@@ -43,14 +43,35 @@ const ListContainer = styled.div`
 `;
 
 const ListMobile = styled.div`
-  display: block;
+  margin: 0 auto;
   width: 100%;
   @media (min-width: 768px) {
     display: none;
   }
 `;
 
+const BtnViewMore = styled.div`
+  cursor: pointer;
+  margin: 0 auto;
+  max-width: 6rem;
+  color: grey;
+  border: 1px solid grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+  &.show {
+    display: block;
+  }
+  &.hidden {
+    display: none;
+  }
+`;
+
 export default function ListMovie() {
+  const [number, setNumber] = useState(3);
+
   const state = useSelector((state) => {
     return {
       isLoading: state.listMovieReducer.loading,
@@ -92,11 +113,21 @@ export default function ListMovie() {
     ],
   };
 
+  const { data } = state;
+
   const renderListMovie = () => {
-    const { data } = state;
     return (
       data &&
       data.map((item) => {
+        return <MovieItem key={item.maPhim} movie={item} status="nowShowing" />;
+      })
+    );
+  };
+
+  const renderListMovieMobile = () => {
+    return (
+      data &&
+      [...data].splice(0, number).map((item) => {
         return <MovieItem key={item.maPhim} movie={item} status="nowShowing" />;
       })
     );
@@ -107,7 +138,18 @@ export default function ListMovie() {
       <ListContainer>
         <Slider {...settingSlick}>{renderListMovie()}</Slider>
       </ListContainer>
-      <ListMobile>{renderListMovie()}</ListMobile>
+      <ListMobile>
+        {renderListMovieMobile()}
+        <BtnViewMore
+          variant="outlined"
+          className={data && +number >= +data.length ? "hidden" : "show"}
+          onClick={() => {
+            setNumber(number + 5);
+          }}
+        >
+          View More
+        </BtnViewMore>
+      </ListMobile>
     </>
   );
 }

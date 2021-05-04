@@ -71,6 +71,7 @@ const NavbarMenu = styled.div`
   }
 
   @media (min-width: 768px) {
+    visibility: visible;
     width: fit-content;
     height: 100%;
     flex-direction: row;
