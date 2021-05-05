@@ -280,7 +280,7 @@ export default function NavbarHome() {
       <NavbarMenu className={!clicked ? "active" : ""}>
         {/* Login  */}
         <NavbarLoginMobile>
-          <i className="fas fa-user-circle"></i>Đăng nhập
+          <i className="fas fa-user-circle">Đăng nhập</i>
         </NavbarLoginMobile>
         {/* menuList  */}
         {renderMenuItem()}

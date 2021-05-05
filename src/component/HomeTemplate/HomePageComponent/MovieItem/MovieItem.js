@@ -8,7 +8,7 @@ const Item = styled.div`
   overflow: hidden;
   padding-top: 5px;
   cursor: pointer;
-  // min-height: 24rem;
+  min-height: 24rem;
   .buyButton {
     width: 100%;
     display: none;
@@ -119,7 +119,7 @@ export default function MovieItem(props) {
           <Title>{movie.tenPhim}</Title>
           <Time>{movie.danhGia}</Time>
           <Button variant="contained" color="secondary" className="buyButton">
-            <Link to={`/detal/${movie.maPhim}`} style={{ color: "#fff" }}>
+            <Link to={`/detail/${movie.maPhim}`} style={{ color: "#fff" }}>
               MUA VÉ
             </Link>
           </Button>
