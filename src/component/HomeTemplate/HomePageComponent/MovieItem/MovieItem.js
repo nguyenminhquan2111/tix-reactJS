@@ -8,7 +8,7 @@ const Item = styled.div`
   overflow: hidden;
   padding-top: 5px;
   cursor: pointer;
-  // min-height: 24rem;
+  min-height: 24rem;
   .buyButton {
     width: 100%;
     display: none;
