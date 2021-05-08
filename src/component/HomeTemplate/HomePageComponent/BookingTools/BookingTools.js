@@ -28,10 +28,6 @@ const Tools = styled.div`
     align-items: center;
     justify-content: space-between;
   }
-  // & > div > div > div {
-  //   font-weight: 500;
-  //   color: grey;
-  // }
   & > div > div i {
     color: grey;
 `;
@@ -79,14 +75,6 @@ const SelectMovieContainer = styled.div`
 `;
 const SelectMovie = styled.div``;
 
-//Cinema chain
-// const SelectCinemaChainContainer = styled.div`
-//   flex: 2;
-//   border-right: solid 1px rgba(238, 238, 238, 0.88);
-// `;
-// const SelectCinemaChain = styled.div``;
-// const ListCinemaChain = styled.div``;
-
 //Cinema
 const SelectCinemaContainer = styled.div`
   flex: 2;
@@ -94,7 +82,6 @@ const SelectCinemaContainer = styled.div`
   position: relative;
 `;
 const SelectCinema = styled.div``;
-// const ListCinema = styled.div``;
 
 //Date
 const SelectDateContainer = styled.div`
@@ -103,7 +90,6 @@ const SelectDateContainer = styled.div`
   position: relative;
 `;
 const SelectDate = styled.div``;
-// const ListDate = styled.div``;
 
 //Session
 const SelectSessionContainer = styled.div`
@@ -112,7 +98,6 @@ const SelectSessionContainer = styled.div`
   position: relative;
 `;
 const SelectSession = styled.div``;
-// const ListSession = styled.div``;
 
 //Confirm
 const ConfirmContainer = styled.div`
