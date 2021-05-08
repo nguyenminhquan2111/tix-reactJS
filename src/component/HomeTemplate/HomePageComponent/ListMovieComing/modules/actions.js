@@ -1,12 +1,12 @@
 import * as ActionType from "./constants";
 import axios from "axios";
+import { URL_LIST_MOVIE_COMING } from "../../URL";
 
 export const actFetchListMovieComing = () => {
   return (dispatch) => {
     dispatch(actListMovieComingRequest());
     axios({
-      url:
-        "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP09",
+      url: URL_LIST_MOVIE_COMING,
       method: "GET",
     })
       .then((res) => {

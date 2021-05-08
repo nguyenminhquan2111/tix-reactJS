@@ -1,6 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import NavbarHome from "../../component/NavbarHome/Navbar";
+
 function LayoutHome(props) {
   return (
     <>

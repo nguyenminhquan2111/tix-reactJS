@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MenuItems, LoginItems, Location } from "../MenuItems/MenuItem";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 // Variable
 const text = "#000";
@@ -257,15 +257,15 @@ export default function NavbarHome() {
       );
     });
   };
-  const renderLogin = () => {
-    return LoginItems.map((item, index) => {
-      return (
-        <li key={index} href={item.url}>
-          Đăng Nhập
-        </li>
-      );
-    });
-  };
+  // const renderLogin = () => {
+  //   return LoginItems.map((item, index) => {
+  //     return (
+  //       <li key={index} href={item.url}>
+  //         Đăng Nhập
+  //       </li>
+  //     );
+  //   });
+  // };
 
   return (
     <Navbar>
