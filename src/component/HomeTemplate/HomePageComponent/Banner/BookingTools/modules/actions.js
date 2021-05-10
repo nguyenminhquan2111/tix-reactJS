@@ -6,7 +6,7 @@ export const actFetchDetailMovie = (id) => {
   return (dispatch) => {
     dispatch(actDetailMovieRequest());
     axios({
-      url: URL_DETAIL_MOVIE + id,
+      url: URL_DETAIL_MOVIE(id),
       method: "GET",
     })
       .then((res) => {
