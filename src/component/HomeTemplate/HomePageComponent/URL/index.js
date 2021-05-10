@@ -7,3 +7,6 @@ export const URL_LIST_MOVIE_COMING =
 //   url Detail + id
 export const URL_DETAIL_MOVIE =
   "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayThongTinPhim?MaPhim=";
+
+export const URL_LIST_CINEMA_CHAIN =
+  "https://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinHeThongRap";

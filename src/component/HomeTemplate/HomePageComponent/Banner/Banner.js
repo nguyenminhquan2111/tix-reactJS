@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import BookingTools from "../BookingTools/BookingTools";
+import BookingTools from "./BookingTools/BookingTools";
 
 const Carousel = styled.section`
   display: none;

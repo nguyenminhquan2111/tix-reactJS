@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import Loading from "../../../Loading";
-import { actFetchListMovie } from "../ListMovie/modules/actions";
+import { actFetchListMovie } from "../../ShowingMovie/ListMovie/modules/actions";
 import { actFetchDetailMovie } from "./modules/actions";
+import Loading from "../../../../Loading";
 
 const Tools = styled.div`
   position: absolute;
@@ -29,7 +29,6 @@ const Tools = styled.div`
   & > div > div i {
     color: grey;
   }
-
   @media (min-width: 997px) {
     display: flex;
   }
@@ -75,7 +74,6 @@ const List = styled.ul`
     opacity: 1;
     top: 100%;
   }
-
   &::-webkit-scrollbar {
     width: 4px;
     background-color: #e8e3e3;

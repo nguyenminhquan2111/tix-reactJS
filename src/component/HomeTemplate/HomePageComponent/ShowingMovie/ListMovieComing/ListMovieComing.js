@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { actFetchListMovieComing } from "./modules/actions";
-import MovieItem from "../MovieItem/MovieItem";
 import Slider from "react-slick";
 import styled from "styled-components";
+import MovieItem from "../MovieItem/MovieItem";
 // import { Container } from "@material-ui/core";
 
 const ListContainer = styled.div`

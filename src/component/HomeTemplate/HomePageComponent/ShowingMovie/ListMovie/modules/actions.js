@@ -1,6 +1,6 @@
 import * as ActionType from "./constants";
 import axios from "axios";
-import { URL_LIST_MOVIE } from "../../URL";
+import { URL_LIST_MOVIE } from "../../../URL";
 
 export const actFetchListMovie = () => {
   return (dispatch) => {

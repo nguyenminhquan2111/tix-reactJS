@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import ListMovie from "../ListMovie/ListMovie";
-import ListMovieComing from "../ListMovieComing/ListMovieComing";
+import ListMovie from "./ListMovie/ListMovie";
+import ListMovieComing from "./ListMovieComing/ListMovieComing";
 
 const List = styled.section`
   max-width: 100%;

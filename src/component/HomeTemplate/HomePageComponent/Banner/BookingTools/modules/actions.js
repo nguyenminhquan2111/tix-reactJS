@@ -1,5 +1,5 @@
 import axios from "axios";
-import { URL_DETAIL_MOVIE } from "../../URL";
+import { URL_DETAIL_MOVIE } from "../../../URL";
 import * as ActionType from "./constants";
 
 export const actFetchDetailMovie = (id) => {
