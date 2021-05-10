@@ -41,7 +41,7 @@ export default function ShowingMovie() {
   const [show, setShow] = useState(true);
 
   return (
-    <List id="lichChieu">
+    <List id="lichChieu" className="lichChieu">
       <TabTitle class="nav nav-tabs" id="nav-tab" role="tablist">
         <Nav
           onClick={() => {

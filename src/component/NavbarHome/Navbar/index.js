@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MenuItems, LoginItems, Location } from "../MenuItems/MenuItem";
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 // Variable
 const text = "#000";
@@ -130,6 +131,14 @@ const NavbarLogin = styled.div`
   align-items: center;
 `;
 
+const LoginTitle = styled.a`
+  cursor: pointer !important;
+  color: ${textLogin} !important;
+  font-size: 0.9rem !important;
+  margin: 0 !important;
+  font-weight: normal !important;
+`;
+
 const NavbarLoginMobile = styled(NavbarLogin)`
   color: ${textLogin};
   display: flex;
@@ -166,6 +175,7 @@ const DropdownTitle = styled.div`
   width: 6rem;
   color: ${textLogin};
   font-size: 0.9rem;
+  margin-top: 0.2rem;
   @media (min-width: 768px) {
   }
 `;
@@ -257,19 +267,22 @@ export default function NavbarHome() {
       );
     });
   };
-  // const renderLogin = () => {
-  //   return LoginItems.map((item, index) => {
-  //     return (
-  //       <li key={index} href={item.url}>
-  //         Đăng Nhập
-  //       </li>
-  //     );
-  //   });
-  // };
+
+  const renderLogin = () => {
+    return LoginItems.map((item, index) => {
+      return (
+        <NavbarItem key={index}>
+          <LoginTitle href={item.url}>Đăng nhập</LoginTitle>
+        </NavbarItem>
+      );
+    });
+  };
 
   return (
     <Navbar>
-      <NavbarLogo>Movie</NavbarLogo>
+      <NavLink to="/">
+        <NavbarLogo>Movie</NavbarLogo>
+      </NavLink>
       <ButtonShow onClick={() => setClicked(!clicked)}>
         {clicked ? (
           <i className="fas fa-bars"></i>
@@ -280,7 +293,7 @@ export default function NavbarHome() {
       <NavbarMenu className={!clicked ? "active" : ""}>
         {/* Login  */}
         <NavbarLoginMobile>
-          <i className="fas fa-user-circle">Đăng nhập</i>
+          <i className="fas fa-user-circle"></i> {renderLogin()}
         </NavbarLoginMobile>
         {/* menuList  */}
         {renderMenuItem()}
@@ -301,7 +314,8 @@ export default function NavbarHome() {
       </NavbarMenu>
       <NavbarRight>
         <NavbarLogin>
-          <i className="fas fa-user-circle"></i>Đăng nhập
+          <i className="fas fa-user-circle"></i>
+          {renderLogin()}
         </NavbarLogin>
         <NavbarLocation>
           <i className="fas fa-map-marker-alt"></i>

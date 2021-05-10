@@ -1,8 +1,8 @@
 export const MenuItems = [
-  { title: "Lịch Chiếu", url: "#lichChieu" },
-  { title: "Cụm Rạp", url: "#cumRap" },
-  { title: "Tin Tức", url: "#tinTuc" },
-  { title: "Ứng Dụng", url: "#ungDung" },
+  { title: "Lịch Chiếu", url: "/#lichChieu" },
+  { title: "Cụm Rạp", url: "/#cumRap" },
+  { title: "Tin Tức", url: "/#tinTuc" },
+  { title: "Ứng Dụng", url: "/#ungDung" },
 ];
 
 export const LoginItems = [
