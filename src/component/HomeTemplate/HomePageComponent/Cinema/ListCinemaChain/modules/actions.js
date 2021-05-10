@@ -1,6 +1,6 @@
 import * as ActionType from "./constants";
 import axios from "axios";
-import { URL_LIST_CINEMA_CHAIN } from "../../URL";
+import { URL_LIST_CINEMA_CHAIN } from "../../../URL";
 
 export const actFetchListCinemaChain = () => {
   return (dispatch) => {

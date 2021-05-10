@@ -282,7 +282,7 @@ export default function BookingTools() {
           }}
         >
           <TitleMovie>{movie}</TitleMovie>
-          <i class="fas fa-angle-down"></i>
+          <i className="fas fa-angle-down"></i>
         </Select>
         <List className={movieClick ? "active" : ""}>{renderListMovie()}</List>
       </SelectMovieContainer>
@@ -298,7 +298,7 @@ export default function BookingTools() {
           }}
         >
           <Title>{cinema}</Title>
-          <i class="fas fa-angle-down"></i>
+          <i className="fas fa-angle-down"></i>
         </Select>
         <List className={cinemaClick ? "active" : ""}>
           {movie !== "Phim" ? (
@@ -326,7 +326,7 @@ export default function BookingTools() {
           >
             {date}
           </Title>
-          <i class="fas fa-angle-down"></i>
+          <i className="fas fa-angle-down"></i>
         </Select>
         <List className={dateClick ? "active" : ""}>
           {cinema !== "Rạp" ? (
@@ -354,7 +354,7 @@ export default function BookingTools() {
           >
             {session}
           </Title>
-          <i class="fas fa-angle-down"></i>
+          <i className="fas fa-angle-down"></i>
         </Select>
         <List className={sessionClick ? "active" : ""}>
           {date !== "Ngày xem" ? (
