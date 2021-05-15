@@ -10,7 +10,7 @@ const routesHome = [
   },
   {
     exact: false,
-    path: "/detail",
+    path: "/detail/:id",
     component: DetailPage,
   },
 
