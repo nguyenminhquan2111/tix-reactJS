@@ -8,7 +8,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import {
   actGetCinemaBrand,
   actGetListCinemaByBrand,
-} from "@redux/actions/movieActions";
+} from "redux/actions/movieActions";
 
 const CinemaBrandWrapper = styled.section`
   max-width: 100%;

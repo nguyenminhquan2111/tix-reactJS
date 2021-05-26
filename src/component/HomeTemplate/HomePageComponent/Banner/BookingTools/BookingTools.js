@@ -4,10 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import Loading from "../../../../Loading";
 import _ from "lodash";
-import {
-  actGetDetailMovie,
-  actGetListMovie,
-} from "@redux/actions/movieActions";
+import { actGetDetailMovie, actGetListMovie } from "redux/actions/movieActions";
 
 const Tools = styled.div`
   position: absolute;

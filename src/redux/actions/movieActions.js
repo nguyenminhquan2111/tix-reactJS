@@ -107,14 +107,14 @@ const actCinemaByBrand = (data) => {
   };
 };
 
-const actRequestAPI = () => {
-  return {
-    type: ActionType.API_REQUEST,
-  };
-};
+// const actRequestAPI = () => {
+//   return {
+//     type: ActionType.API_REQUEST,
+//   };
+// };
 
-const actFailedAPI = () => {
-  return {
-    type: ActionType.API_FAILED,
-  };
-};
+// const actFailedAPI = () => {
+//   return {
+//     type: ActionType.API_FAILED,
+//   };
+// };

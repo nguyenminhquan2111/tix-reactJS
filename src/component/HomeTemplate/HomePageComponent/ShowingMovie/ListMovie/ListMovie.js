@@ -1,7 +1,7 @@
-import { actGetListMovie } from "@redux/actions/movieActions";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Slider from "react-slick";
+import { actGetListMovie } from "redux/actions/movieActions";
 import styled from "styled-components";
 import MovieItem from "../MovieItem/MovieItem";
 
