@@ -189,8 +189,8 @@ const DropdownList = styled.ul`
   overflow-y: scroll;
   top: 0;
   right: 50%;
-
   transform: translatex(50%);
+
   &::-webkit-scrollbar {
     width: 4px;
     background-color: #e8e3e3;
