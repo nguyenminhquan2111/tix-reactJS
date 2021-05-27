@@ -51,21 +51,8 @@ const CircleProgressBarBase = ({
           strokeDasharray={`${progressBar} ${100 - progressBar}`}
           strokeDashoffset={INITIAL_OFFSET}
         />
-        <g className="circle-label">
-          <text
-            x="50%"
-            y="50%"
-            className="circle-percentage"
-            style={{
-              color: "#fff !important",
-              fontSize: "0.5rem",
-              fontWeight: "bold",
-            }}
-          >
-            {progressBar / 10}
-          </text>
-        </g>
       </svg>
+      <p className="circle-percentage">{progressBar / 10}</p>
     </figure>
   );
 };

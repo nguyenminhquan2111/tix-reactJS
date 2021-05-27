@@ -1,4 +1,3 @@
-import React from "react";
 import CircleProgressBarBase from "./CircleProgressBarBase";
 import styled from "styled-components";
 
@@ -8,10 +7,14 @@ const CircleProgressBar = styled(CircleProgressBarBase)`
   }
 
   .circle-percentage {
-    font-size: 0.6em;
+    font-size: 0.7em;
     line-height: 1;
     text-anchor: middle;
-    transform: translateY(-0.25em);
+    position: absolute;
+    z-index: 10;
+    color: white;
+    font-size: 3rem;
+    transform: translate(50px, -105px);
   }
 
   .circle-text {

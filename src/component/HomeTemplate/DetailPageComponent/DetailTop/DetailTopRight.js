@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-// import "react-circular-progressbar/dist/styles.css";
 import CircleProgressBar from "./CircleProgressBar/CircleProgressBar";
 export default function DetailTopRight(props) {
   const Col_9 = styled.div`
@@ -10,6 +9,7 @@ export default function DetailTopRight(props) {
     align-items: center;
     font-size: 14px;
     .left {
+      width: 32rem;
       color: #e9e9e9;
       font-weight: 1rem;
       //padding-right: 21rem;
@@ -29,7 +29,6 @@ export default function DetailTopRight(props) {
     }
     .right {
       text-align: center;
-      width: 25rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -70,21 +69,36 @@ export default function DetailTopRight(props) {
       .img-container {
         position: relative;
         display: flex;
-        margin-top: 1.8rem;
+        margin-top: 0;
         margin-bottom: 5px;
         img {
           max-width: 2rem;
           height: auto;
           vertical-align: middle;
+          margin: 0 0.1rem;
         }
       }
       .detail {
-        color: $grey-200;
+        margin-top: 5px;
+        color: #e9e9e9;
         font-size: 0.9rem;
       }
     }
   `;
   const { item } = props;
+  const renderImg = () => {
+    let star = 0,
+      number = 0;
+    star = Math.floor(item.danhGia / 2);
+    if (item.danhGia - star * 2 > 0) number = 1;
+    let arr = [];
+    for (let i = 0; i < star; i++) arr.push(1);
+    if (number) arr.push(2);
+    return arr.map((item) => {
+      if (item == 1) return <img src="/images/star1.png" alt="star1" />;
+      return <img src="/images/star1.2.png" alt="star1.2" />;
+    });
+  };
   return (
     <div>
       <Col_9 className="col-9 m-0 p-0">
@@ -107,15 +121,10 @@ export default function DetailTopRight(props) {
         </div> */}
           <CircleProgressBar
             trailStrokeColor="gray"
-            strokeColor="teal"
+            strokeColor="#7ed321"
             percentage={item.danhGia * 10}
           />
-          <div className="img-container">
-            <img src="./img/star1.png" alt />
-            <img src="./img/star1.png" alt />
-            <img src="./img/star1.png" alt />
-            <img src="./img/star1.2.png" alt />
-          </div>
+          <div className="img-container">{renderImg()}</div>
           <p className="detail">271 người đánh giá</p>
         </div>
       </Col_9>

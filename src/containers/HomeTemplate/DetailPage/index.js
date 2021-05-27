@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "./../../../component/Loader";
-import { actFetchDetailMovie } from "./../../../component/HomeTemplate/HomePageComponent/Banner/BookingTools/modules/actions";
+import { actGetDetailMovie } from "redux/actions/movieActions";
 import DetailTop from "./../../../component/HomeTemplate/DetailPageComponent/DetailTop/DetailTop";
 export default function DetailPage(props) {
   const state = useSelector((state) => {
     return {
-      isLoading: state.detailMovieReducer.loading,
-      data: state.detailMovieReducer.data,
+      isLoading: state.movieReducer.loading,
+      data: state.movieReducer.detailMovie,
     };
   });
   const { isLoading, data } = state;
@@ -16,7 +16,7 @@ export default function DetailPage(props) {
   console.log(id);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(actFetchDetailMovie(id));
+    dispatch(actGetDetailMovie(id));
   }, []);
   const renderDetailMovie = () => {
     if (isLoading) return <Loader />;

@@ -43,7 +43,7 @@ export default function DetailTop(props) {
   const Row = styled.div`
     height: 100%;
   `;
- 
+
   const { movie } = props;
 
   return (

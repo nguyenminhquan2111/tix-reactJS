@@ -35,11 +35,14 @@ export const actGetListMovieComing = () => {
 };
 export const actGetDetailMovie = (idMovie) => {
   return (dispatch) => {
+    dispatch(actRequestAPI());
+
     axios({
       url: URL_GET_DETAIL_MOVIE(idMovie),
       method: "GET",
     })
       .then((res) => {
+        console.log(res.data);
         dispatch(actDetailMovie(res.data));
       })
       .catch();
@@ -107,11 +110,11 @@ const actCinemaByBrand = (data) => {
   };
 };
 
-// const actRequestAPI = () => {
-//   return {
-//     type: ActionType.API_REQUEST,
-//   };
-// };
+const actRequestAPI = () => {
+  return {
+    type: ActionType.API_REQUEST,
+  };
+};
 
 // const actFailedAPI = () => {
 //   return {
