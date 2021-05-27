@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import listMovieReducer from "../../component/HomeTemplate/HomePageComponent/ListMovie/modules/reducer";
-import listMovieComingReducer from "../../component/HomeTemplate/HomePageComponent/ListMovieComing/modules/reducer";
-import detailMovieReducer from "../../component/HomeTemplate/HomePageComponent/BookingTools/modules/reducer";
+import listMovieReducer from "../../component/HomeTemplate/HomePageComponent/ShowingMovie/ListMovie/modules/reducer";
+import listMovieComingReducer from "../../component/HomeTemplate/HomePageComponent/ShowingMovie/ListMovieComing/modules/reducer";
+import detailMovieReducer from "../../component/HomeTemplate/HomePageComponent/Banner/BookingTools/modules/reducer";
 
 const rootReducer = combineReducers({
   listMovieReducer,

@@ -1,15 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import Loading from "../../../Loading";
-import { actFetchListMovie } from "../ListMovie/modules/actions";
+import { actFetchListMovie } from "../../ShowingMovie/ListMovie/modules/actions";
 import { actFetchDetailMovie } from "./modules/actions";
+import Loading from "../../../../Loading";
 
 const Tools = styled.div`
   position: absolute;
-  width: 1080px;
+  // width: 1080px;
   background-color: white;
-  // width: 60%;
+  width: 70%;
   height: 80px;
   bottom: 0;
   left: 50%;
@@ -17,11 +18,8 @@ const Tools = styled.div`
   box-shadow: 0 0 10px rgb(0 0 0 / 30%);
   border-radius: 5px;
   z-index: 999;
-  display: flex;
+  display: none;
   align-items: center;
-  & > div {
-    cursor: pointer;
-  }
   & > div > div {
     padding: 1rem;
     display: flex;
@@ -30,6 +28,29 @@ const Tools = styled.div`
   }
   & > div > div i {
     color: grey;
+  }
+  @media (min-width: 997px) {
+    display: flex;
+  }
+`;
+const Select = styled.div`
+  cursor: pointer;
+`;
+const Title = styled.li`
+  max-width: 8rem;
+  font-weight: 500;
+  color: grey;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+const TitleMovie = styled.li`
+  max-width: 12rem;
+  font-weight: 500;
+  color: grey;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 const List = styled.ul`
   background-color: white;
@@ -53,7 +74,6 @@ const List = styled.ul`
     opacity: 1;
     top: 100%;
   }
-
   &::-webkit-scrollbar {
     width: 4px;
     background-color: #e8e3e3;
@@ -66,6 +86,15 @@ const List = styled.ul`
     border-radius: 4px;
   }
 `;
+const MenuItem = styled.li`
+  padding: 0.2rem 1rem;
+  white-space: nowrap;
+  cursor: pointer;
+  &:hover {
+    background-color: grey;
+    color: white;
+  }
+`;
 
 //Movie
 const SelectMovieContainer = styled.div`
@@ -73,60 +102,28 @@ const SelectMovieContainer = styled.div`
   border-right: solid 1px rgba(238, 238, 238, 0.88);
   position: relative;
 `;
-const SelectMovie = styled.div``;
-
-//Cinema
-const SelectCinemaContainer = styled.div`
+//Cinema,Date,Session
+const SelectContainer = styled.div`
   flex: 2;
   border-right: solid 1px rgba(238, 238, 238, 0.88);
   position: relative;
 `;
-const SelectCinema = styled.div``;
-
-//Date
-const SelectDateContainer = styled.div`
-  flex: 2;
-  border-right: solid 1px rgba(238, 238, 238, 0.88);
-  position: relative;
-`;
-const SelectDate = styled.div``;
-
-//Session
-const SelectSessionContainer = styled.div`
-  flex: 2;
-  border-right: solid 1px rgba(238, 238, 238, 0.88);
-  position: relative;
-`;
-const SelectSession = styled.div``;
 
 //Confirm
 const ConfirmContainer = styled.div`
   flex: 2;
+  display: flex;
+  justify-content: center;
 `;
-const ButtonConfirm = styled.div`
-  padding: 0.5rem;
-`;
-
-const MenuItem = styled.li`
+const ButtonConfirm = styled.button`
+  font-size: 0.8rem;
+  color: #fff;
+  background-color: #4a4a4a;
   padding: 0.2rem 1rem;
-  white-space: nowrap;
-`;
-const TitleMovie = styled.li`
-  max-width: 12rem;
-  font-weight: 500;
-  color: grey;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
-const Title = styled.li`
-  max-width: 8rem;
-  font-weight: 500;
-  color: grey;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  border-radius: 5px;
+  @media (min-width: 1100px) {
+    font-size: 1rem;
+  }
 `;
 
 export default function BookingTools() {
@@ -155,7 +152,6 @@ export default function BookingTools() {
 
   useEffect(() => {
     dispatch(actFetchListMovie());
-    renderListMovie();
   }, []);
 
   useEffect(() => {
@@ -277,7 +273,7 @@ export default function BookingTools() {
     <Tools>
       {/* Movie */}
       <SelectMovieContainer>
-        <SelectMovie
+        <Select
           onClick={() => {
             setMovieClick(!movieClick);
             setCinemaClick(false);
@@ -286,14 +282,14 @@ export default function BookingTools() {
           }}
         >
           <TitleMovie>{movie}</TitleMovie>
-          <i class="fas fa-angle-down"></i>
-        </SelectMovie>
+          <i className="fas fa-angle-down"></i>
+        </Select>
         <List className={movieClick ? "active" : ""}>{renderListMovie()}</List>
       </SelectMovieContainer>
 
       {/* Cinema */}
-      <SelectCinemaContainer>
-        <SelectCinema
+      <SelectContainer>
+        <Select
           onClick={() => {
             setCinemaClick(!cinemaClick);
             setMovieClick(false);
@@ -302,8 +298,8 @@ export default function BookingTools() {
           }}
         >
           <Title>{cinema}</Title>
-          <i class="fas fa-angle-down"></i>
-        </SelectCinema>
+          <i className="fas fa-angle-down"></i>
+        </Select>
         <List className={cinemaClick ? "active" : ""}>
           {movie !== "Phim" ? (
             renderListCinema()
@@ -311,11 +307,11 @@ export default function BookingTools() {
             <MenuItem>Vui lòng chọn phim</MenuItem>
           )}
         </List>
-      </SelectCinemaContainer>
+      </SelectContainer>
 
       {/* Date */}
-      <SelectDateContainer>
-        <SelectDate
+      <SelectContainer>
+        <Select
           onClick={() => {
             setCinemaClick(false);
             setMovieClick(false);
@@ -330,8 +326,8 @@ export default function BookingTools() {
           >
             {date}
           </Title>
-          <i class="fas fa-angle-down"></i>
-        </SelectDate>
+          <i className="fas fa-angle-down"></i>
+        </Select>
         <List className={dateClick ? "active" : ""}>
           {cinema !== "Rạp" ? (
             renderListDate()
@@ -339,11 +335,11 @@ export default function BookingTools() {
             <MenuItem>Vui lòng chọn rạp</MenuItem>
           )}
         </List>
-      </SelectDateContainer>
+      </SelectContainer>
 
       {/* Session  */}
-      <SelectSessionContainer>
-        <SelectSession
+      <SelectContainer>
+        <Select
           onClick={() => {
             setCinemaClick(false);
             setMovieClick(false);
@@ -358,8 +354,8 @@ export default function BookingTools() {
           >
             {session}
           </Title>
-          <i class="fas fa-angle-down"></i>
-        </SelectSession>
+          <i className="fas fa-angle-down"></i>
+        </Select>
         <List className={sessionClick ? "active" : ""}>
           {date !== "Ngày xem" ? (
             renderListSession()
@@ -367,10 +363,12 @@ export default function BookingTools() {
             <MenuItem>Vui lòng chọn ngày xem</MenuItem>
           )}
         </List>
-      </SelectSessionContainer>
+      </SelectContainer>
       {/* Confirm S */}
       <ConfirmContainer>
-        <ButtonConfirm>Confirm</ButtonConfirm>
+        <ButtonConfirm disabled={session !== "Suất chiếu" ? false : true}>
+          MUA VÉ NGAY
+        </ButtonConfirm>
       </ConfirmContainer>
     </Tools>
   );

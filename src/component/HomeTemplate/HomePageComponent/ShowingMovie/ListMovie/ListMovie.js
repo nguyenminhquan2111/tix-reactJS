@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { actFetchListMovie } from "./modules/actions";
-import MovieItem from "../MovieItem/MovieItem";
 import Slider from "react-slick";
 import styled from "styled-components";
+import MovieItem from "../MovieItem/MovieItem";
 
 const ListContainer = styled.div`
   display:none;
@@ -83,6 +83,7 @@ export default function ListMovie() {
 
   useEffect(() => {
     dispatch(actFetchListMovie());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const settingSlick = {

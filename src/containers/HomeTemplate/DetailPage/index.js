@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "./../../../component/Loader";
-import { actFetchDetailMovie } from "./../../../component/HomeTemplate/HomePageComponent/BookingTools/modules/actions";
+import { actFetchDetailMovie } from "./../../../component/HomeTemplate/HomePageComponent/Banner/BookingTools/modules/actions";
 import DetailTop from "./../../../component/HomeTemplate/DetailPageComponent/DetailTop/DetailTop";
 export default function DetailPage(props) {
   const state = useSelector((state) => {

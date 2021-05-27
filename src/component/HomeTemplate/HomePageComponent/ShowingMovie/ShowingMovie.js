@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import ListMovie from "../ListMovie/ListMovie";
-import ListMovieComing from "../ListMovieComing/ListMovieComing";
+import ListMovie from "./ListMovie/ListMovie";
+import ListMovieComing from "./ListMovieComing/ListMovieComing";
 
 const List = styled.section`
   max-width: 100%;
-  margin: 2rem auto;
+  margin: 0 auto;
+  padding-top: 4.5rem;
   @media (min-width: 768px) {
     max-width: 60%;
   }
@@ -19,8 +20,10 @@ const TabTitle = styled.div`
   align-items: center;
   justify-content: center;
   height: 5rem;
+  border: none;
 `;
 const Nav = styled.div`
+  border: none !important;
   cursor: pointer;
   padding: 1rem;
   font-weight: 500;
@@ -33,7 +36,7 @@ const Nav = styled.div`
   &.active {
     font-size: 1.6rem;
     transform: translateY(-5%);
-    color: #fa5238;
+    color: #fa5238 !important;
   }
 `;
 
@@ -41,8 +44,8 @@ export default function ShowingMovie() {
   const [show, setShow] = useState(true);
 
   return (
-    <List id="lichChieu">
-      <TabTitle class="nav nav-tabs" id="nav-tab" role="tablist">
+    <List id="lichChieu" className="lichChieu">
+      <TabTitle className="nav nav-tabs" id="nav-tab" role="tablist">
         <Nav
           onClick={() => {
             setShow(true);

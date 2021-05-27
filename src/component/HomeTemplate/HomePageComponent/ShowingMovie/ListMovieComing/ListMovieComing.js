@@ -1,10 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { actFetchListMovieComing } from "./modules/actions";
-import MovieItem from "../MovieItem/MovieItem";
 import Slider from "react-slick";
 import styled from "styled-components";
-// import { Container } from "@material-ui/core";
+import MovieItem from "../MovieItem/MovieItem";
 
 const ListContainer = styled.div`
   display:none;
