@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { actFetchListMovieComing } from "./modules/actions";
 import Slider from "react-slick";
+import { actGetListMovieComing } from "redux/actions/movieActions";
 import styled from "styled-components";
 import MovieItem from "../MovieItem/MovieItem";
 
@@ -74,15 +74,15 @@ export default function ListMovieComing() {
   const [number, setNumber] = useState(3);
   const state = useSelector((state) => {
     return {
-      isLoading: state.listMovieComingReducer.loading,
-      data: state.listMovieComingReducer.data,
+      isLoading: state.movieReducer.loading,
+      listMovieComing: state.movieReducer.listMovieComing,
     };
   });
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(actFetchListMovieComing());
+    dispatch(actGetListMovieComing());
   }, []);
 
   const settingSlick = {
@@ -112,20 +112,20 @@ export default function ListMovieComing() {
       },
     ],
   };
-  const { data } = state;
+  const { listMovieComing } = state;
 
   const renderListMovieComing = () => {
     return (
-      data &&
-      data.map((item) => {
+      listMovieComing &&
+      listMovieComing.map((item) => {
         return <MovieItem key={item.maPhim} movie={item} status="coming" />;
       })
     );
   };
   const renderListMovieMobile = () => {
     return (
-      data &&
-      [...data].splice(0, number).map((item) => {
+      listMovieComing &&
+      [...listMovieComing].splice(0, number).map((item) => {
         return <MovieItem key={item.maPhim} movie={item} status="nowShowing" />;
       })
     );
@@ -138,7 +138,11 @@ export default function ListMovieComing() {
       <ListMobile>
         {renderListMovieMobile()}
         <BtnViewMore
-          className={data && +number >= +data.length ? "hidden" : "show"}
+          className={
+            listMovieComing && +number >= +listMovieComing.length
+              ? "hidden"
+              : "show"
+          }
           onClick={() => {
             setNumber(number + 5);
           }}

@@ -2,13 +2,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { actFetchListMovie } from "../../ShowingMovie/ListMovie/modules/actions";
-import { actFetchDetailMovie } from "./modules/actions";
 import Loading from "../../../../Loading";
+import _ from "lodash";
+import { actGetDetailMovie, actGetListMovie } from "redux/actions/movieActions";
 
 const Tools = styled.div`
   position: absolute;
-  // width: 1080px;
   background-color: white;
   width: 70%;
   height: 80px;
@@ -142,23 +141,22 @@ export default function BookingTools() {
 
   const state = useSelector((state) => {
     return {
-      isLoading: state.detailMovieReducer.loading,
-      data: state.detailMovieReducer.data,
-      listMovie: state.listMovieReducer.data,
+      detailMovie: state.movieReducer.detailMovie,
+      listMovie: state.movieReducer.listMovie,
     };
   });
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(actFetchListMovie());
+    dispatch(actGetListMovie());
   }, []);
 
   useEffect(() => {
-    dispatch(actFetchDetailMovie(movieId));
+    dispatch(actGetDetailMovie(movieId));
   }, [movieId]);
 
-  const { listMovie, data, isLoading } = state;
+  const { listMovie, detailMovie } = state;
 
   const renderListMovie = () => {
     return (
@@ -185,26 +183,22 @@ export default function BookingTools() {
 
   const renderListCinema = () => {
     let list = [];
-    if (isLoading) {
+    if (!detailMovie) {
       return (
         <MenuItem>
           <Loading />
         </MenuItem>
       );
     }
-    if (data && data.lichChieu.length === 0) {
+    if (detailMovie && detailMovie.lichChieu.length === 0) {
       return <MenuItem>Chưa có thông tin</MenuItem>;
     }
-    if (data && data.lichChieu) {
-      console.log(data);
-      list = data.lichChieu.map((item) => {
+    if (detailMovie && detailMovie.lichChieu) {
+      list = detailMovie.lichChieu.map((item) => {
         return item.thongTinRap.tenCumRap;
       });
     }
-
-    list = new Set(list);
-    list = [...list];
-
+    list = _.uniq(list);
     return list.sort().map((item, index) => {
       return (
         <MenuItem
@@ -224,11 +218,12 @@ export default function BookingTools() {
 
   const renderListDate = () => {
     let list = [];
-    if (data && cinema !== "Rạp") {
-      list = data.lichChieu.filter((item) => {
+    if (detailMovie && cinema !== "Rạp") {
+      list = detailMovie.lichChieu.filter((item) => {
         return item.thongTinRap.tenCumRap === cinema;
       });
     }
+
     return list.map((item, index) => {
       item = new Date(item.ngayChieuGioChieu).toLocaleDateString();
       return (
@@ -248,8 +243,8 @@ export default function BookingTools() {
 
   const renderListSession = () => {
     let list = [];
-    if (data && cinema !== "Rạp") {
-      list = data.lichChieu.filter((item) => {
+    if (detailMovie && cinema !== "Rạp") {
+      list = detailMovie.lichChieu.filter((item) => {
         return item.thongTinRap.tenCumRap === cinema;
       });
     }
