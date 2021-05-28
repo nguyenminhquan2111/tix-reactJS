@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "./../../../component/Loader";
 import { actGetDetailMovie } from "redux/actions/movieActions";
 import DetailTop from "./../../../component/HomeTemplate/DetailPageComponent/DetailTop/DetailTop";
+import DetailMiddle from "./../../../component/HomeTemplate/DetailPageComponent/DetailMiddle/DetailMiddle";
 export default function DetailPage(props) {
   const state = useSelector((state) => {
     return {
@@ -24,6 +25,7 @@ export default function DetailPage(props) {
       return (
         <>
           <DetailTop movie={data}></DetailTop>
+          <DetailMiddle movie={data}></DetailMiddle>
         </>
       );
     return <></>;

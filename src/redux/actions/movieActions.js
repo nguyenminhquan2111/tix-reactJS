@@ -45,7 +45,9 @@ export const actGetDetailMovie = (idMovie) => {
         console.log(res.data);
         dispatch(actDetailMovie(res.data));
       })
-      .catch();
+      .catch((err) => {
+        dispatch(actFailedAPI(err));
+      });
   };
 };
 export const actGetCinemaBrand = () => {
@@ -116,8 +118,8 @@ const actRequestAPI = () => {
   };
 };
 
-// const actFailedAPI = () => {
-//   return {
-//     type: ActionType.API_FAILED,
-//   };
-// };
+const actFailedAPI = () => {
+  return {
+    type: ActionType.API_FAILED,
+  };
+};

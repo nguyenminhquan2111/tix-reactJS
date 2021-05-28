@@ -29,7 +29,12 @@ const CircleProgressBarBase = ({
   return (
     <figure
       className={className}
-      style={{ transform: "scale:(0.5)", width: "10rem" }}
+      style={{
+        transform: "scale:(0.5)",
+        width: "10rem",
+        margin: "0",
+        position: "relative",
+      }}
     >
       <svg viewBox={circleConfig.viewBox}>
         <circle

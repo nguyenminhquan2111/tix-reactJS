@@ -14,7 +14,9 @@ const CircleProgressBar = styled(CircleProgressBarBase)`
     z-index: 10;
     color: white;
     font-size: 3rem;
-    transform: translate(50px, -105px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .circle-text {
