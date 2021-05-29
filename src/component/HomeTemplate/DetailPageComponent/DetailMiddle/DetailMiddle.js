@@ -8,6 +8,7 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import TabPanelThongTin from "./ThongTin";
+import TabPanelDanhGia from "./DanhGia";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -45,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: "#0a2029",
+    paddingBottom: "3rem",
   },
 }));
 const fadeIn = keyframes`
@@ -110,11 +112,9 @@ export default function DetailMiddle(props) {
       <TabPanelStyled value={value} index={0}>
         <TabPanelThongTin movie={movie}></TabPanelThongTin>
       </TabPanelStyled>
-      <TabPanelStyled
-        value={value}
-        index={1}
-        className="DanhGia"
-      ></TabPanelStyled>
+      <TabPanelStyled value={value} index={1} className="DanhGia">
+        <TabPanelDanhGia movie={movie}></TabPanelDanhGia>
+      </TabPanelStyled>
     </div>
   );
 }
