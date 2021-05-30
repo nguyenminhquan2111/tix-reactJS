@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MenuItems, LoginItems, Location } from "../MenuItems/MenuItem";
 import styled from "styled-components";
+
 import { NavLink } from "react-router-dom";
 
 // Variable
@@ -246,7 +247,7 @@ export default function NavbarHome() {
     return MenuItems.map((item, index) => {
       return (
         <NavbarItem key={index}>
-          <a href={item.url}>{item.title}</a>
+          <axx href={item.url}>{item.title}</axx>
         </NavbarItem>
       );
     });
