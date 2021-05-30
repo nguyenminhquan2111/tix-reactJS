@@ -35,6 +35,7 @@ export const actGetListMovieComing = () => {
 };
 export const actGetDetailMovie = (idMovie) => {
   return (dispatch) => {
+    dispatch(actRequestAPI());
     axios({
       url: URL_GET_DETAIL_MOVIE(idMovie),
       method: "GET",
@@ -42,7 +43,7 @@ export const actGetDetailMovie = (idMovie) => {
       .then((res) => {
         dispatch(actDetailMovie(res.data));
       })
-      .catch();
+      .catch((err) => {});
   };
 };
 export const actGetCinemaBrand = () => {
@@ -107,14 +108,14 @@ const actCinemaByBrand = (data) => {
   };
 };
 
-// const actRequestAPI = () => {
-//   return {
-//     type: ActionType.API_REQUEST,
-//   };
-// };
+const actRequestAPI = () => {
+  return {
+    type: ActionType.API_REQUEST,
+  };
+};
 
-// const actFailedAPI = () => {
-//   return {
-//     type: ActionType.API_FAILED,
-//   };
-// };
+const actFailedAPI = () => {
+  return {
+    type: ActionType.API_FAILED,
+  };
+};
