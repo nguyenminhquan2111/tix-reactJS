@@ -94,7 +94,6 @@ const MenuItem = styled.li`
     color: white;
   }
 `;
-
 //Movie
 const SelectMovieContainer = styled.div`
   flex: 3;
@@ -126,18 +125,22 @@ const ButtonConfirm = styled.button`
 `;
 
 export default function BookingTools() {
-  const [movieClick, setMovieClick] = useState(false);
-  const [movie, setMovie] = useState("Phim");
+  const [click, setClick] = useState({
+    movie: false,
+    cinema: false,
+    date: false,
+    session: false,
+  });
+
+  const titleArr = ["Phim", "Rạp", "Ngày xem", "Suất chiếu"];
+  const [title, setTitle] = useState({
+    movie: titleArr[0],
+    cinema: titleArr[1],
+    date: titleArr[2],
+    session: titleArr[3],
+  });
+
   const [movieId, setMovieId] = useState("");
-
-  const [cinemaClick, setCinemaClick] = useState(false);
-  const [cinema, setCinema] = useState("Rạp");
-
-  const [dateClick, setDateClick] = useState(false);
-  const [date, setDate] = useState("Ngày xem");
-
-  const [sessionClick, setSessionClick] = useState(false);
-  const [session, setSession] = useState("Suất chiếu");
 
   const state = useSelector((state) => {
     return {
@@ -166,12 +169,14 @@ export default function BookingTools() {
           <MenuItem
             key={index}
             onClick={() => {
-              setMovie(item.tenPhim);
               setMovieId(item.maPhim);
-              setMovieClick(false);
-              setCinema("Rạp");
-              setDate("Ngày xem");
-              setSession("Suất chiếu");
+              setClick({ movie: false });
+              setTitle({
+                movie: item.tenPhim,
+                cinema: titleArr[1],
+                date: titleArr[2],
+                session: titleArr[3],
+              });
             }}
           >
             {item.tenPhim}
@@ -203,10 +208,13 @@ export default function BookingTools() {
       return (
         <MenuItem
           onClick={() => {
-            setCinemaClick(false);
-            setCinema(item);
-            setDate("Ngày xem");
-            setSession("Suất chiếu");
+            setClick({ cinema: false });
+            setTitle({
+              ...title,
+              cinema: item,
+              date: titleArr[2],
+              session: titleArr[3],
+            });
           }}
           key={index}
         >
@@ -218,9 +226,9 @@ export default function BookingTools() {
 
   const renderListDate = () => {
     let list = [];
-    if (detailMovie && cinema !== "Rạp") {
+    if (detailMovie && title.cinema !== "Rạp") {
       list = detailMovie.lichChieu.filter((item) => {
-        return item.thongTinRap.tenCumRap === cinema;
+        return item.thongTinRap.tenCumRap === title.cinema;
       });
     }
 
@@ -230,9 +238,12 @@ export default function BookingTools() {
         <MenuItem
           key={index}
           onClick={() => {
-            setDateClick(false);
-            setDate(item);
-            setSession("Suất chiếu");
+            setClick({ date: false });
+            setTitle({
+              ...title,
+              date: item,
+              session: titleArr[3],
+            });
           }}
         >
           {item}
@@ -243,9 +254,9 @@ export default function BookingTools() {
 
   const renderListSession = () => {
     let list = [];
-    if (detailMovie && cinema !== "Rạp") {
+    if (detailMovie && title.cinema !== "Rạp") {
       list = detailMovie.lichChieu.filter((item) => {
-        return item.thongTinRap.tenCumRap === cinema;
+        return item.thongTinRap.tenCumRap === title.cinema;
       });
     }
     return list.map((item, index) => {
@@ -254,8 +265,9 @@ export default function BookingTools() {
         <MenuItem
           key={index}
           onClick={() => {
-            setSessionClick(false);
-            setSession(item);
+            setClick({ session: false });
+            // setSession(item);
+            setTitle({ ...title, session: item });
           }}
         >
           {item}
@@ -270,33 +282,37 @@ export default function BookingTools() {
       <SelectMovieContainer>
         <Select
           onClick={() => {
-            setMovieClick(!movieClick);
-            setCinemaClick(false);
-            setDateClick(false);
-            setSessionClick(false);
+            setClick({
+              movie: !click.movie,
+              cinema: false,
+              date: false,
+              session: false,
+            });
           }}
         >
-          <TitleMovie>{movie}</TitleMovie>
+          <TitleMovie>{title.movie}</TitleMovie>
           <i className="fas fa-angle-down"></i>
         </Select>
-        <List className={movieClick ? "active" : ""}>{renderListMovie()}</List>
+        <List className={click.movie ? "active" : ""}>{renderListMovie()}</List>
       </SelectMovieContainer>
 
       {/* Cinema */}
       <SelectContainer>
         <Select
           onClick={() => {
-            setCinemaClick(!cinemaClick);
-            setMovieClick(false);
-            setDateClick(false);
-            setSessionClick(false);
+            setClick({
+              movie: false,
+              cinema: !click.cinema,
+              date: false,
+              session: false,
+            });
           }}
         >
-          <Title>{cinema}</Title>
+          <Title>{title.cinema}</Title>
           <i className="fas fa-angle-down"></i>
         </Select>
-        <List className={cinemaClick ? "active" : ""}>
-          {movie !== "Phim" ? (
+        <List className={click.cinema ? "active" : ""}>
+          {title.movie !== "Phim" ? (
             renderListCinema()
           ) : (
             <MenuItem>Vui lòng chọn phim</MenuItem>
@@ -308,23 +324,25 @@ export default function BookingTools() {
       <SelectContainer>
         <Select
           onClick={() => {
-            setCinemaClick(false);
-            setMovieClick(false);
-            setDateClick(!dateClick);
-            setSessionClick(false);
+            setClick({
+              movie: false,
+              cinema: false,
+              date: !click.date,
+              session: false,
+            });
           }}
         >
           <Title
             onClick={() => {
-              setDateClick(true);
+              setClick({ date: true });
             }}
           >
-            {date}
+            {title.date}
           </Title>
           <i className="fas fa-angle-down"></i>
         </Select>
-        <List className={dateClick ? "active" : ""}>
-          {cinema !== "Rạp" ? (
+        <List className={click.date ? "active" : ""}>
+          {title.cinema !== "Rạp" ? (
             renderListDate()
           ) : (
             <MenuItem>Vui lòng chọn rạp</MenuItem>
@@ -336,23 +354,25 @@ export default function BookingTools() {
       <SelectContainer>
         <Select
           onClick={() => {
-            setCinemaClick(false);
-            setMovieClick(false);
-            setDateClick(false);
-            setSessionClick(!sessionClick);
+            setClick({
+              movie: false,
+              cinema: false,
+              date: false,
+              session: !click.session,
+            });
           }}
         >
           <Title
             onClick={() => {
-              setSessionClick(true);
+              setClick({ session: true });
             }}
           >
-            {session}
+            {title.session}
           </Title>
           <i className="fas fa-angle-down"></i>
         </Select>
-        <List className={sessionClick ? "active" : ""}>
-          {date !== "Ngày xem" ? (
+        <List className={click.session ? "active" : ""}>
+          {title.date !== "Ngày xem" ? (
             renderListSession()
           ) : (
             <MenuItem>Vui lòng chọn ngày xem</MenuItem>
@@ -361,7 +381,7 @@ export default function BookingTools() {
       </SelectContainer>
       {/* Confirm S */}
       <ConfirmContainer>
-        <ButtonConfirm disabled={session !== "Suất chiếu" ? false : true}>
+        <ButtonConfirm disabled={title.session !== "Suất chiếu" ? false : true}>
           MUA VÉ NGAY
         </ButtonConfirm>
       </ConfirmContainer>
