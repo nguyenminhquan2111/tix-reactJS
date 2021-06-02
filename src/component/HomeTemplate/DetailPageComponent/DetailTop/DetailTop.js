@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 import DetailTopLeft from "./DetailTopLeft";
 import DetailTopRight from "./DetailTopRight";
-export default function DetailTop(props) {
+function DetailTop(props) {
   const DetailTop = styled.div`
      {
       box-sizing: border-box;
@@ -60,3 +60,5 @@ export default function DetailTop(props) {
     </div>
   );
 }
+
+export default memo(DetailTop);

@@ -5,6 +5,7 @@ import { actGetDetailMovie } from "redux/actions/movieActions";
 import DetailTop from "./../../../component/HomeTemplate/DetailPageComponent/DetailTop/DetailTop";
 import DetailMiddle from "./../../../component/HomeTemplate/DetailPageComponent/DetailMiddle/DetailMiddle";
 import Footer from "component/HomeTemplate/HomePageComponent/Footer/Footer";
+import ModalComponent from "./../../../component/HomeTemplate/DetailPageComponent/Modal/Modal";
 export default function DetailPage(props) {
   const state = useSelector((state) => {
     return {
@@ -28,6 +29,7 @@ export default function DetailPage(props) {
           <DetailTop movie={data}></DetailTop>
           <DetailMiddle movie={data}></DetailMiddle>
           <Footer></Footer>
+          <ModalComponent trailerFlim={data.trailer}></ModalComponent>
         </>
       );
     return <></>;

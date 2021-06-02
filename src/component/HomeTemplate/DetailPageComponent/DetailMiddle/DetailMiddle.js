@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo } from "react";
 import styled, { keyframes } from "styled-components";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -85,7 +85,7 @@ const AppBarStyled = styled(AppBar)`
   transform: translateY(-60px) !important;
 `;
 
-export default function DetailMiddle(props) {
+function DetailMiddle(props) {
   const { movie } = props;
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -118,3 +118,4 @@ export default function DetailMiddle(props) {
     </div>
   );
 }
+export default memo(DetailMiddle);

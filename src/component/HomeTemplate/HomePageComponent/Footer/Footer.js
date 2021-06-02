@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Grid from "@material-ui/core/Grid";
 import styled from "styled-components";
 import Avatar from "@material-ui/core/Avatar";
@@ -94,12 +94,12 @@ const Item = styled.div`
   max-width: 20%;
   flex-basis: 20%;
 `;
-export default function Footer() {
+function Footer() {
   const classes = useStyles();
   const renderPartner = () => {
-    return ListImg.map((item) => {
+    return ListImg.map((item, index) => {
       return (
-        <Item>
+        <Item key={index}>
           <Avatar src={item} style={{ transform: "scale(0.8)" }} />
         </Item>
       );
@@ -193,3 +193,4 @@ export default function Footer() {
     </FooterContainer>
   );
 }
+export default memo(Footer);
