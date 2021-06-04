@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import { actHandleModal } from "redux/actions/movieActions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 export default function DetailTopLeft(props) {
   const Col_3 = styled.div`
@@ -10,7 +10,8 @@ export default function DetailTopLeft(props) {
     max-width: 25%;
     background: url(${(props) => props.img});
     border-radius: 5px;
-    // padding-left: 15px;
+    margin: 0;
+    padding: 0;
     position: relative;
     background-repeat: round;
     &:hover {
@@ -54,7 +55,7 @@ export default function DetailTopLeft(props) {
     dispatch(actHandleModal(true));
   };
   return (
-    <Col_3 className=" m-0 p-0" img={item.hinhAnh}>
+    <Col_3 img={item.hinhAnh}>
       <div className="img-caption d-block">
         <Button
           variant="outlined"

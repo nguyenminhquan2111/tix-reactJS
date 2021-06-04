@@ -47,14 +47,17 @@ function DetailTop(props) {
     display: block;
     width: 100%;
   `;
-  const Container__ImgBackGroundMobie = styled.div`
-    dislay: none;
+  const Container__ImgBackGroundMobie = styled.div.attrs((props) => ({
+    Height: props.height,
+  }))`
+    dislay: none !important;
     overflow: hidden;
     margin-top: 4rem;
     position: relative;
     z-index: 1;
     overflow: hidden;
-    height: 20rem;
+    height: ${(props) => props.Height};
+
     &::after {
       content: "";
       display: block;
@@ -151,8 +154,8 @@ function DetailTop(props) {
           </Row>
         </Content>
       </DetailTop>
-      <DetailTop__mobie isOpen={open}>
-        <Container__ImgBackGroundMobie>
+      <DetailTop__mobie>
+        <Container__ImgBackGroundMobie height={open === "none" ? "20rem" : "0"}>
           <ImgBackgroundMobie src={movie.hinhAnh} alt="mobie" />
           <ImgCaptionMovie>
             <img
@@ -163,9 +166,9 @@ function DetailTop(props) {
           </ImgCaptionMovie>
         </Container__ImgBackGroundMobie>
         <Iframe
-          isOpent={open}
+          isOpen={open}
           width="100%"
-          height="100%"
+          height={300}
           src={movie.trailer}
           title="YouTube video player"
           frameBorder={0}
