@@ -3,6 +3,10 @@ import styled from "styled-components";
 import CircleProgressBar from "./CircleProgressBar/CircleProgressBar";
 function DetailTopRight(props) {
   const Col_9 = styled.div`
+    flex: 0 0 75%;
+    max-width: 75%;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -102,7 +106,7 @@ function DetailTopRight(props) {
   };
   return (
     <div>
-      <Col_9 className="col-9 m-0 p-0">
+      <Col_9>
         <div className="left">
           <p className="pEl-1">
             {new Date(item.ngayKhoiChieu).toLocaleDateString()}
