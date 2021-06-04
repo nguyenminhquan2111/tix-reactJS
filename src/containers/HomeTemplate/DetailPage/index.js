@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actGetDetailMovie } from "redux/actions/movieActions";
+
+import DetailTop from "./../../../component/HomeTemplate/DetailPageComponent/DetailTop/DetailTop";
+import DetailMiddle from "./../../../component/HomeTemplate/DetailPageComponent/DetailMiddle/DetailMiddle";
 import Footer from "component/HomeTemplate/Footer/Footer";
-import DetailTop from "component/HomeTemplate/DetailPageComponent/DetailTop/DetailTop";
-import DetailMiddle from "component/HomeTemplate/DetailPageComponent/DetailMiddle/DetailMiddle";
+import ModalComponent from "./../../../component/HomeTemplate/DetailPageComponent/Modal/Modal";
 import Loader from "component/Loader";
+
 export default function DetailPage(props) {
   const state = useSelector((state) => {
     return {
@@ -28,6 +31,7 @@ export default function DetailPage(props) {
           <DetailTop movie={data} />
           <DetailMiddle movie={data} />
           <Footer />
+          <ModalComponent trailerFlim={data.trailer} />
         </>
       );
     return <></>;

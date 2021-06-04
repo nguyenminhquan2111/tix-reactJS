@@ -1,5 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import Button from "@material-ui/core/Button";
+import { actHandleModal } from "redux/actions/movieActions";
+import { useDispatch, useSelector } from "react-redux";
+
 export default function DetailTopLeft(props) {
   const Col_3 = styled.div`
     flex: 0 0 25%;
@@ -45,10 +49,30 @@ export default function DetailTopLeft(props) {
     }
   `;
   const { item } = props;
+  const dispatch = useDispatch();
+  const handleClickOpen = () => {
+    dispatch(actHandleModal(true));
+  };
   return (
     <Col_3 className=" m-0 p-0" img={item.hinhAnh}>
       <div className="img-caption d-block">
-        <i id="myBtn1" className="fa fa-play" />
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={handleClickOpen}
+          style={{
+            width: "5rem",
+            height: "5rem",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%,-50%)",
+            borderRadius: "50%",
+            border: "none",
+          }}
+        >
+          <i id="myBtn1" className="fa fa-play" />
+        </Button>
       </div>
     </Col_3>
   );

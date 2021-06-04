@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import CircleProgressBar from "./CircleProgressBar/CircleProgressBar";
-export default function DetailTopRight(props) {
+function DetailTopRight(props) {
   const Col_9 = styled.div`
     display: flex;
     flex-direction: row;
@@ -86,6 +86,7 @@ export default function DetailTopRight(props) {
     }
   `;
   const { item } = props;
+
   const renderImg = () => {
     let star = 0,
       number = 0;
@@ -131,3 +132,5 @@ export default function DetailTopRight(props) {
     </div>
   );
 }
+
+export default DetailTopRight;
