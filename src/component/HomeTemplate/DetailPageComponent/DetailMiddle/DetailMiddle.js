@@ -83,6 +83,10 @@ const AppBarStyled = styled(AppBar)`
   position: absolute !important;
   z-index: 1 !important;
   transform: translateY(-60px) !important;
+  @media (max-width: 736px) {
+    transform: translateY(-10px) !important;
+    position: relative !important;
+  }
 `;
 
 function DetailMiddle(props) {
