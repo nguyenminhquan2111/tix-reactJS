@@ -118,11 +118,12 @@ export default function MovieItem(props) {
         <>
           <Title>{movie.tenPhim}</Title>
           <Time>{movie.danhGia}</Time>
-          <Button variant="contained" color="secondary" className="buyButton">
-            <Link to={`/detail/${movie.maPhim}`} style={{ color: "#fff" }}>
+
+          <Link to={`/detail/${movie.maPhim}`} style={{ color: "#fff" }}>
+            <Button variant="contained" color="secondary" className="buyButton">
               MUA VÉ
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         </>
       ) : (
         <>

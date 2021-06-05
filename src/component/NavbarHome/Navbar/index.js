@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MenuItems, LoginItems, Location } from "../MenuItems/MenuItem";
 import styled from "styled-components";
+
 import { NavLink } from "react-router-dom";
 
 // Variable

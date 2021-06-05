@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import Loading from "../../../../Loading";
+// import Loading from "../../../../Loading";
 import _ from "lodash";
 import { actGetDetailMovie, actGetListMovie } from "redux/actions/movieActions";
 import SkeletonCaption from "component/Skeleton/SkeletonCaption";

@@ -41,9 +41,12 @@ export const actGetDetailMovie = (idMovie) => {
       method: "GET",
     })
       .then((res) => {
+        console.log(res.data);
         dispatch(actDetailMovie(res.data));
       })
-      .catch((err) => {});
+      .catch((err) => {
+        dispatch(actFailedAPI(err));
+      });
   };
 };
 export const actGetCinemaBrand = () => {
