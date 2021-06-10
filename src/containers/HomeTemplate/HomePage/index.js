@@ -1,3 +1,4 @@
+import ModalComponent from "component/HomeTemplate/Modal/Modal";
 import React from "react";
 import Banner from "../../../component/HomeTemplate/HomePageComponent/Banner/Banner";
 import Cinema from "../../../component/HomeTemplate/HomePageComponent/Cinema/Cinema";
@@ -10,6 +11,7 @@ export default function index() {
       <Banner />
       <ShowingMovie />
       <Cinema />
+      <ModalComponent />
     </>
   );
 }

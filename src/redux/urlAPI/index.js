@@ -12,3 +12,6 @@ export const URL_GET_LIST_CINEMA_BRAND =
 
 export const URL_GET_LIST_CINEMA_BY_BRAND = (idCinemaBrand) =>
   `https://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=${idCinemaBrand}`;
+
+export const URL_LOGIN_USER =
+  "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap";
