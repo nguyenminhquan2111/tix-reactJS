@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import PageNotFound from "./containers/PageNotFound";
 import { routesHome } from "./routes";
 import HomeTemplate from "./containers/HomeTemplate";
+import Form from "component/HomeTemplate/Form/Form";
 function App() {
   const renderRoutesHome = (routes) => {
     if (routes && routes.length > 0) {
@@ -21,7 +22,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         {renderRoutesHome(routesHome)}
-
+        <Route path="/login" component={Form} />
         <Route path="" component={PageNotFound} />
       </Switch>
     </BrowserRouter>

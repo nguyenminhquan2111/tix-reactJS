@@ -3,7 +3,15 @@ import "./css/style.css";
 
 export default function Loader() {
   return (
-    <div className="loading loading05 container-fluid">
+    <div
+      className="loading loading05 container-fluid"
+      style={{
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+      }}
+    >
       <span>L</span>
       <span>O</span>
       <span>A</span>

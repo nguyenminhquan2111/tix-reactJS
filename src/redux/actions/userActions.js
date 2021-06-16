@@ -3,9 +3,9 @@ import * as ActionType from "../constants";
 import { URL_LOGIN_USER } from "../urlAPI";
 import Swal from "sweetalert2";
 
-export const fetchLoginForm = (user, history) => {
+export const actLogin = (user, history) => {
   return (dispatch) => {
-    dispatch(actFormRequest());
+    dispatch(actLoginRequest());
     axios({
       url: URL_LOGIN_USER,
       method: "POST",
@@ -15,30 +15,32 @@ export const fetchLoginForm = (user, history) => {
         console.log(result.data);
 
         localStorage.setItem("UserCustomer", JSON.stringify(result.data));
+        Swal.fire("Đăng nhập thành công", "", "success");
         history.replace("/");
-        dispatch(actFormSuccess(result.data));
+        dispatch(actLoginSuccess(result.data));
       })
       .catch((error) => {
         Swal.fire("Tài khoản hoặc mật khẩu sai", "", "error");
         console.log(error);
-        dispatch(actFormFailed(error));
+        dispatch(actLoginFailed(error));
       });
   };
 };
 
-const actFormRequest = () => {
+const actLoginRequest = () => {
   return {
     type: ActionType.FORM_REQUEST,
   };
 };
-const actFormSuccess = (data) => {
+
+const actLoginSuccess = (data) => {
   return {
     type: ActionType.FORM_SUCCESS,
     payload: data,
   };
 };
 
-const actFormFailed = (err) => {
+const actLoginFailed = (err) => {
   return {
     type: ActionType.FORM_FAILED,
     payload: err,

@@ -9,9 +9,11 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Checkbox from "@material-ui/core/Checkbox";
-import { fetchLoginForm } from "redux/actions/userActions";
+import { actLogin } from "redux/actions/userActions";
 import Button from "@material-ui/core/Button";
 import Swal from "sweetalert2";
+import Loader from "component/Loader";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -50,6 +52,7 @@ const FormContainer = styled.div`
   background-size: contain;
   background-position: center;
   width: 100vw;
+  max-width: 100%;
   height: 50rem;
 `;
 const TabsContainer = styled.div`
@@ -100,13 +103,17 @@ const TabsContainer = styled.div`
     }
   }
 `;
+const StyledTabs = withStyles({
+  flexContainer: {
+    justifyContent: "space-around",
+  },
+})(Tabs);
 export default function Form(props) {
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.userReducer.loading);
-
   const [value, setValue] = useState(0);
   const [checked, setChecked] = useState(true);
   const [state, setState] = useState({ taiKhoan: "", matKhau: "" });
+
   const handleChangeChecked = (event) => {
     setChecked(event.target.checked);
   };
@@ -127,7 +134,7 @@ export default function Form(props) {
       Swal.fire("Bạn phải nhập mật khẩu", "", "error");
       return;
     }
-    dispatch(fetchLoginForm(state, props.history));
+    dispatch(actLogin(state, props.history));
   };
   const handleOnChange = (event) => {
     const { name, value } = event.target;
@@ -142,7 +149,7 @@ export default function Form(props) {
     <FormContainer>
       <TabsContainer>
         <AppBar position="static">
-          <Tabs
+          <StyledTabs
             value={value}
             onChange={handleChange}
             indicatorColor="primary"
@@ -150,14 +157,14 @@ export default function Form(props) {
           >
             <Tab label="SIGN IN" {...a11yProps(0)} />
             <Tab label="SIGN UP" {...a11yProps(1)} />
-          </Tabs>
+          </StyledTabs>
         </AppBar>
         <TabPanel value={value} index={0}>
           <form>
             <p className="title">USERNAME</p>
             <input name="taiKhoan" onChange={handleOnChange} />
             <p className="title">PASSWORD</p>
-            <input name="matKhau" onChange={handleOnChange} />
+            <input type="password" name="matKhau" onChange={handleOnChange} />
             <div className="checkBoxContainer">
               <Checkbox
                 checked={checked}
