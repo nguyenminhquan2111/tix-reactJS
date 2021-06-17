@@ -333,10 +333,10 @@ export default function NavbarHome() {
     );
   };
   const handleLogout = () => {
-    localStorage.removeItem("UserCustomer");
     Swal.fire({
       title: "Bạn có chắc muốn đăng xuất?",
       text: "",
+
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -344,7 +344,18 @@ export default function NavbarHome() {
       confirmButtonText: "Đăng xuất",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire("Đăng xuất thành công", "", "success");
+        Swal.fire({
+          width: "400",
+          height: "100",
+          backdrop: "none",
+          showCloseButton: true,
+          icon: "success",
+          title: "Đăng xuất thành công",
+          showConfirmButton: false,
+          timer: 2500,
+          timerProgressBar: true,
+        });
+        localStorage.removeItem("UserCustomer");
         setIslogin(false);
       }
     });
