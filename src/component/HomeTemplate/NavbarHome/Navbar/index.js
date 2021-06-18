@@ -233,11 +233,6 @@ const DropdownItem = styled.li`
   }
 `;
 
-// const LocationList = styled.div``;
-// const LoginDesktop = styled.div``;
-// const LoginMobile = styled.div``;
-// const LocationMobile = styled.div``;
-
 export default function NavbarHome() {
   const [clicked, setClicked] = useState(true);
   const [location, setLocation] = useState("Hồ Chí Minh");

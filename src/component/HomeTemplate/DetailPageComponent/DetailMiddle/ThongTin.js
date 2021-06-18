@@ -59,6 +59,19 @@ const News = styled.div`
       }
     }
   }
+  @media (max-width: 768px) {
+    .news__container {
+      width: 100%;
+      padding: 0;
+      .newsImg {
+        img {
+          height: 100% !important;
+          width: 100%;
+          border: 2px solid #fff;
+        }
+      }
+    }
+  }
 `;
 
 const ThongTin = styled.div`

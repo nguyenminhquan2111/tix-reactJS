@@ -74,8 +74,23 @@ export const actGetListCinemaByBrand = (idCinema) => {
   };
 };
 
+export const actHandleModal = (res) => {
+  return (dispatch) => {
+    if (res) dispatch(actOpenModal());
+    else dispatch(actCloseModal());
+  };
+};
 //actions
-
+const actOpenModal = () => {
+  return {
+    type: ActionType.OPEN_MODAL,
+  };
+};
+const actCloseModal = () => {
+  return {
+    type: ActionType.CLOSE_MODAL,
+  };
+};
 const actListMovie = (data) => {
   return {
     type: ActionType.GET_LIST_MOVIE,

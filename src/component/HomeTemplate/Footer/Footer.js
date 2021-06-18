@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Grid from "@material-ui/core/Grid";
 import styled from "styled-components";
 import Avatar from "@material-ui/core/Avatar";
@@ -23,7 +23,39 @@ const FooterStyled1 = styled.div`
     color: #ffffff;
     font-weight: 500;
   }
+  @media (max-width: 992px) {
+    display: none;
+  }
 `;
+const FooterStyled__mobie = styled.div`
+  display: none;
+  .DoiTac {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @media (max-width: 992px) {
+    display: block;
+    text-align: center;
+    padding-bottom: 1rem;
+    padding-top: 0.5rem;
+  }
+  @media (max-width: 768px) {
+    .container__mobie {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .Tix {
+        display: flex;
+        a {
+          padding: 0 0.5rem;
+        }
+      }
+    }
+  }
+`;
+
 const FooterStyled2 = styled.div`
   max-width: 870px;
   margin: 0 auto;
@@ -56,6 +88,13 @@ const FooterStyled2 = styled.div`
     color: #fb4226;
     text-decoration: none;
     font-size: 12px;
+  }
+  @media (max-width: 768px) {
+    .container__2 {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
   }
 `;
 const Left = styled.div`
@@ -94,12 +133,12 @@ const Item = styled.div`
   max-width: 20%;
   flex-basis: 20%;
 `;
-export default function Footer() {
+function Footer() {
   const classes = useStyles();
   const renderPartner = () => {
-    return ListImg.map((item) => {
+    return ListImg.map((item, index) => {
       return (
-        <Item>
+        <Item key={index}>
           <Avatar src={item} style={{ transform: "scale(0.8)" }} />
         </Item>
       );
@@ -156,9 +195,43 @@ export default function Footer() {
           </Grid>
         </Grid>
       </FooterStyled1>
+      <FooterStyled__mobie>
+        <Grid container className="container__mobie" spacing={3}>
+          <Grid item xs={4} sm={6}>
+            <Left>
+              <Grid container>
+                <Grid xs={12} className="Tix">
+                  <a href="#">Thỏa thuận sử dụng</a>
+                  <a href="#">Chính sách bảo mật</a>
+                </Grid>
+              </Grid>
+            </Left>
+          </Grid>
+
+          <Grid item xs={4}>
+            <Right>
+              <Grid container>
+                <Grid xs={12} className="DoiTac">
+                  <a href="#">
+                    <img src="/images/facebook-logo.png" />
+                  </a>
+                  <a href="#">
+                    <img src="/images/zalo-logo.png" />
+                  </a>
+                </Grid>
+              </Grid>
+            </Right>
+          </Grid>
+        </Grid>
+      </FooterStyled__mobie>
       <HR></HR>
       <FooterStyled2>
-        <Grid container spacing={0} style={{ justifyContent: "space-between" }}>
+        <Grid
+          container
+          spacing={0}
+          className="container__2"
+          style={{ justifyContent: "space-between" }}
+        >
           <Grid sx={4}>
             <img src="/images/zion-logo.jpg" className="img__left" />
           </Grid>
@@ -193,3 +266,4 @@ export default function Footer() {
     </FooterContainer>
   );
 }
+export default memo(Footer);

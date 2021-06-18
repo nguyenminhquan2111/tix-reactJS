@@ -8,6 +8,7 @@ const initialState = {
   listCinemaBrand: null,
   listCinemaByBrand: null,
   error: null,
+  isOpen: false,
 };
 
 const movieReducer = (state = initialState, { type, payload }) => {
@@ -52,6 +53,14 @@ const movieReducer = (state = initialState, { type, payload }) => {
       state.loading = false;
       state.detailMovie = null;
       state.error = payload;
+      return { ...state };
+    }
+    case ActionType.CLOSE_MODAL: {
+      state.isOpen = false;
+      return { ...state };
+    }
+    case ActionType.OPEN_MODAL: {
+      state.isOpen = true;
       return { ...state };
     }
     default:

@@ -171,9 +171,10 @@ export default function TabPanelDanhGia(props) {
     let arr = [];
     for (let i = 0; i < star; i++) arr.push(1);
     if (number) arr.push(2);
-    return arr.map((item) => {
-      if (item == 1) return <img src="/images/star1.png" alt="star1" />;
-      return <img src="/images/star1.2.png" alt="star1.2" />;
+    return arr.map((item, index) => {
+      if (item == 1)
+        return <img key={index} src="/images/star1.png" alt="star1" />;
+      return <img key={index} src="/images/star1.2.png" alt="star1.2" />;
     });
   };
   const changeCurrentlength = () => {
@@ -183,7 +184,7 @@ export default function TabPanelDanhGia(props) {
     return UserCmtDetail.map((item, index) => {
       if (index < currentLength * 5)
         return (
-          <Card className={classes.root}>
+          <Card key={index} className={classes.root}>
             <Comment>
               <Top>
                 <div className="left">

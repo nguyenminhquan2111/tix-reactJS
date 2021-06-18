@@ -1,31 +1,35 @@
-/* eslint-disable react/jsx-pascal-case */
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import CircleProgressBar from "./CircleProgressBar/CircleProgressBar";
 
 const Col_9 = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-  .left {
-    width: 32rem;
-    color: #e9e9e9;
-    font-weight: 1rem;
-    //padding-right: 21rem;
-    padding-left: 1rem;
-    .pEl-2 {
-      span {
-        font-size: 1rem;
-        display: inline-block;
-        background-color: #fb4226 !important;
-        padding: 0 6px;
-        border-radius: 5px;
-        margin-right: 5px;
-      }
-      font-size: 1.5rem;
-      margin: 0;
+    flex: 0 0 75%;
+    max-width: 75%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    .left {
+      width: 32rem;
+      color: #e9e9e9;
+      font-weight: 1rem;
+      //padding-right: 21rem;
+      padding-left: 1rem;
+      .pEl-2 {
+        span {
+          font-size: 1rem;
+          display: inline-block;
+          background-color: #fb4226 !important;
+          padding: 0 6px;
+          border-radius: 5px;
+          margin-right: 5px;
+        }
+        font-size: 1.5rem;
+        margin: 0;}
+     
     }
   }
   .right {
@@ -86,8 +90,10 @@ const Col_9 = styled.div`
     }
   }
 `;
+
 export default function DetailTopRight(props) {
   const { item } = props;
+
   const renderImg = () => {
     let star = 0,
       number = 0;
@@ -97,13 +103,13 @@ export default function DetailTopRight(props) {
     for (let i = 0; i < star; i++) arr.push(1);
     if (number) arr.push(2);
     return arr.map((item) => {
-      if (item == 1) return <img src="/images/star1.png" alt="star1" />;
+      if (item === 1) return <img src="/images/star1.png" alt="star1" />;
       return <img src="/images/star1.2.png" alt="star1.2" />;
     });
   };
   return (
     <div>
-      <Col_9 className="col-9 m-0 p-0">
+      <Col_9>
         <div className="left">
           <p className="pEl-1">
             {new Date(item.ngayKhoiChieu).toLocaleDateString()}
