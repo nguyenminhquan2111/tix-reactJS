@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
@@ -8,7 +9,6 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Checkbox from "@material-ui/core/Checkbox";
 import Swal from "sweetalert2";
-import Loader from "component/Loader";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";

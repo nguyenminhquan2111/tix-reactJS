@@ -4,9 +4,9 @@ import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2";
-import Checkbox from "@material-ui/core/Checkbox";
-import { actLogin } from "redux/actions/userActions";
-export default function SignUp() {
+
+import { actSignUp } from "redux/actions/userActions";
+export default function SignUp(props) {
   const dispatch = useDispatch();
   const [state, setState] = useState({
     taiKhoan: "",
@@ -14,8 +14,8 @@ export default function SignUp() {
     hoTen: "",
     email: "",
     soDt: "",
-    maNhom: "",
-    maLoaiNguoiDung: "",
+    maNhom: "GP09",
+    maLoaiNguoiDung: "KhachHang",
   });
   const handleOnChange = (event) => {
     const { name, value } = event.target;
@@ -27,6 +27,7 @@ export default function SignUp() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
+    dispatch(actSignUp(state, props.history));
   };
   return (
     <div>
@@ -41,8 +42,17 @@ export default function SignUp() {
         </div>
         <div>
           <p className="title">NAME</p>
-          <input type="password" name="h" onChange={handleOnChange} />
+          <input name="hoTen" onChange={handleOnChange} />
         </div>
+        <div>
+          <p className="title">EMAIL ADDRESS</p>
+          <input name="email" onChange={handleOnChange} />
+        </div>
+        <div>
+          <p className="title">PHONE NUMBER</p>
+          <input name="soDt" onChange={handleOnChange} />
+        </div>
+
         <Button type="submit" variant="contained" className="buttonForm">
           Submit
         </Button>

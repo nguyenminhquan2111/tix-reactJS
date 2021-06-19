@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import Checkbox from "@material-ui/core/Checkbox";
 import { actLogin } from "redux/actions/userActions";
 import Container from "@material-ui/core/Container";
+import Loader from "component/Loader";
 
 export default function SignIn(props) {
   const dispatch = useDispatch();
