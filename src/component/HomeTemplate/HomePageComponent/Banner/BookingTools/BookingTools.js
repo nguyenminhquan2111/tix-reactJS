@@ -2,9 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-// import Loading from "../../../../Loading";
 import _ from "lodash";
-import { actGetDetailMovie, actGetListMovie } from "redux/actions/movieActions";
+import { actGetDetailMovie } from "redux/actions/movieActions";
 import SkeletonCaption from "component/Skeleton/SkeletonCaption";
 
 const Tools = styled.div`
@@ -125,7 +124,7 @@ const ButtonConfirm = styled.button`
   }
 `;
 
-export default function BookingTools() {
+export default function BookingTools({ ...props }) {
   const [click, setClick] = useState({
     movie: false,
     cinema: false,
@@ -147,21 +146,17 @@ export default function BookingTools() {
     return {
       loading: state.movieReducer.loading,
       detailMovie: state.movieReducer.detailMovie,
-      listMovie: state.movieReducer.listMovie,
     };
   });
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(actGetListMovie());
-  }, []);
-
-  useEffect(() => {
     dispatch(actGetDetailMovie(movieId));
   }, [movieId]);
 
-  const { listMovie, detailMovie, loading } = state;
+  const { detailMovie, loading } = state;
+  const listMovie = props.listMovie;
 
   const renderListMovie = () => {
     return (

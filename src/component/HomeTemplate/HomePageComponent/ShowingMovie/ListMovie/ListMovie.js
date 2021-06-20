@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from "react";
 import Slider from "react-slick";
-import { actGetListMovie } from "redux/actions/movieActions";
 import styled from "styled-components";
 import MovieItem from "../MovieItem/MovieItem";
 
@@ -41,7 +39,6 @@ const ListContainer = styled.div`
      
   }
 `;
-
 const ListMobile = styled.div`
   margin: 0 auto;
   width: 100%;
@@ -49,7 +46,6 @@ const ListMobile = styled.div`
     display: none;
   }
 `;
-
 const BtnViewMore = styled.div`
   cursor: pointer;
   margin: 0 auto;
@@ -69,21 +65,8 @@ const BtnViewMore = styled.div`
   }
 `;
 
-export default function ListMovie() {
+export default function ListMovie({ ...props }) {
   const [number, setNumber] = useState(3);
-  const state = useSelector((state) => {
-    return {
-      isLoading: state.movieReducer.loading,
-      listMovie: state.movieReducer.listMovie,
-    };
-  });
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(actGetListMovie());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const settingSlick = {
     className: "list__movie__slider",
@@ -113,7 +96,7 @@ export default function ListMovie() {
     ],
   };
 
-  const { listMovie } = state;
+  const listMovie = props.listMovie;
 
   const renderListMovie = () => {
     return (

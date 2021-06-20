@@ -40,7 +40,7 @@ const Nav = styled.div`
   }
 `;
 
-export default function ShowingMovie() {
+export default function ShowingMovie({ ...props }) {
   const [show, setShow] = useState(true);
 
   return (
@@ -82,7 +82,7 @@ export default function ShowingMovie() {
           role="tabpanel"
           aria-labelledby="nav-home-tab"
         >
-          <ListMovie />
+          <ListMovie listMovie={props.listMovie} />
         </div>
         <div
           className={show ? "tab-pane fade" : "tab-pane fade show active"}
@@ -90,7 +90,7 @@ export default function ShowingMovie() {
           role="tabpanel"
           aria-labelledby="nav-profile-tab"
         >
-          <ListMovieComing />
+          <ListMovieComing listMovieComing={props.listMovieComing} />
         </div>
       </div>
     </List>
