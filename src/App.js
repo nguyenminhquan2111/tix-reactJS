@@ -4,7 +4,7 @@ import { routesAdmin, routesHome } from "./routes";
 import HomeTemplate from "./containers/HomeTemplate";
 import AdminTemplate from "containers/AdminTemplate";
 import Form from "component/HomeTemplate/Form/Form";
-import Auth from "containers/AdminTemplate/AuthPage/Auth";
+import Auth from "containers/AdminTemplate/Auth";
 function App() {
   const renderRoutesHome = (routes) => {
     if (routes && routes.length > 0) {
@@ -39,7 +39,7 @@ function App() {
       <Switch>
         {renderRoutesHome(routesHome)}
         {renderRoutesAdmin(routesAdmin)}
-        <Route path="/auth" component={Auth} />
+        <Route path="/admin" component={Auth} />
         <Route path="/login" component={Form} />
         <Route path="" component={PageNotFound} />
       </Switch>

@@ -116,7 +116,7 @@ export const actAuth = (user, history) => {
           timer: 2500,
           timerProgressBar: true,
         });
-        history.replace("/dashboard");
+        history.replace("/admin/dashboard-user");
         dispatch(actLoginSuccess(result.data));
       })
       .catch((error) => {

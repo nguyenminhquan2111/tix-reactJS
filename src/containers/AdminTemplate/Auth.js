@@ -116,6 +116,7 @@ export default function Auth(props) {
               helperText={taiKhoanHelperText}
             />
             <TextField
+              type="password"
               className={classes.textField}
               onChange={(e) => setMatKhau(e.target.value)}
               id="outlined-basic"
