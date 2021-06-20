@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
+import { actHandleModal } from "redux/actions/movieActions";
+import { useDispatch } from "react-redux";
+import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 
 const Item = styled.div`
   margin: 0.2rem 1rem;
@@ -104,14 +107,53 @@ const ComingSoonTime = styled(Time)`
     display: block;
   }
 `;
+const IconPlayVideo = styled.i`
+  display: none;
+  color: #fff;
+  width: 5rem;
+  height: 5rem;
+  line-height: 5rem;
+  text-align: center;
+  border: 2px solid #ff;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  background: rgba(197, 197, 197, 0.3);
+`;
+
+const IconPlayContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.3s linear;
+  ${Item}:hover & {
+    opacity: 1;
+  }
+`;
+
 export default function MovieItem(props) {
   const { movie, status } = props;
-
+  const dispatch = useDispatch();
+  const handleClickOpen = () => {
+    dispatch(actHandleModal(true, movie.trailer));
+  };
   return (
     <Item>
-      <ItemMedia>
+      <ItemMedia style={{ position: "relative" }}>
         <Image src={movie.hinhAnh} alt={movie.tenPhim}></Image>
         <ImageShadow src={movie.hinhAnh} alt={movie.tenPhim}></ImageShadow>
+        <IconPlayContainer onClick={handleClickOpen}>
+          <PlayCircleOutlineIcon
+            style={{ transform: "scale(2)", color: "#fff" }}
+          />
+        </IconPlayContainer>
       </ItemMedia>
 
       {status === "nowShowing" ? (

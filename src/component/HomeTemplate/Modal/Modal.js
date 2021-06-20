@@ -26,18 +26,31 @@ const IconContainer = styled.div`
   border: 3px solid #fff;
   border-radius: 50%;
 `;
+const IframeContainer = styled.div`
+  .iframe1 {
+    display: block;
+  }
+  .iframe2 {
+    display: none;
+  }
+  @media(max-width:  763px){
+    .iframe1 {
+      display: none;
+    }
+    .iframe2 {
+      display: block
+  }
+`;
 export default function ModalComponent(props) {
-  const { trailerFlim } = props;
-  console.log(trailerFlim);
   const classes = useStyles();
   const dispatch = useDispatch();
   const state = useSelector((state) => {
     return {
       open: state.movieReducer.isOpen,
+      link: state.movieReducer.linkTrailer,
     };
   });
-  const { open } = state;
-  console.log(open);
+  const { open, link } = state;
 
   const handleClose = () => {
     dispatch(actHandleModal(false));
@@ -63,15 +76,28 @@ export default function ModalComponent(props) {
             </IconButton>
           </IconContainer>
         ) : null}
-        <iframe
-          width={948}
-          height={1600 / 3}
-          src={trailerFlim}
-          title="YouTube video player"
-          frameBorder={0}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
+        <IframeContainer>
+          <iframe
+            className="iframe1"
+            width={711}
+            height={400}
+            src={link}
+            title="YouTube video player"
+            frameBorder={0}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+          <iframe
+            className="iframe2"
+            width={474}
+            height={800 / 3}
+            src={link}
+            title="YouTube video player"
+            frameBorder={0}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </IframeContainer>
       </StyledDialog>
     </div>
   );

@@ -8,3 +8,6 @@ export const GET_LIST_CINEMA_BRAND = "GET_LIST_CINEMA_BRAND";
 export const GET_LIST_CINEMA_BY_BRAND = "GET_LIST_CINEMA_BY_BRAND";
 export const OPEN_MODAL = "OPEN_MODAL";
 export const CLOSE_MODAL = "CLOSE_MODAL";
+export const FORM_REQUEST = "FORM_REQUEST";
+export const FORM_SUCCESS = "FORM_SUCCESS";
+export const FORM_FAILED = "FORM_FAILED";

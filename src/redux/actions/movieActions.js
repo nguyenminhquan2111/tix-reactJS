@@ -74,16 +74,17 @@ export const actGetListCinemaByBrand = (idCinema) => {
   };
 };
 
-export const actHandleModal = (res) => {
+export const actHandleModal = (res, link = null) => {
   return (dispatch) => {
-    if (res) dispatch(actOpenModal());
+    if (res) dispatch(actOpenModal(link));
     else dispatch(actCloseModal());
   };
 };
 //actions
-const actOpenModal = () => {
+const actOpenModal = (link) => {
   return {
     type: ActionType.OPEN_MODAL,
+    payload: link,
   };
 };
 const actCloseModal = () => {

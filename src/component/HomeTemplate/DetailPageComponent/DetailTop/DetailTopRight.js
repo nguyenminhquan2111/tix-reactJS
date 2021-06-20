@@ -1,35 +1,33 @@
 import React from "react";
 import styled from "styled-components";
 import CircleProgressBar from "./CircleProgressBar/CircleProgressBar";
-
 const Col_9 = styled.div`
-    flex: 0 0 75%;
-    max-width: 75%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14px;
-    .left {
-      width: 32rem;
-      color: #e9e9e9;
-      font-weight: 1rem;
-      //padding-right: 21rem;
-      padding-left: 1rem;
-      .pEl-2 {
-        span {
-          font-size: 1rem;
-          display: inline-block;
-          background-color: #fb4226 !important;
-          padding: 0 6px;
-          border-radius: 5px;
-          margin-right: 5px;
-        }
-        font-size: 1.5rem;
-        margin: 0;}
-     
+  flex: 0 0 75%;
+  max-width: 75%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  .left {
+    width: 32rem;
+    color: #e9e9e9;
+    font-weight: 1rem;
+    //padding-right: 21rem;
+    padding-left: 1rem;
+    .pEl-2 {
+      span {
+        font-size: 1rem;
+        display: inline-block;
+        background-color: #fb4226 !important;
+        padding: 0 6px;
+        border-radius: 5px;
+        margin-right: 5px;
+      }
+      font-size: 1.5rem;
+      margin: 0;
     }
   }
   .right {
