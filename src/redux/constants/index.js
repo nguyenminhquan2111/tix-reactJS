@@ -11,3 +11,5 @@ export const CLOSE_MODAL = "CLOSE_MODAL";
 export const FORM_REQUEST = "FORM_REQUEST";
 export const FORM_SUCCESS = "FORM_SUCCESS";
 export const FORM_FAILED = "FORM_FAILED";
+export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
+export const SIGN_UP_FAILED = "SIGN_UP_FAILED";

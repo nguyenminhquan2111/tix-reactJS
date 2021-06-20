@@ -15,3 +15,5 @@ export const URL_GET_LIST_CINEMA_BY_BRAND = (idCinemaBrand) =>
 
 export const URL_LOGIN_USER =
   "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap";
+export const URL_SIGN_UP_USER =
+  "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangKy";

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MenuItems, LoginItems, Location } from "../MenuItems/MenuItem";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import { NavLink } from "react-router-dom";
-
+import Swal from "sweetalert2";
 // Variable
 const text = "#000";
 const textHover = "#fb4226";
@@ -131,7 +132,25 @@ const NavbarLogin = styled.div`
   display: flex;
   align-items: center;
 `;
+const NavbarLogout = styled.div`
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding-right: 0.5rem;
+  display: flex;
+  align-items: center;
+  p {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    padding-left: 0.5rem;
+    color: #000;
+    font-weight: bold;
+    transition: all 0.3s linear;
 
+    &:hover {
+      color: #fb4226;
+    }
+  }
+`;
 const LoginTitle = styled.a`
   cursor: pointer !important;
   color: ${textLogin} !important;
@@ -139,7 +158,14 @@ const LoginTitle = styled.a`
   margin: 0 !important;
   font-weight: normal !important;
 `;
-
+const LoginTitleMobie = styled(LoginTitle)`
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  padding-left: 2rem;
+  i {
+    padding-right: 0.5rem !important;
+  }
+`;
 const NavbarLoginMobile = styled(NavbarLogin)`
   color: ${textLogin};
   display: flex;
@@ -237,7 +263,10 @@ export default function NavbarHome() {
   const [clicked, setClicked] = useState(true);
   const [location, setLocation] = useState("Hồ Chí Minh");
   const [dropdown, setDropdown] = useState(false);
-
+  const [isLogin, setIslogin] = useState(false);
+  useEffect(() => {
+    if (localStorage.getItem("UserCustomer")) setIslogin(true);
+  }, []);
   const renderMenuItem = () => {
     return MenuItems.map((item, index) => {
       return (
@@ -273,7 +302,64 @@ export default function NavbarHome() {
       );
     });
   };
+  const renderAccount = () => {
+    let data = JSON.parse(localStorage.getItem("UserCustomer"));
+    return (
+      <>
+        <NavbarLogin>
+          <LoginTitle>Xin Chào {data.hoTen}</LoginTitle>
+        </NavbarLogin>
 
+        <NavbarLogout onClick={handleLogout}>
+          <p>Đăng Xuất</p>
+        </NavbarLogout>
+      </>
+    );
+  };
+  const renderAccountMobie = () => {
+    let data = JSON.parse(localStorage.getItem("UserCustomer"));
+    return (
+      <>
+        <NavbarLogin>
+          <LoginTitleMobie>
+            <i className="fas fa-user-circle"></i>Xin Chào {data.hoTen}
+          </LoginTitleMobie>
+        </NavbarLogin>
+
+        <NavbarLogout onClick={handleLogout}>
+          <p>Đăng Xuất</p>
+        </NavbarLogout>
+      </>
+    );
+  };
+  const handleLogout = () => {
+    Swal.fire({
+      title: "Bạn có chắc muốn đăng xuất?",
+      text: "",
+
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Đăng xuất",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          width: "400",
+          height: "100",
+          backdrop: "none",
+          showCloseButton: true,
+          icon: "success",
+          title: "Đăng xuất thành công",
+          showConfirmButton: false,
+          timer: 2500,
+          timerProgressBar: true,
+        });
+        localStorage.removeItem("UserCustomer");
+        setIslogin(false);
+      }
+    });
+  };
   return (
     <Navbar>
       <NavLink to="/">
@@ -289,7 +375,13 @@ export default function NavbarHome() {
       <NavbarMenu className={!clicked ? "active" : ""}>
         {/* Login  */}
         <NavbarLoginMobile>
-          <i className="fas fa-user-circle"></i> {renderLogin()}
+          {isLogin ? (
+            renderAccountMobie()
+          ) : (
+            <>
+              <i className="fas fa-user-circle"></i> {renderLogin()}
+            </>
+          )}
         </NavbarLoginMobile>
         {/* menuList  */}
         {renderMenuItem()}
@@ -309,23 +401,29 @@ export default function NavbarHome() {
         </NavbarLocationMobile>
       </NavbarMenu>
       <NavbarRight>
-        <NavbarLogin>
-          <i className="fas fa-user-circle"></i>
-          {renderLogin()}
-        </NavbarLogin>
-        <NavbarLocation>
-          <i className="fas fa-map-marker-alt"></i>
-          <DropdownTitle
-            onClick={() => {
-              setDropdown(!dropdown);
-            }}
-          >
-            {location}
-          </DropdownTitle>
-          <DropdownList style={{ display: dropdown ? "block" : "none" }}>
-            {renderLocation()}
-          </DropdownList>
-        </NavbarLocation>
+        {isLogin ? (
+          renderAccount()
+        ) : (
+          <>
+            <NavbarLogin>
+              <i className="fas fa-user-circle"></i>
+              {renderLogin()}
+            </NavbarLogin>
+            <NavbarLocation>
+              <i className="fas fa-map-marker-alt"></i>
+              <DropdownTitle
+                onClick={() => {
+                  setDropdown(!dropdown);
+                }}
+              >
+                {location}
+              </DropdownTitle>
+              <DropdownList style={{ display: dropdown ? "block" : "none" }}>
+                {renderLocation()}
+              </DropdownList>
+            </NavbarLocation>
+          </>
+        )}
       </NavbarRight>
     </Navbar>
   );

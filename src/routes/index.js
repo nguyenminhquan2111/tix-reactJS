@@ -1,4 +1,4 @@
-import Form from "component/HomeTemplate/Form/Form";
+import Dashboard from "containers/AdminTemplate/DashboardPage/Dashboard";
 import DetailPage from "../containers/HomeTemplate/DetailPage";
 import HomePage from "../containers/HomeTemplate/HomePage";
 import TicketPage from "../containers/HomeTemplate/TicketPage";
@@ -20,11 +20,12 @@ const routesHome = [
     path: "/ticket",
     component: TicketPage,
   },
+];
+const routesAdmin = [
   {
     exact: false,
-    path: "/login",
-    component: Form,
+    path: "/dashboard",
+    component: Dashboard,
   },
 ];
-
-export { routesHome };
+export { routesHome, routesAdmin };

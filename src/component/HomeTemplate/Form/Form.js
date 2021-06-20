@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
@@ -9,10 +8,10 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Checkbox from "@material-ui/core/Checkbox";
-import { fetchLoginForm } from "redux/actions/userActions";
-import Button from "@material-ui/core/Button";
 import Swal from "sweetalert2";
-
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import SignIn from "./SignIn";
+import SignUp from "./SignUp";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -50,6 +49,7 @@ const FormContainer = styled.div`
   background-size: contain;
   background-position: center;
   width: 100vw;
+  max-width: 100%;
   height: 50rem;
 `;
 const TabsContainer = styled.div`
@@ -100,49 +100,23 @@ const TabsContainer = styled.div`
     }
   }
 `;
+const StyledTabs = withStyles({
+  flexContainer: {
+    justifyContent: "space-around",
+  },
+})(Tabs);
 export default function Form(props) {
-  const dispatch = useDispatch();
-  const loading = useSelector((state) => state.userReducer.loading);
-
   const [value, setValue] = useState(0);
-  const [checked, setChecked] = useState(true);
-  const [state, setState] = useState({ taiKhoan: "", matKhau: "" });
-  const handleChangeChecked = (event) => {
-    setChecked(event.target.checked);
-  };
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-  const handleLogin = (event) => {
-    event.preventDefault();
-    if (state.taiKhoan === "" && state.matKhau === "") {
-      Swal.fire("Bạn phải nhập tài khoản và mật khẩu", "", "error");
-      return;
-    }
-    if (state.taiKhoan === "") {
-      Swal.fire("Bạn phải nhập tài khoản ", "", "error");
-      return;
-    }
-    if (state.matKhau === "") {
-      Swal.fire("Bạn phải nhập mật khẩu", "", "error");
-      return;
-    }
-    dispatch(fetchLoginForm(state, props.history));
-  };
-  const handleOnChange = (event) => {
-    const { name, value } = event.target;
-    setState({
-      ...state,
-      [name]: value,
-    });
-    console.log(state);
   };
 
   return (
     <FormContainer>
       <TabsContainer>
         <AppBar position="static">
-          <Tabs
+          <StyledTabs
             value={value}
             onChange={handleChange}
             indicatorColor="primary"
@@ -150,40 +124,13 @@ export default function Form(props) {
           >
             <Tab label="SIGN IN" {...a11yProps(0)} />
             <Tab label="SIGN UP" {...a11yProps(1)} />
-          </Tabs>
+          </StyledTabs>
         </AppBar>
         <TabPanel value={value} index={0}>
-          <form>
-            <p className="title">USERNAME</p>
-            <input name="taiKhoan" onChange={handleOnChange} />
-            <p className="title">PASSWORD</p>
-            <input name="matKhau" onChange={handleOnChange} />
-            <div className="checkBoxContainer">
-              <Checkbox
-                checked={checked}
-                onChange={handleChangeChecked}
-                color="primary"
-                inputProps={{ "aria-label": "secondary  checkbox" }}
-              />
-              <span className="checkBoxContent">Keep me Signed in</span>
-            </div>
-
-            <Button
-              onClick={handleLogin}
-              variant="contained"
-              className="buttonForm"
-            >
-              Submit
-            </Button>
-            <Link to={"/"}>
-              <Button variant="contained" className="buttonForm">
-                Back To Home
-              </Button>
-            </Link>
-          </form>
+          <SignIn history={props.history} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Item Two
+          <SignUp history={props.history} />
         </TabPanel>
       </TabsContainer>
     </FormContainer>
