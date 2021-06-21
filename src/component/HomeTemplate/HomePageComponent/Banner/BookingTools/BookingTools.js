@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import Loading from "../../../../Loading";
 import _ from "lodash";
-import { actGetDetailMovie, actGetListMovie } from "redux/actions/movieActions";
+import { actGetDetailMovie } from "redux/actions/movieActions";
+import SkeletonCaption from "component/Skeleton/SkeletonCaption";
 
 const Tools = styled.div`
   position: absolute;
@@ -124,7 +124,7 @@ const ButtonConfirm = styled.button`
   }
 `;
 
-export default function BookingTools() {
+export default function BookingTools({ ...props }) {
   const [click, setClick] = useState({
     movie: false,
     cinema: false,
@@ -144,22 +144,19 @@ export default function BookingTools() {
 
   const state = useSelector((state) => {
     return {
+      loading: state.movieReducer.loading,
       detailMovie: state.movieReducer.detailMovie,
-      listMovie: state.movieReducer.listMovie,
     };
   });
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(actGetListMovie());
-  }, []);
-
-  useEffect(() => {
     dispatch(actGetDetailMovie(movieId));
   }, [movieId]);
 
-  const { listMovie, detailMovie } = state;
+  const { detailMovie, loading } = state;
+  const listMovie = props.listMovie;
 
   const renderListMovie = () => {
     return (
@@ -188,11 +185,15 @@ export default function BookingTools() {
 
   const renderListCinema = () => {
     let list = [];
-    if (!detailMovie) {
+    if (loading) {
       return (
-        <MenuItem>
-          <Loading />
-        </MenuItem>
+        <li style={{ padding: "0.2rem 1rem", whiteSpace: "nowrap" }}>
+          <SkeletonCaption />
+          <SkeletonCaption />
+          <SkeletonCaption />
+          <SkeletonCaption />
+          <SkeletonCaption />
+        </li>
       );
     }
     if (detailMovie && detailMovie.lichChieu.length === 0) {

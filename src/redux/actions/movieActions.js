@@ -36,7 +36,6 @@ export const actGetListMovieComing = () => {
 export const actGetDetailMovie = (idMovie) => {
   return (dispatch) => {
     dispatch(actRequestAPI());
-
     axios({
       url: URL_GET_DETAIL_MOVIE(idMovie),
       method: "GET",

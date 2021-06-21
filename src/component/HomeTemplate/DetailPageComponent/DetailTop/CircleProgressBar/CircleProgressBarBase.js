@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 const INITIAL_OFFSET = 25;
 const circleConfig = {

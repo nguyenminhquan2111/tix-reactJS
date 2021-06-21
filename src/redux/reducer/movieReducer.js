@@ -47,9 +47,12 @@ const movieReducer = (state = initialState, { type, payload }) => {
     case ActionType.API_REQUEST: {
       state.loading = true;
       state.detailMovie = null;
+      state.error = null;
       return { ...state };
     }
     case ActionType.API_FAILED: {
+      state.loading = false;
+      state.detailMovie = null;
       state.error = payload;
       return { ...state };
     }

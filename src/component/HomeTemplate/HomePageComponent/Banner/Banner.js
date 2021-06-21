@@ -10,7 +10,7 @@ const Carousel = styled.section`
   }
 `;
 
-export default function Banner() {
+export default function Banner({ ...props }) {
   return (
     <Carousel className="banner">
       <div id="demo" className="carousel slide" data-ride="carousel">
@@ -54,7 +54,7 @@ export default function Banner() {
           <span className="carousel-control-next-icon" />
         </a>
       </div>
-      <BookingTools />
+      <BookingTools listMovie={props.listMovie} />
     </Carousel>
   );
 }

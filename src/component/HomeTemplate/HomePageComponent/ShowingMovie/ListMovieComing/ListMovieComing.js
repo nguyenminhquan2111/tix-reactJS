@@ -1,8 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from "react";
 import Slider from "react-slick";
-import { actGetListMovieComing } from "redux/actions/movieActions";
 import styled from "styled-components";
 import MovieItem from "../MovieItem/MovieItem";
 
@@ -70,20 +68,8 @@ const BtnViewMore = styled.div`
   }
 `;
 
-export default function ListMovieComing() {
+export default function ListMovieComing({ ...props }) {
   const [number, setNumber] = useState(3);
-  const state = useSelector((state) => {
-    return {
-      isLoading: state.movieReducer.loading,
-      listMovieComing: state.movieReducer.listMovieComing,
-    };
-  });
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(actGetListMovieComing());
-  }, []);
 
   const settingSlick = {
     className: "list__movie__slider",
@@ -112,7 +98,6 @@ export default function ListMovieComing() {
       },
     ],
   };
-  const { listMovieComing } = state;
 
   const renderListMovieComing = () => {
     return (
@@ -130,6 +115,7 @@ export default function ListMovieComing() {
       })
     );
   };
+  const listMovieComing = props.listMovieComing;
   return (
     <>
       <ListContainer>

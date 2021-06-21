@@ -89,7 +89,7 @@ const Col_9 = styled.div`
   }
 `;
 
-function DetailTopRight(props) {
+export default function DetailTopRight(props) {
   const { item } = props;
 
   const renderImg = () => {
@@ -101,7 +101,7 @@ function DetailTopRight(props) {
     for (let i = 0; i < star; i++) arr.push(1);
     if (number) arr.push(2);
     return arr.map((item) => {
-      if (item == 1) return <img src="/images/star1.png" alt="star1" />;
+      if (item === 1) return <img src="/images/star1.png" alt="star1" />;
       return <img src="/images/star1.2.png" alt="star1.2" />;
     });
   };
@@ -137,5 +137,3 @@ function DetailTopRight(props) {
     </div>
   );
 }
-
-export default DetailTopRight;
