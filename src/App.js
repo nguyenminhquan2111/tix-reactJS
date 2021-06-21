@@ -4,7 +4,7 @@ import { routesAdmin, routesHome } from "./routes";
 import HomeTemplate from "./containers/HomeTemplate";
 import AdminTemplate from "containers/AdminTemplate";
 import Form from "component/HomeTemplate/Form/Form";
-import Auth from "containers/AdminTemplate/Auth";
+import Auth from "containers/AdminTemplate/AuthPage/Auth";
 function App() {
   const renderRoutesHome = (routes) => {
     if (routes && routes.length > 0) {

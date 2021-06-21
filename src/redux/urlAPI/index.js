@@ -17,3 +17,6 @@ export const URL_LOGIN_USER =
   "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap";
 export const URL_SIGN_UP_USER =
   "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangKy";
+
+export const URL_GET_LIST_USER =
+  "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP09";

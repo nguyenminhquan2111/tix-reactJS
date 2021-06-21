@@ -1,4 +1,3 @@
-import Footer from "component/HomeTemplate/Footer/Footer";
 import ModalComponent from "component/HomeTemplate/Modal/Modal";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";

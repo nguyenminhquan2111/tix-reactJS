@@ -1,5 +1,5 @@
-import Dashboard from "containers/AdminTemplate/Dashboard";
-import DashboardMovie from "containers/AdminTemplate/DashboardMovie";
+import DashboardMovie from "containers/AdminTemplate/DashboardMoviePage/DashboardMovie";
+import Dashboard from "containers/AdminTemplate/DashboardUserPage/Dashboard";
 import DetailPage from "../containers/HomeTemplate/DetailPage";
 import HomePage from "../containers/HomeTemplate/HomePage";
 import TicketPage from "../containers/HomeTemplate/TicketPage";

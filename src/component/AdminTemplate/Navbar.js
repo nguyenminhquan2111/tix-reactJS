@@ -1,25 +1,26 @@
 import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import FaceIcon from "@material-ui/icons/Face";
 import { useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
 import PersonIcon from "@material-ui/icons/Person";
+import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  button: {
+  buttonLogout: {
     background: "#212121",
     marginTop: "100px",
-    color: "#fafafa",
-    hover: {
-      "&:hover": {
-        backgroundColor: "rgb(7, 177, 77, 0.42)",
-      },
+    color: "#fff !important",
+    "&:hover": {
+      backgroundColor: "#fb4226 !important",
     },
+  },
+  button: {
+    color: "#3f51b5",
   },
   container: {
     width: "260px",
@@ -31,14 +32,14 @@ const useStyles = makeStyles((theme) => ({
     border: "none",
     bottom: 0,
     zIndex: 1,
-    border: 0,
-    borderRadius: 3,
+    borderRight: 5,
     boxShadow:
       "0 10px 30px -12px rgb(0 0 0 / 42%), 0 4px 25px 0px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%)",
     color: "white",
     overflowY: "auto",
     display: "flex",
     flexDirection: "column",
+    background: "#3f51b5",
   },
   avatar: {
     margin: "0 auto",
@@ -61,9 +62,8 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 4,
     textAlign: "center",
   },
-
-  buttonMenu: {
-    color: "#fff",
+  tagP: {
+    fontSize: "1.5rem",
   },
 }));
 function Navbar() {
@@ -84,33 +84,39 @@ function Navbar() {
         </Avatar>
 
         <span className={classes.span}></span>
-        <p>Hi, admin {userAdmin.hoTen}</p>
+        <p className={classes.tagP}>
+          <EmojiPeopleIcon />
+          Hi, admin {userAdmin.hoTen}
+        </p>
         <hr />
         <div className={classes.leftUp1}>
           <NavLink
-            activeClassName="active"
             style={{ textDecoration: "none" }}
             to="/admin/dashboard-user"
             exact
           >
-            <Button fullWidth> DashBoard User</Button>
+            <Button className={classes.button} variant="contained">
+              DashBoard User
+            </Button>
           </NavLink>
         </div>
 
         <div className={classes.leftUp2}>
           <NavLink
-            activeClassName="active"
             style={{ textDecoration: "none" }}
             to="/admin/dashboard-movie"
             exact
           >
-            <Button fullWidth> DashBoard Movie</Button>
+            <Button className={classes.button} variant="contained">
+              {" "}
+              DashBoard Movie
+            </Button>
           </NavLink>
         </div>
         <hr />
 
         <Button
-          className={classes.button}
+          className={classes.buttonLogout}
           onClick={changePageHome}
           color="primary"
           variant="contained"

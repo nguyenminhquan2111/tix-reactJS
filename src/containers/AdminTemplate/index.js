@@ -1,25 +1,44 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import Navbar from "./Navbar";
+import Navbar from "../../component/AdminTemplate/Navbar";
+import Appbar from "../../component/AdminTemplate/Appbar";
 import styled from "styled-components";
 const LayoutAdminStyled = styled.div`
   display: flex;
   flex-direction: row;
-
-  @media (max-width: 600px) {
+  .navbar {
+    display: block;
+  }
+  .appbar {
+    display: none;
+  }
+  @media (max-width: 960px) {
     flex-direction: column;
+    .navbar {
+      display: none;
+    }
+    .appbar {
+      display: block;
+    }
   }
 `;
 const PropsChildren = styled.div`
   display: block;
-  @media (min-width: 600px) {
+  @media (min-width: 960px) {
     margin-left: 260px;
   }
 `;
+
 function LayoutAdmin(props) {
   return (
     <LayoutAdminStyled>
-      <Navbar />
+      <div className="navbar">
+        <Navbar />
+      </div>
+      <div className="appbar">
+        <Appbar />
+      </div>
+
       <PropsChildren>{props.children}</PropsChildren>
     </LayoutAdminStyled>
   );
