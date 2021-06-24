@@ -154,6 +154,27 @@ export const actFetchListUser = () => {
       });
   };
 };
+
+export const actDeleteUser = (user) => {
+  const userAdmin = JSON.parse(localStorage.getItem("UserAdmin"));
+  axios({
+    method: "DELETE",
+    url: `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${user.taiKhoan}`,
+    headers: {
+      Authorization: `Bearer ${userAdmin.accessToken}`,
+    },
+  })
+    .then((rs) => {
+      Swal.fire("Xoá tài khoản thành công!", "Nhấn OK để thoát!", "success");
+    })
+    .catch((error) => {
+      Swal.fire(
+        "Xoá tài khoản không thành công !",
+        error.response.data,
+        "error"
+      );
+    });
+};
 const actGetListUserRequest = () => {
   return { type: ActionType.GET_LIST_USER_REQUEST };
 };
