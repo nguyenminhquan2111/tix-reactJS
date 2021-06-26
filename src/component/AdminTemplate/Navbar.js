@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#3f51b5",
   },
   container: {
-    width: "260px",
+    width: "230px",
     height: "100%",
     position: "fixed",
     top: 0,

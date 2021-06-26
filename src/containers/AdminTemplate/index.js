@@ -25,7 +25,7 @@ const LayoutAdminStyled = styled.div`
 const PropsChildren = styled.div`
   display: block;
   @media (min-width: 960px) {
-    margin-left: 230px;
+    margin-left: 200px;
   }
 `;
 

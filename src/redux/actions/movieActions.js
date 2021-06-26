@@ -80,7 +80,41 @@ export const actHandleModal = (res, link = null) => {
     else dispatch(actCloseModal());
   };
 };
+export const actFetchListMovie = () => {
+  return (dispatch) => {
+    dispatch(actFetchListMovieRequest());
+    axios({
+      url: URL_GET_LIST_MOVIE,
+      method: "GET",
+    })
+      .then((result) => {
+        console.log(result.data);
+        dispatch(actFetchListMovieSuccess(result.data));
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(actFetchListMovieFailed(error));
+      });
+  };
+};
 //actions
+const actFetchListMovieRequest = () => {
+  return {
+    type: ActionType.FETCH_LIST_MOVIE_REQUEST,
+  };
+};
+const actFetchListMovieSuccess = (data) => {
+  return {
+    type: ActionType.FETCH_LIST_MOVIE_SUCCESS,
+    payload: data,
+  };
+};
+const actFetchListMovieFailed = (error) => {
+  return {
+    type: ActionType.FETCH_LIST_MOVIE_FAILED,
+    payload: error,
+  };
+};
 const actOpenModal = (link) => {
   return {
     type: ActionType.OPEN_MODAL,

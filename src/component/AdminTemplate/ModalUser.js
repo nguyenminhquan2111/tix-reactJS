@@ -1,17 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import MuiDialogTitle from "@material-ui/core/DialogTitle";
 import MuiDialogContent from "@material-ui/core/DialogContent";
-import MuiDialogActions from "@material-ui/core/DialogActions";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
+import Swal from "sweetalert2";
 import { makeStyles } from "@material-ui/core/styles";
+import {
+  actAddUser,
+  actEditUser,
+  actFetchListUser,
+} from "redux/actions/userActions";
+import { useDispatch } from "react-redux";
+
 const useStyles = makeStyles({
   input: {
     margin: "10px 0",
@@ -54,28 +60,12 @@ const DialogContent = withStyles((theme) => ({
   },
 }))(MuiDialogContent);
 
-const DialogActions = withStyles((theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(1),
-  },
-}))(MuiDialogActions);
-const currencies = [
-  {
-    value: "quanTri",
-    label: "Quản trị",
-  },
-  {
-    value: "khacHang",
-    label: "Khách hàng",
-  },
-];
-export default function ModalUser() {
+export default function ModalUser(props) {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
-  const [currency, setCurrency] = useState("");
+  const dispatch = useDispatch();
+  const { open, userEdit } = props;
 
-  const [state, setState] = useState({
+  const [input, setInput] = useState({
     taiKhoan: "",
     matKhau: "",
     email: "",
@@ -84,48 +74,178 @@ export default function ModalUser() {
     maLoaiNguoiDung: "",
     hoTen: "",
   });
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  const [error, setError] = useState({
+    taiKhoan: "",
+    matKhau: "",
+    email: "",
+    soDt: "",
+    maLoaiNguoiDung: "",
+    hoTen: "",
+  });
+  const [validation, setValidation] = useState(false);
+  useEffect(() => {
+    if (userEdit) {
+      setInput({
+        ...input,
+        taiKhoan: userEdit.taiKhoan,
+        matKhau: userEdit.matKhau,
+        email: userEdit.email,
+        soDt: userEdit.soDt,
+        maLoaiNguoiDung: userEdit.maLoaiNguoiDung,
+        hoTen: userEdit.hoTen,
+      });
+      setValidation(true);
+    } else {
+      setInput({
+        ...input,
+        taiKhoan: "",
+        matKhau: "",
+        email: "",
+        soDt: "",
+        maLoaiNguoiDung: "",
+        hoTen: "",
+      });
+      setValidation(false);
+    }
+    console.log(input);
+    setError({
+      taiKhoan: "",
+      matKhau: "",
+      email: "",
+      soDt: "",
+      maLoaiNguoiDung: "",
+      hoTen: "",
+    });
+  }, [props.open]);
   const handleClose = () => {
-    setOpen(false);
-    setCurrency("");
+    props.closeModal(false);
+    setInput({
+      taiKhoan: "",
+      matKhau: "",
+      email: "",
+      soDt: "",
+      maNhom: "GP09",
+      maLoaiNguoiDung: "",
+      hoTen: "",
+    });
+    setError({
+      taiKhoan: "",
+      matKhau: "",
+      email: "",
+      soDt: "",
+      maLoaiNguoiDung: "",
+      hoTen: "",
+    });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(state);
-    setOpen(false);
-    setCurrency("");
+    console.log(input);
+    props.closeModal(false);
+    if (userEdit) {
+      actEditUser(input)
+        .then((result) => {
+          Swal.fire(
+            "Sửa tài khoản thành công!",
+            "Nhấn OK để thoát!",
+            "success"
+          );
+          dispatch(actFetchListUser());
+        })
+        .catch((error) => {
+          console.log({ ...error });
+
+          Swal.fire(
+            "Sửa tài khoản không thành công !",
+            error.response.data,
+            "error"
+          );
+        });
+    } else {
+      actAddUser(input)
+        .then((result) => {
+          Swal.fire(
+            "Tạo tài khoản thành công!",
+            "Nhấn OK để thoát!",
+            "success"
+          );
+          dispatch(actFetchListUser());
+        })
+        .catch((error) => {
+          Swal.fire(
+            "Tạo tài khoản không thành công !",
+            error.response.data,
+            "error"
+          );
+        });
+    }
+    handleClose();
   };
   const handleOnchange = (e) => {
     const { value, name } = e.target;
-    setState({
-      ...state,
+    setInput({
+      ...input,
       [name]: value,
     });
-    console.log(state);
+    console.log({ name, value });
+  };
+  const handleError = (e) => {
+    const { name, value } = e.target;
+    let mess = "";
+    mess = value === "" ? name + " khong duoc rong" : "";
+    console.log({ name, value, mess });
+    switch (name) {
+      case "taiKhoan":
+        break;
+      case "matKhau":
+        break;
+      case "email":
+        if (value && !value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
+          mess = "Vui lòng nhập đúng email.";
+        }
+        break;
+      case "soDt":
+        if (value && !value.match(/([1-9][0-9]*)|0/)) {
+          mess = "Vui lòng chỉ nhập số,";
+        }
+        break;
+      case "maLoaiNguoiDung":
+        break;
+      case "hoTen":
+        break;
+    }
+    setError({
+      ...error,
+      [name]: mess,
+    });
+
+    const { taiKhoan, matKhau, email, soDt, maLoaiNguoiDung, hoTen } = input;
+    if (taiKhoan && matKhau && email && soDt && maLoaiNguoiDung && hoTen)
+      setValidation(true);
+    else setValidation(false);
+    console.log({ input, error, validation });
+  };
+  const handleChange = (event) => {
+    setInput({
+      ...input,
+      maLoaiNguoiDung: event.target.value,
+    });
   };
   return (
     <div>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleClickOpen}
-        startIcon={<AddCircleIcon />}
-      >
-        Thêm người dùng
-      </Button>
       <Dialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
       >
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Thêm người dùng
+          {userEdit ? "Chỉnh sửa người dùng" : " Thêm người dùng"}
         </DialogTitle>
         <DialogContent dividers>
           <form onSubmit={handleSubmit}>
             <TextField
+              size="small"
+              InputLabelProps={{ shrink: true }}
+              value={input.taiKhoan}
               fullWidth
               className={classes.input}
               id="outlined-basic"
@@ -133,8 +253,16 @@ export default function ModalUser() {
               variant="outlined"
               onChange={handleOnchange}
               name="taiKhoan"
+              onKeyUp={handleError}
+              onBlur={handleError}
+              error={error.taiKhoan !== ""}
+              helperText={error.taiKhoan}
             />
+
             <TextField
+              size="small"
+              InputLabelProps={{ shrink: true }}
+              value={input.matKhau}
               fullWidth
               className={classes.input}
               id="outlined-basic"
@@ -142,8 +270,15 @@ export default function ModalUser() {
               variant="outlined"
               onChange={handleOnchange}
               name="matKhau"
+              onKeyUp={handleError}
+              onBlur={handleError}
+              error={error.matKhau !== ""}
+              helperText={error.matKhau}
             />
             <TextField
+              size="small"
+              InputLabelProps={{ shrink: true }}
+              value={input.email}
               fullWidth
               className={classes.input}
               id="outlined-basic"
@@ -151,8 +286,15 @@ export default function ModalUser() {
               variant="outlined"
               onChange={handleOnchange}
               name="email"
+              onKeyUp={handleError}
+              onBlur={handleError}
+              error={error.email !== ""}
+              helperText={error.email}
             />
             <TextField
+              size="small"
+              InputLabelProps={{ shrink: true }}
+              value={input.soDt}
               fullWidth
               className={classes.input}
               id="outlined-basic"
@@ -160,31 +302,36 @@ export default function ModalUser() {
               variant="outlined"
               onChange={handleOnchange}
               name="soDt"
+              onKeyUp={handleError}
+              onBlur={handleError}
+              error={error.soDt !== ""}
+              helperText={error.soDt}
             />
+
             <TextField
+              size="small"
+              InputLabelProps={{ shrink: true }}
+              value={input.maLoaiNguoiDung}
               fullWidth
               className={classes.input}
-              id="outlined-select-currency"
-              select
-              value={currency}
+              id="outlined-basic"
               label="Mã loại người dùng"
+              variant="outlined"
               onChange={handleOnchange}
               name="maLoaiNguoiDung"
-              variant="outlined"
+              onKeyUp={handleError}
+              onBlur={handleError}
+              error={error.maLoaiNguoiDung !== ""}
+              helperText={error.maLoaiNguoiDung}
+              select
             >
-              {currencies.map((option) => (
-                <MenuItem
-                  key={option.value}
-                  value={option.value}
-                  onClick={() => {
-                    setCurrency(option.value);
-                  }}
-                >
-                  {option.label}
-                </MenuItem>
-              ))}
+              <MenuItem value="KhachHang">Khách hàng</MenuItem>
+              <MenuItem value="QuanTri">Quản trị</MenuItem>
             </TextField>
             <TextField
+              size="small"
+              InputLabelProps={{ shrink: true }}
+              value={input.hoTen}
               fullWidth
               className={classes.input}
               id="outlined-basic"
@@ -192,10 +339,30 @@ export default function ModalUser() {
               variant="outlined"
               onChange={handleOnchange}
               name="hoTen"
+              onKeyUp={handleError}
+              onBlur={handleError}
+              error={error.hoTen !== ""}
+              helperText={error.hoTen}
             />
-            <Button type="submit" color="primary">
-              Thêm
-            </Button>
+            {userEdit ? (
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={!validation}
+              >
+                Lưu thay đổi
+              </Button>
+            ) : (
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={!validation}
+              >
+                Thêm người dùng
+              </Button>
+            )}
           </form>
         </DialogContent>
       </Dialog>

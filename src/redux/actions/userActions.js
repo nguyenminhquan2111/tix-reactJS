@@ -157,23 +157,38 @@ export const actFetchListUser = () => {
 
 export const actDeleteUser = (user) => {
   const userAdmin = JSON.parse(localStorage.getItem("UserAdmin"));
-  axios({
+  return axios({
     method: "DELETE",
     url: `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${user.taiKhoan}`,
     headers: {
       Authorization: `Bearer ${userAdmin.accessToken}`,
     },
-  })
-    .then((rs) => {
-      Swal.fire("Xoá tài khoản thành công!", "Nhấn OK để thoát!", "success");
-    })
-    .catch((error) => {
-      Swal.fire(
-        "Xoá tài khoản không thành công !",
-        error.response.data,
-        "error"
-      );
-    });
+  });
+};
+export const actEditUser = (user) => {
+  const userAdmin = JSON.parse(localStorage.getItem("UserAdmin"));
+  let userEdit = { ...user, maNhom: "GP09" };
+  return axios({
+    method: "PUT",
+    url: "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung",
+    data: userEdit,
+    headers: {
+      Authorization: `Bearer ${userAdmin.accessToken}`,
+    },
+  });
+};
+export const actAddUser = (user) => {
+  const userAdmin = JSON.parse(localStorage.getItem("UserAdmin"));
+  let userAdd = { ...user, maNhom: "GP09" };
+
+  return axios({
+    method: "POST",
+    url: "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/ThemNguoiDung",
+    data: userAdd,
+    headers: {
+      Authorization: `Bearer ${userAdmin.accessToken}`,
+    },
+  });
 };
 const actGetListUserRequest = () => {
   return { type: ActionType.GET_LIST_USER_REQUEST };
