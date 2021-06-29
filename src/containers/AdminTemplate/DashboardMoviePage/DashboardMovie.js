@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { actFetchListMovie } from "redux/actions/movieActions";
+import { actFetchListMovie, actDeleteMovie } from "redux/actions/movieActions";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles, withStyles, useTheme } from "@material-ui/core/styles";
 import Swal from "sweetalert2";
@@ -23,8 +23,7 @@ import CreateIcon from "@material-ui/icons/Create";
 import SearchIcon from "@material-ui/icons/Search";
 import Button from "@material-ui/core/Button";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import { actDeleteUser } from "redux/actions/userActions";
-import ModalUser from "component/AdminTemplate/ModalUser";
+import ModalMovie from "component/AdminTemplate/ModalMovie";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 
 const LightTooltip = withStyles((theme) => ({
@@ -120,7 +119,7 @@ export default function DashboardMovie() {
   const listMovie = useSelector((state) => state.movieReducer.listMovie);
   const [keyWord, setKeyWord] = useState("");
   const [open, setOpen] = useState(false);
-  const [userEdit, setUserEdit] = useState(null);
+  const [movieEdit, setMovieEdit] = useState(null);
   //-----------------
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -138,18 +137,20 @@ export default function DashboardMovie() {
   useEffect(() => {
     dispatch(actFetchListMovie());
   }, []);
-  const handleDeleteUser = (user) => {
-    actDeleteUser(user)
-      .then((result) => {
-        Swal.fire("Xoá tài khoản thành công!", "Nhấn OK để thoát!", "success");
+  const handleDeleteMovie = (user) => {
+    actDeleteMovie(user)
+      .then((rs) => {
+        Swal.fire("Xoá phim thành công !", "Nhấn OK để thoát!", "success");
         dispatch(actFetchListMovie());
       })
       .catch((error) => {
-        Swal.fire(
-          "Xoá tài khoản không thành công !",
-          error.response.data,
-          "error"
-        );
+        if (error.response.data)
+          Swal.fire(
+            "Xoá không phim thành công !",
+            error.response.data,
+            "error"
+          );
+        else Swal.fire("Xoá không phim thành công !", "", "error");
       });
   };
 
@@ -177,8 +178,8 @@ export default function DashboardMovie() {
         return;
       return (
         biDanh.toLowerCase().indexOf(keyWord.toLowerCase().trim()) !== -1 ||
-        danhGia.toLowerCase().indexOf(keyWord.toLowerCase().trim()) !== -1 ||
-        maPhim.toLowerCase().indexOf(keyWord.toLowerCase().trim()) !== -1 ||
+        String(danhGia).indexOf(keyWord.toLowerCase().trim()) !== -1 ||
+        String(maPhim).indexOf(keyWord.toLowerCase().trim()) !== -1 ||
         moTa.toLowerCase().indexOf(keyWord.toLowerCase().trim()) !== -1 ||
         ngayKhoiChieu.toLowerCase().indexOf(keyWord.toLowerCase().trim()) !==
           -1 ||
@@ -190,20 +191,24 @@ export default function DashboardMovie() {
     if (data && data.length >= 0)
       return (
         <div>
-          <h1 className={classes.title}>Dashboard User</h1>
-          <ModalUser open={open} closeModal={handleClose} userEdit={userEdit} />
+          <h1 className={classes.title}>Dashboard Movie</h1>
+          <ModalMovie
+            open={open}
+            closeModal={handleClose}
+            movieEdit={movieEdit}
+          />
 
           <div className={classes.container}>
             <Button
               variant="contained"
               color="primary"
               onClick={() => {
-                setUserEdit(null);
+                setMovieEdit(null);
                 handleClickOpen();
               }}
               startIcon={<AddCircleIcon />}
             >
-              Thêm người dùng
+              Thêm phim
             </Button>
             <TextField
               onChange={(e) => setKeyWord(e.target.value)}
@@ -230,6 +235,7 @@ export default function DashboardMovie() {
               <TableHead>
                 <TableRow>
                   <StyledTableCell align="center">Bí danh</StyledTableCell>
+                  <StyledTableCell align="center">Tên phim</StyledTableCell>
                   <StyledTableCell align="center">Đánh giá</StyledTableCell>
                   <StyledTableCell align="center">Hình ảnh</StyledTableCell>
 
@@ -238,7 +244,7 @@ export default function DashboardMovie() {
                   <StyledTableCell align="center">
                     Ngày khởi chiếu
                   </StyledTableCell>
-                  <StyledTableCell align="center">Tên phim</StyledTableCell>
+
                   <StyledTableCell align="center">Trailer</StyledTableCell>
                   <StyledTableCell align="center">Thao tác</StyledTableCell>
                 </TableRow>
@@ -254,6 +260,9 @@ export default function DashboardMovie() {
                   <StyledTableRow key={index}>
                     <StyledTableCellBody component="th" scope="row">
                       {row.biDanh}
+                    </StyledTableCellBody>
+                    <StyledTableCellBody align="right">
+                      {row.tenPhim}
                     </StyledTableCellBody>
                     <StyledTableCellBody align="right">
                       {row.danhGia}
@@ -275,9 +284,7 @@ export default function DashboardMovie() {
                     <StyledTableCellBody align="right">
                       {row.ngayKhoiChieu}
                     </StyledTableCellBody>
-                    <StyledTableCellBody align="right">
-                      {row.tenPhim}
-                    </StyledTableCellBody>
+
                     <StyledTableCellBody align="right">
                       <p className={classes.trailer}>{row.trailer}</p>
                     </StyledTableCellBody>
@@ -290,7 +297,7 @@ export default function DashboardMovie() {
                         color="primary"
                         size="small"
                         onClick={() => {
-                          setUserEdit(row);
+                          setMovieEdit(row);
                           handleClickOpen();
                         }}
                       >
@@ -306,7 +313,7 @@ export default function DashboardMovie() {
                         <LightTooltip title="Xóa">
                           <DeleteIcon
                             onClick={() => {
-                              handleDeleteUser(row);
+                              handleDeleteMovie(row);
                             }}
                           />
                         </LightTooltip>

@@ -97,6 +97,72 @@ export const actFetchListMovie = () => {
       });
   };
 };
+export const actDeleteMovie = (movie) => {
+  const userAdmin = JSON.parse(localStorage.getItem("UserAdmin"));
+  return axios({
+    method: "DELETE",
+    url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/XoaPhim?MaPhim=${movie.maPhim}`,
+    data: movie.maPhim,
+    headers: {
+      Authorization: `Bearer ${userAdmin.accessToken}`,
+    },
+  });
+};
+export const actAddMovie = (movie) => {
+  let moment = require("moment");
+  let form_data = new FormData();
+  let ngayKhoiChieu = moment(movie.ngayKhoiChieu).format("DD/MM/YYYY");
+  const userAdmin = JSON.parse(localStorage.getItem("UserAdmin"));
+  let maPhim = parseInt(movie.maPhim, 10);
+  let danhGia = parseInt(movie.danhGia, 10);
+  let movieAdd = {
+    ...movie,
+    maNhom: "GP09",
+    maPhim: maPhim,
+    danhGia: danhGia,
+    ngayKhoiChieu: ngayKhoiChieu,
+  };
+  for (const i in movieAdd) {
+    console.log(i, movieAdd[i]);
+    form_data.append(i, movieAdd[i]);
+  }
+  return axios({
+    method: "POST",
+    url: "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/ThemPhimUploadHinh",
+    // "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/UploadHinhAnhPhim",
+    data: form_data,
+    headers: {
+      Authorization: `Bearer ${userAdmin.accessToken}`,
+    },
+  });
+};
+export const actEditMovie = (movie) => {
+  let moment = require("moment");
+  let ngayKhoiChieu = moment(movie.ngayKhoiChieu).format("DD/MM/YYYY");
+  let form_data = new FormData();
+  const userAdmin = JSON.parse(localStorage.getItem("UserAdmin"));
+  let maPhim = parseInt(movie.maPhim, 10);
+  let danhGia = parseInt(movie.danhGia, 10);
+  let movieAdd = {
+    ...movie,
+    maNhom: "GP09",
+    maPhim: maPhim,
+    danhGia: danhGia,
+    ngayKhoiChieu: ngayKhoiChieu,
+  };
+  for (const i in movieAdd) {
+    console.log(i, movieAdd[i]);
+    form_data.append(i, movieAdd[i]);
+  }
+  return axios({
+    method: "POST",
+    url: "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/CapNhatPhimUpload",
+    data: form_data,
+    headers: {
+      Authorization: `Bearer ${userAdmin.accessToken}`,
+    },
+  });
+};
 //actions
 const actFetchListMovieRequest = () => {
   return {
