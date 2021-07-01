@@ -191,13 +191,9 @@ export default function ModalUser(props) {
   const handleError = (e) => {
     const { name, value } = e.target;
     let mess = "";
-    mess = value === "" ? name + " khong duoc rong" : "";
+    mess = value === "" ? name + " không được rỗng" : "";
     console.log({ name, value, mess });
     switch (name) {
-      case "taiKhoan":
-        break;
-      case "matKhau":
-        break;
       case "email":
         if (value && !value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
           mess = "Vui lòng nhập đúng email.";
@@ -208,9 +204,7 @@ export default function ModalUser(props) {
           mess = "Vui lòng chỉ nhập số,";
         }
         break;
-      case "maLoaiNguoiDung":
-        break;
-      case "hoTen":
+      default:
         break;
     }
     setError({

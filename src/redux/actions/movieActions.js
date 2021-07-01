@@ -6,6 +6,8 @@ import {
   URL_GET_LIST_CINEMA_BY_BRAND,
   URL_GET_LIST_MOVIE,
   URL_GET_LIST_MOVIE_COMING,
+  URL_ADD_AND_UPDATE_MOVIE,
+  URL_DELETE_MOVIE,
 } from "../urlAPI";
 
 //get from API
@@ -101,7 +103,7 @@ export const actDeleteMovie = (movie) => {
   const userAdmin = JSON.parse(localStorage.getItem("UserAdmin"));
   return axios({
     method: "DELETE",
-    url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/XoaPhim?MaPhim=${movie.maPhim}`,
+    url: URL_DELETE_MOVIE(movie.maPhim),
     data: movie.maPhim,
     headers: {
       Authorization: `Bearer ${userAdmin.accessToken}`,
@@ -128,7 +130,7 @@ export const actAddMovie = (movie) => {
   }
   return axios({
     method: "POST",
-    url: "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/ThemPhimUploadHinh",
+    url: URL_ADD_AND_UPDATE_MOVIE,
     // "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/UploadHinhAnhPhim",
     data: form_data,
     headers: {
@@ -156,7 +158,7 @@ export const actEditMovie = (movie) => {
   }
   return axios({
     method: "POST",
-    url: "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/CapNhatPhimUpload",
+    url: URL_ADD_AND_UPDATE_MOVIE,
     data: form_data,
     headers: {
       Authorization: `Bearer ${userAdmin.accessToken}`,

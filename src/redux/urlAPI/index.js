@@ -20,3 +20,7 @@ export const URL_SIGN_UP_USER =
 
 export const URL_GET_LIST_USER =
   "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP09";
+export const URL_ADD_AND_UPDATE_MOVIE =
+  "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/CapNhatPhimUpload";
+export const URL_DELETE_MOVIE = (id) =>
+  `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/XoaPhim?MaPhim=${id}`;

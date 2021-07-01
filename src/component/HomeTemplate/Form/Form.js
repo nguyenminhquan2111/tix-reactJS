@@ -75,13 +75,14 @@ const TabsContainer = styled.div`
     font-size: 0.8rem;
     opacity: 0.7;
   }
-  input {
+  .inputContainer {
+    margin: 10px 0;
     border: none;
-    padding: 15px 20px;
-    border-radius: 25px;
-    background: rgba(255, 255, 255, 0.1);
-    width: 100%;
-    margin: 0.5rem 0;
+  }
+  input {
+    border: none !important;
+    background: #fff;
+    border-radius: 5px;
   }
   .buttonForm {
     border: none;
