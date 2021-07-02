@@ -6,8 +6,9 @@ import {
   URL_GET_LIST_CINEMA_BY_BRAND,
   URL_GET_LIST_MOVIE,
   URL_GET_LIST_MOVIE_COMING,
-  URL_ADD_AND_UPDATE_MOVIE,
+  URL_ADD_MOVIE,
   URL_DELETE_MOVIE,
+  URL_UPDATE_MOVIE,
 } from "../urlAPI";
 
 //get from API
@@ -110,27 +111,12 @@ export const actDeleteMovie = (movie) => {
     },
   });
 };
-export const actAddMovie = (movie) => {
-  let moment = require("moment");
-  let form_data = new FormData();
-  let ngayKhoiChieu = moment(movie.ngayKhoiChieu).format("DD/MM/YYYY");
+export const actAddMovie = (form_data) => {
   const userAdmin = JSON.parse(localStorage.getItem("UserAdmin"));
-  let maPhim = parseInt(movie.maPhim, 10);
-  let danhGia = parseInt(movie.danhGia, 10);
-  let movieAdd = {
-    ...movie,
-    maNhom: "GP09",
-    maPhim: maPhim,
-    danhGia: danhGia,
-    ngayKhoiChieu: ngayKhoiChieu,
-  };
-  for (const i in movieAdd) {
-    console.log(i, movieAdd[i]);
-    form_data.append(i, movieAdd[i]);
-  }
+
   return axios({
     method: "POST",
-    url: URL_ADD_AND_UPDATE_MOVIE,
+    url: URL_ADD_MOVIE,
     // "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/UploadHinhAnhPhim",
     data: form_data,
     headers: {
@@ -138,27 +124,12 @@ export const actAddMovie = (movie) => {
     },
   });
 };
-export const actEditMovie = (movie) => {
-  let moment = require("moment");
-  let ngayKhoiChieu = moment(movie.ngayKhoiChieu).format("DD/MM/YYYY");
-  let form_data = new FormData();
+export const actEditMovie = (form_data) => {
   const userAdmin = JSON.parse(localStorage.getItem("UserAdmin"));
-  let maPhim = parseInt(movie.maPhim, 10);
-  let danhGia = parseInt(movie.danhGia, 10);
-  let movieAdd = {
-    ...movie,
-    maNhom: "GP09",
-    maPhim: maPhim,
-    danhGia: danhGia,
-    ngayKhoiChieu: ngayKhoiChieu,
-  };
-  for (const i in movieAdd) {
-    console.log(i, movieAdd[i]);
-    form_data.append(i, movieAdd[i]);
-  }
+
   return axios({
     method: "POST",
-    url: URL_ADD_AND_UPDATE_MOVIE,
+    url: URL_UPDATE_MOVIE,
     data: form_data,
     headers: {
       Authorization: `Bearer ${userAdmin.accessToken}`,

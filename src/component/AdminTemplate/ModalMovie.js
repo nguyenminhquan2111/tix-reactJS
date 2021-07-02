@@ -153,8 +153,23 @@ export default function ModalMovie(props) {
     e.preventDefault();
     console.log(input);
     props.closeModal(false);
+    let form_data = new FormData();
+    let ngayKhoiChieu = moment(input.ngayKhoiChieu).format("DD/MM/YYYY");
+    let maPhim = parseInt(input.maPhim, 10);
+    let danhGia = parseInt(input.danhGia, 10);
+    let data = {
+      ...input,
+      maNhom: "GP09",
+      maPhim: maPhim,
+      danhGia: danhGia,
+      ngayKhoiChieu: ngayKhoiChieu,
+    };
+    for (const i in data) {
+      console.log(i, data[i]);
+      form_data.append(i, data[i]);
+    }
     if (movieEdit) {
-      actEditMovie(input)
+      actEditMovie(form_data)
         .then((result) => {
           Swal.fire("Sửa phim thành công !", "Nhấn OK để thoát!", "success");
           dispatch(actFetchListMovie());
@@ -163,7 +178,7 @@ export default function ModalMovie(props) {
           Swal.fire("Sửa không phim thành công !", "Nhấn OK để thoát", "error");
         });
     } else {
-      actAddMovie(input)
+      actAddMovie(form_data)
         .then((result) => {
           Swal.fire("Thêm phim thành công !", "Nhấn OK để thoát!", "success");
           dispatch(actFetchListMovie());

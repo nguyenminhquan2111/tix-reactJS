@@ -123,8 +123,8 @@ export default function Form(props) {
             indicatorColor="primary"
             aria-label="simple tabs example"
           >
-            <Tab label="SIGN IN" {...a11yProps(0)} />
-            <Tab label="SIGN UP" {...a11yProps(1)} />
+            <Tab label="Đăng nhập" {...a11yProps(0)} />
+            <Tab label="Đăng ký" {...a11yProps(1)} />
           </StyledTabs>
         </AppBar>
         <TabPanel value={value} index={0}>

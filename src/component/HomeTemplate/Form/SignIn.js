@@ -79,7 +79,7 @@ export default function SignIn(props) {
           <TextField
             onChange={handleOnChange}
             name="taiKhoan"
-            label="Username"
+            label="Tài khoản"
             variant="filled"
             required
             fullWidth
@@ -91,7 +91,7 @@ export default function SignIn(props) {
             type="password"
             onChange={handleOnChange}
             name="matKhau"
-            label="Password"
+            label="Mật khẩu"
             variant="filled"
             required
             fullWidth
