@@ -2,12 +2,21 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import "./index.css";
 
-const PageNotFoundStyled = styled.div``;
+const PageNotFoundStyled = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: hidden;
+  display: block;
+  width: 100%;
+  height: 100%;
+`;
 
 export default class PageNotFound extends Component {
   render() {
     return (
-      <>
+      <PageNotFoundStyled>
         <div className="main">
           <div>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 355">
@@ -407,7 +416,7 @@ export default class PageNotFound extends Component {
             </svg>
           </div>
         </div>
-      </>
+      </PageNotFoundStyled>
     );
   }
 }

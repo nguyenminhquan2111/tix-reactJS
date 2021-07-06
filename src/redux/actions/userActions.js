@@ -2,6 +2,7 @@ import axios from "axios";
 import * as ActionType from "../constants";
 import { URL_LOGIN_USER, URL_SIGN_UP_USER, URL_GET_LIST_USER } from "../urlAPI";
 import Swal from "sweetalert2";
+import { URL_DELETE_USER, URL_EDIT_USER, URL_ADD_USER } from "../urlAPI";
 
 export const actLogin = (user, history) => {
   return (dispatch) => {
@@ -159,7 +160,7 @@ export const actDeleteUser = (user) => {
   const userAdmin = JSON.parse(localStorage.getItem("UserAdmin"));
   return axios({
     method: "DELETE",
-    url: `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${user.taiKhoan}`,
+    url: URL_DELETE_USER(user.taiKhoan),
     headers: {
       Authorization: `Bearer ${userAdmin.accessToken}`,
     },
@@ -170,7 +171,7 @@ export const actEditUser = (user) => {
   let userEdit = { ...user, maNhom: "GP09" };
   return axios({
     method: "PUT",
-    url: "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung",
+    url: URL_EDIT_USER,
     data: userEdit,
     headers: {
       Authorization: `Bearer ${userAdmin.accessToken}`,
@@ -183,7 +184,7 @@ export const actAddUser = (user) => {
 
   return axios({
     method: "POST",
-    url: "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/ThemNguoiDung",
+    url: URL_ADD_USER,
     data: userAdd,
     headers: {
       Authorization: `Bearer ${userAdmin.accessToken}`,
