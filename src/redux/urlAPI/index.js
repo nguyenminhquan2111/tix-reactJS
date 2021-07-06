@@ -13,6 +13,12 @@ export const URL_GET_LIST_CINEMA_BRAND =
 export const URL_GET_LIST_CINEMA_BY_BRAND = (idCinemaBrand) =>
   `https://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=${idCinemaBrand}`;
 
+export const URL_LIST_MOVIE_CINEMA = (idCinema) =>
+  `https://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maHeThongRap=${idCinema}&maNhom=GP09`;
+
+export const URL_DETAIL_TICKET_ROOM = (idRoom) =>
+  `https://movie0706.cybersoft.edu.vn/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${idRoom}`;
+
 export const URL_LOGIN_USER =
   "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap";
 export const URL_SIGN_UP_USER =
