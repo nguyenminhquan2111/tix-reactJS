@@ -43,32 +43,20 @@ export default function DetailMovieInRoom({ detailRoom }) {
   let history = useHistory();
   const classes = useStyles();
   const handleOnClick = () => {
-    if (localStorage.getItem("UserCustomer"))
-      Swal.fire({
-        width: "400",
-        height: "100",
-        backdrop: "none",
-        showCloseButton: true,
-        icon: "success",
-        title: "Đặt vé thành công",
-        showConfirmButton: false,
-        timer: 2500,
-        timerProgressBar: true,
-      });
-    else {
-      Swal.fire({
-        width: "400",
-        height: "100",
-        backdrop: "none",
-        showCloseButton: true,
-        icon: "warning",
-        title: "Bạn phải đăng nhập để đặt vé",
-        showConfirmButton: false,
-        timer: 2500,
-        timerProgressBar: true,
-      });
-      history.push("/login");
-    }
+    Swal.fire({
+      width: "400",
+      height: "100",
+      backdrop: "none",
+      showCloseButton: true,
+      icon: "success",
+      title: "Đặt vé thành công",
+      showConfirmButton: false,
+      timer: 2500,
+      timerProgressBar: true,
+    });
+    setTimeout(() => {
+      history.push("");
+    }, 2500);
   };
   return (
     <>
