@@ -1,6 +1,8 @@
 import { Box, Button, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
 import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   totalPrice: {
@@ -38,7 +40,24 @@ export default function DetailMovieInRoom({ detailRoom }) {
   const listBookingChair = useSelector(
     (state) => state.movieReducer.listBookingChair
   );
+  let history = useHistory();
   const classes = useStyles();
+  const handleOnClick = () => {
+    Swal.fire({
+      width: "400",
+      height: "100",
+      backdrop: "none",
+      showCloseButton: true,
+      icon: "success",
+      title: "Đặt vé thành công",
+      showConfirmButton: false,
+      timer: 2500,
+      timerProgressBar: true,
+    });
+    setTimeout(() => {
+      history.push("");
+    }, 2500);
+  };
   return (
     <>
       <Box className={classes.totalPrice}>
@@ -66,7 +85,7 @@ export default function DetailMovieInRoom({ detailRoom }) {
         ))}
       </Box>
       <hr />
-      <Button fullWidth variant="contained">
+      <Button fullWidth variant="contained" onClick={handleOnClick}>
         Đặt vé
       </Button>
     </>

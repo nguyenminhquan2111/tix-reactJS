@@ -13,7 +13,6 @@ export default function TicketPage(props) {
       detailTicketRoom: state.movieReducer.detailTicketRoom,
     };
   });
-
   const dispatch = useDispatch();
 
   useEffect(async () => {

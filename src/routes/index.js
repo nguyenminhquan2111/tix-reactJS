@@ -1,4 +1,5 @@
-import Dashboard from "containers/AdminTemplate/DashboardPage/Dashboard";
+import DashboardMovie from "containers/AdminTemplate/DashboardMoviePage/DashboardMovie";
+import Dashboard from "containers/AdminTemplate/DashboardUserPage/Dashboard";
 import DetailPage from "../containers/HomeTemplate/DetailPage";
 import HomePage from "../containers/HomeTemplate/HomePage";
 
@@ -18,8 +19,13 @@ const routesHome = [
 const routesAdmin = [
   {
     exact: false,
-    path: "/dashboard",
+    path: "/admin/dashboard-user",
     component: Dashboard,
+  },
+  {
+    exact: false,
+    path: "/admin/dashboard-movie",
+    component: DashboardMovie,
   },
 ];
 export { routesHome, routesAdmin };

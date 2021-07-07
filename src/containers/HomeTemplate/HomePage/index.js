@@ -1,4 +1,3 @@
-import Footer from "component/HomeTemplate/Footer/Footer";
 import ModalComponent from "component/HomeTemplate/Modal/Modal";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,7 +8,7 @@ import Cinema from "component/HomeTemplate/HomePageComponent/Cinema/Cinema";
 import "../mainSCSS/css/style.css";
 import { actGetListMovieComing } from "redux/actions/movieActions";
 import { actGetCinemaBrand } from "redux/actions/movieActions";
-
+import Footer from "./../../../component/HomeTemplate/Footer/Footer";
 export default function HomePage() {
   const state = useSelector((state) => {
     return {

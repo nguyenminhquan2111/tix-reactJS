@@ -88,6 +88,24 @@ const movieReducer = (state = initialState, { type, payload }) => {
       state.linkTrailer = payload;
       return { ...state };
     }
+    case ActionType.FETCH_LIST_MOVIE_REQUEST: {
+      state.loading = true;
+      state.listMovie = null;
+      state.error = null;
+      return { ...state };
+    }
+    case ActionType.FETCH_LIST_MOVIE_SUCCESS: {
+      state.loading = false;
+      state.listMovie = payload;
+      state.error = null;
+      return { ...state };
+    }
+    case ActionType.FETCH_LIST_MOVIE_FAILED: {
+      state.loading = false;
+      state.listMovie = null;
+      state.error = payload;
+      return { ...state };
+    }
     default:
       return { ...state };
   }

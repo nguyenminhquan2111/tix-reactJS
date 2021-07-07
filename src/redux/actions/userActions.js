@@ -1,7 +1,8 @@
 import axios from "axios";
 import * as ActionType from "../constants";
-import { URL_LOGIN_USER, URL_SIGN_UP_USER } from "../urlAPI";
+import { URL_LOGIN_USER, URL_SIGN_UP_USER, URL_GET_LIST_USER } from "../urlAPI";
 import Swal from "sweetalert2";
+import { URL_DELETE_USER, URL_EDIT_USER, URL_ADD_USER } from "../urlAPI";
 
 export const actLogin = (user, history) => {
   return (dispatch) => {
@@ -116,7 +117,7 @@ export const actAuth = (user, history) => {
           timer: 2500,
           timerProgressBar: true,
         });
-        history.replace("/dashboard");
+        history.replace("/admin/dashboard-user");
         dispatch(actLoginSuccess(result.data));
       })
       .catch((error) => {
@@ -135,6 +136,74 @@ export const actAuth = (user, history) => {
 
         dispatch(actLoginFailed(error));
       });
+  };
+};
+export const actFetchListUser = () => {
+  return (dispatch) => {
+    dispatch(actGetListUserRequest());
+    axios({
+      url: URL_GET_LIST_USER,
+      method: "GET",
+    })
+      .then((result) => {
+        console.log(result.data);
+        dispatch(actGetListUserSuccess(result.data));
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(actGetListUserFailed(error));
+      });
+  };
+};
+
+export const actDeleteUser = (user) => {
+  const userAdmin = JSON.parse(localStorage.getItem("UserAdmin"));
+  return axios({
+    method: "DELETE",
+    url: URL_DELETE_USER(user.taiKhoan),
+    headers: {
+      Authorization: `Bearer ${userAdmin.accessToken}`,
+    },
+  });
+};
+export const actEditUser = (user) => {
+  const userAdmin = JSON.parse(localStorage.getItem("UserAdmin"));
+  let userEdit = { ...user, maNhom: "GP09" };
+  return axios({
+    method: "PUT",
+    url: URL_EDIT_USER,
+    data: userEdit,
+    headers: {
+      Authorization: `Bearer ${userAdmin.accessToken}`,
+    },
+  });
+};
+export const actAddUser = (user) => {
+  const userAdmin = JSON.parse(localStorage.getItem("UserAdmin"));
+  let userAdd = { ...user, maNhom: "GP09" };
+
+  return axios({
+    method: "POST",
+    url: URL_ADD_USER,
+    data: userAdd,
+    headers: {
+      Authorization: `Bearer ${userAdmin.accessToken}`,
+    },
+  });
+};
+const actGetListUserRequest = () => {
+  return { type: ActionType.GET_LIST_USER_REQUEST };
+};
+const actGetListUserSuccess = (data) => {
+  return {
+    type: ActionType.GET_LIST_USER_SUCCESS,
+    payload: data,
+  };
+};
+const actGetListUserFailed = (error) => {
+  return {
+    type: ActionType.GET_LIST_USER_FAILED,
+    payload: error,
   };
 };
 const actLoginRequest = () => {

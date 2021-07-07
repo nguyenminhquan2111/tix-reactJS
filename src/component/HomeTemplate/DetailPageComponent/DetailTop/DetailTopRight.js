@@ -116,9 +116,7 @@ export default function DetailTopRight(props) {
             <span>C16</span>
             {item.tenPhim}
           </p>
-          <p className="pEl-3">
-            {item.lichChieu[0]?.thoiLuong} phút - 0 IMDb - 2D/Digital
-          </p>
+          <p className="pEl-3">180 phút - 0 IMDb - 2D/Digital</p>
         </div>
         <div className="right">
           {/* <div className="circular">

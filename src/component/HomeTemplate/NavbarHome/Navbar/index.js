@@ -337,10 +337,10 @@ export default function NavbarHome() {
       title: "Bạn có chắc muốn đăng xuất?",
       text: "",
 
-      icon: "warning",
+      icon: "question",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#9b9b9b",
       confirmButtonText: "Đăng xuất",
     }).then((result) => {
       if (result.isConfirmed) {

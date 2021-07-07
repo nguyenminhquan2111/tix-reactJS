@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { actHandleModal } from "redux/actions/movieActions";
 import { useDispatch } from "react-redux";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
+import { withStyles } from "@material-ui/core/styles";
 
 const Item = styled.div`
   margin: 0.2rem 1rem;
@@ -137,7 +138,12 @@ const IconPlayContainer = styled.div`
     opacity: 1;
   }
 `;
-
+const StyledButton = withStyles({
+  contained: {
+    backgroundColor: "#fa5238",
+    color: "#fff",
+  },
+})(Button);
 export default function MovieItem(props) {
   const { movie, status } = props;
   const dispatch = useDispatch();
@@ -162,9 +168,9 @@ export default function MovieItem(props) {
           <Time>{movie.danhGia}</Time>
 
           <Link to={`/detail/${movie.maPhim}`} style={{ color: "#fff" }}>
-            <Button variant="contained" color="secondary" className="buyButton">
+            <StyledButton variant="contained" className="buyButton">
               MUA VÉ
-            </Button>
+            </StyledButton>
           </Link>
         </>
       ) : (
