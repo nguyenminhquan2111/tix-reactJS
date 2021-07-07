@@ -1,14 +1,16 @@
 import axios from "axios";
 import * as ActionType from "../constants";
 import {
+  URL_DETAIL_TICKET_ROOM,
   URL_GET_DETAIL_MOVIE,
   URL_GET_LIST_CINEMA_BRAND,
   URL_GET_LIST_CINEMA_BY_BRAND,
   URL_GET_LIST_MOVIE,
   URL_GET_LIST_MOVIE_COMING,
+  URL_LIST_MOVIE_CINEMA,
   URL_ADD_MOVIE,
-  URL_DELETE_MOVIE,
   URL_UPDATE_MOVIE,
+  URL_DELETE_MOVIE,
 } from "../urlAPI";
 
 //get from API
@@ -54,6 +56,7 @@ export const actGetDetailMovie = (idMovie) => {
 };
 export const actGetCinemaBrand = () => {
   return (dispatch) => {
+    dispatch(actRequestAPI());
     axios({
       url: URL_GET_LIST_CINEMA_BRAND,
       method: "GET",
@@ -61,11 +64,14 @@ export const actGetCinemaBrand = () => {
       .then((res) => {
         dispatch(actCinemaBrand(res.data));
       })
-      .catch();
+      .catch((err) => {
+        dispatch(actFailedAPI(err));
+      });
   };
 };
 export const actGetListCinemaByBrand = (idCinema) => {
   return (dispatch) => {
+    dispatch(actRequestAPI());
     axios({
       url: URL_GET_LIST_CINEMA_BY_BRAND(idCinema),
       method: "GET",
@@ -73,7 +79,46 @@ export const actGetListCinemaByBrand = (idCinema) => {
       .then((res) => {
         dispatch(actCinemaByBrand(res.data));
       })
-      .catch();
+      .catch((err) => {
+        dispatch(actFailedAPI(err));
+      });
+  };
+};
+
+export const actGetListMovieCinema = (idCinema) => {
+  return (dispatch) => {
+    dispatch(actRequestAPI());
+    axios({
+      url: URL_LIST_MOVIE_CINEMA(idCinema),
+      method: "GET",
+    })
+      .then((res) => {
+        dispatch(actMovieCinema(res.data));
+      })
+      .catch((err) => {
+        dispatch(actFailedAPI(err));
+      });
+  };
+};
+
+export const actGetDetailTicketRoom = async (idRoom) => {
+  return async (dispatch) => {
+    dispatch(actRequestAPI());
+    await axios({
+      url: URL_DETAIL_TICKET_ROOM(idRoom),
+      method: "GET",
+    })
+      .then((res) => {
+        dispatch(actDetailTicketRoom(res.data));
+      })
+      .catch((err) => {
+        dispatch(actFailedAPI(err));
+      });
+  };
+};
+export const actGetBookingChair = (data) => {
+  return (dispatch) => {
+    dispatch(actBookingChair(data));
   };
 };
 
@@ -117,7 +162,6 @@ export const actAddMovie = (form_data) => {
   return axios({
     method: "POST",
     url: URL_ADD_MOVIE,
-    // "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/UploadHinhAnhPhim",
     data: form_data,
     headers: {
       Authorization: `Bearer ${userAdmin.accessToken}`,
@@ -193,9 +237,32 @@ const actCinemaBrand = (data) => {
   };
 };
 
+const actBookingChair = (data) => {
+  return {
+    type: ActionType.BOOKING_CHAIR,
+    payload: {
+      maGhe: data.maGhe,
+      giaVe: data.giaVe,
+      stt: data.stt,
+    },
+  };
+};
+
 const actCinemaByBrand = (data) => {
   return {
     type: ActionType.GET_LIST_CINEMA_BY_BRAND,
+    payload: data,
+  };
+};
+const actMovieCinema = (data) => {
+  return {
+    type: ActionType.GET_LIST_MOVIE_CINEMA,
+    payload: data,
+  };
+};
+const actDetailTicketRoom = (data) => {
+  return {
+    type: ActionType.GET_DETAIL_TICKET_ROOM,
     payload: data,
   };
 };

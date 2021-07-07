@@ -5,16 +5,17 @@ import { actGetListMovie } from "redux/actions/movieActions";
 import Banner from "component/HomeTemplate/HomePageComponent/Banner/Banner";
 import ShowingMovie from "component/HomeTemplate/HomePageComponent/ShowingMovie/ShowingMovie";
 import Cinema from "component/HomeTemplate/HomePageComponent/Cinema/Cinema";
-import Footer from "component/HomeTemplate/Footer/Footer";
 import "../mainSCSS/css/style.css";
 import { actGetListMovieComing } from "redux/actions/movieActions";
-
+import { actGetCinemaBrand } from "redux/actions/movieActions";
+import Footer from "./../../../component/HomeTemplate/Footer/Footer";
 export default function HomePage() {
   const state = useSelector((state) => {
     return {
       isLoading: state.movieReducer.loading,
       listMovie: state.movieReducer.listMovie,
       listMovieComing: state.movieReducer.listMovieComing,
+      listCinemaBrand: state.movieReducer.listCinemaBrand,
     };
   });
 
@@ -23,15 +24,16 @@ export default function HomePage() {
   useEffect(() => {
     dispatch(actGetListMovie());
     dispatch(actGetListMovieComing());
+    dispatch(actGetCinemaBrand());
   }, []);
 
-  const { listMovie, listMovieComing } = state;
+  const { listMovie, listMovieComing, listCinemaBrand } = state;
 
   return (
     <>
       <Banner listMovie={listMovie} />
       <ShowingMovie listMovie={listMovie} listMovieComing={listMovieComing} />
-      <Cinema />
+      <Cinema listCinemaBrand={listCinemaBrand} />
       <ModalComponent />
       <Footer />
     </>

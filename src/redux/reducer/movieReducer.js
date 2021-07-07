@@ -7,6 +7,9 @@ const initialState = {
   detailMovie: null,
   listCinemaBrand: null,
   listCinemaByBrand: null,
+  listMovieCinema: null,
+  detailTicketRoom: null,
+  listBookingChair: [],
   error: null,
   isOpen: false,
   linkTrailer: null,
@@ -44,6 +47,25 @@ const movieReducer = (state = initialState, { type, payload }) => {
       state.error = null;
       return { ...state };
     }
+    case ActionType.GET_LIST_MOVIE_CINEMA: {
+      state.loading = false;
+      state.listMovieCinema = payload;
+      state.error = null;
+      return { ...state };
+    }
+    case ActionType.GET_DETAIL_TICKET_ROOM: {
+      state.loading = false;
+      state.detailTicketRoom = payload;
+      state.error = null;
+      return { ...state };
+    }
+    case ActionType.BOOKING_CHAIR: {
+      let arrChair = [...state.listBookingChair];
+      let index = arrChair?.findIndex((item) => item.maGhe === payload.maGhe);
+      index !== -1 ? arrChair.splice(index, 1) : arrChair.push(payload);
+      return { ...state, listBookingChair: arrChair };
+    }
+
     case ActionType.API_REQUEST: {
       state.loading = true;
       state.detailMovie = null;

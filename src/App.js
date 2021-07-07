@@ -5,6 +5,7 @@ import HomeTemplate from "./containers/HomeTemplate";
 import AdminTemplate from "containers/AdminTemplate";
 import Form from "component/HomeTemplate/Form/Form";
 import Auth from "containers/AdminTemplate/AuthPage/Auth";
+import TicketPage from "containers/HomeTemplate/TicketPage";
 function App() {
   const renderRoutesHome = (routes) => {
     if (routes && routes.length > 0) {
@@ -40,6 +41,8 @@ function App() {
         {renderRoutesHome(routesHome)}
         {renderRoutesAdmin(routesAdmin)}
         <Route path="/admin" component={Auth} />
+        <Route path="/ticket/:maLichChieu" component={TicketPage} />
+        <Route path="/auth" component={Auth} />
         <Route path="/login" component={Form} />
         <Route path="" component={PageNotFound} />
       </Switch>

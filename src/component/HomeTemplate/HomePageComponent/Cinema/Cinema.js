@@ -1,15 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import CinemaBrandItem from "./CinemaBrand/CinemaBrandItem";
+import CinemaBrandItem from "./CinemaBrandItem";
 import styled from "styled-components";
-import CinemaByBrandItem from "./CinemaByBrand/CinemaByBrandItem";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import {
-  actGetCinemaBrand,
-  actGetListCinemaByBrand,
-} from "redux/actions/movieActions";
+import CinemaByBrandItem from "./CinemaByBrandItem";
+import { actGetListCinemaByBrand } from "redux/actions/movieActions";
+import { actGetListMovieCinema } from "redux/actions/movieActions";
+import MovieShowItem from "./MovieShowItem";
 
+const WrapperTopBot = styled.div`
+  height: 120px;
+  background: url(https://tix.vn/app/assets/img/icons/back-news.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+`;
 const CinemaBrandWrapper = styled.section`
   max-width: 100%;
   margin: 0 auto;
@@ -20,12 +24,13 @@ const CinemaBrandWrapper = styled.section`
     max-width: 50%;
   }
 `;
-const CinemaBrandContainer = styled(Tabs)`
+const CinemaBrandContainer = styled.div`
   display: flex;
   height: 700px;
   overflow-y: hidden;
+  margin-bottom: 20px;
 `;
-const CinemaBrand = styled(Tab)`
+const CinemaBrand = styled.div`
   cursor: pointer;
   padding: 0;
   opacity: 0.5;
@@ -34,10 +39,11 @@ const CinemaBrand = styled(Tab)`
     opacity: 1;
   }
 `;
-const CinemaBrandList = styled(TabList)`
+const CinemaBrandList = styled.div`
   border: 1px solid #ebebec;
+  width: 10%;
 `;
-const CinemaByBrandList = styled(TabPanel)`
+const CinemaByBrandList = styled.div`
   border-top: 1px solid #ebebec;
   border-bottom: 1px solid #ebebec;
   width: 35%;
@@ -54,35 +60,47 @@ const CinemaByBrandList = styled(TabPanel)`
     border-radius: 4px;
   }
 `;
+const MovieCinema = styled.div`
+  border-top: 1px solid #ebebec;
+  border-bottom: 1px solid #ebebec;
+  width: 55%;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 4px;
+    background-color: #e8e3e3;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 30%);
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 4px;
+  }
+`;
 
-export default function Cinema() {
+export default function Cinema(props) {
   const [idCinemaBrand, setIdCinemaBrand] = useState("BHDStar");
   const [cinemaLogo, setCinemaLogo] = useState(
     "http://movie0706.cybersoft.edu.vn/hinhanh/bhd-star-cineplex.png"
   );
+  const [maCumRap, setMaCumRap] = useState("");
 
   const state = useSelector((state) => {
     return {
       isLoading: state.movieReducer.loading,
-      listCinemaBrand: state.movieReducer.listCinemaBrand,
       listCinemaByBrand: state.movieReducer.listCinemaByBrand,
+      listMovieCinema: state.movieReducer.listMovieCinema,
     };
   });
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(actGetCinemaBrand());
-  }, []);
-
-  useEffect(() => {
     dispatch(actGetListCinemaByBrand(idCinemaBrand));
+    dispatch(actGetListMovieCinema(idCinemaBrand));
   }, [idCinemaBrand]);
 
-  const { listCinemaBrand, listCinemaByBrand } = state;
-
-  console.log("data", listCinemaBrand);
-  console.log("cinemaBrand", idCinemaBrand);
-  console.log("CinemaByBrand", listCinemaByBrand);
+  const { listCinemaByBrand, listMovieCinema } = state;
+  const { listCinemaBrand } = props;
 
   const renderCinemaBrand = () => {
     return (
@@ -108,24 +126,53 @@ export default function Cinema() {
       listCinemaByBrand &&
       listCinemaByBrand.map((item, index) => {
         return (
-          <CinemaByBrandItem
+          <div
             key={index}
-            cinemaByBrand={item}
-            cinemaLogo={cinemaLogo}
-          />
+            style={{ cursor: "pointer" }}
+            onClick={() => setMaCumRap(item.maCumRap)}
+          >
+            <CinemaByBrandItem cinemaByBrand={item} cinemaLogo={cinemaLogo} />
+          </div>
         );
       })
     );
   };
 
+  const renderMovieCinema = () => {
+    let theater = [];
+    let listMovie = [];
+
+    if (maCumRap && listMovieCinema) {
+      theater = listMovieCinema.map((item) =>
+        item.lstCumRap.find((theater) => theater.maCumRap === maCumRap)
+      );
+      if (theater) {
+        listMovie = theater.map(
+          (movie) => movie && movie.danhSachPhim.map((listMovie) => listMovie)
+        );
+        if (listMovie[0]) {
+          return listMovie[0].map((item, index) => (
+            <MovieShowItem
+              key={index}
+              detail={item}
+              onClick={() => console.log(item)}
+            />
+          ));
+        }
+      }
+    }
+    return <></>;
+  };
+
   return (
-    <CinemaBrandWrapper id="cumRap">
+    <CinemaBrandWrapper>
+      <WrapperTopBot></WrapperTopBot>
       <CinemaBrandContainer>
         <CinemaBrandList>{renderCinemaBrand()}</CinemaBrandList>
-        <CinemaByBrandList forceRender={true}>
-          {renderCinemaByBrand()}
-        </CinemaByBrandList>
+        <CinemaByBrandList>{renderCinemaByBrand()}</CinemaByBrandList>
+        <MovieCinema>{renderMovieCinema()}</MovieCinema>
       </CinemaBrandContainer>
+      <WrapperTopBot></WrapperTopBot>
     </CinemaBrandWrapper>
   );
 }
