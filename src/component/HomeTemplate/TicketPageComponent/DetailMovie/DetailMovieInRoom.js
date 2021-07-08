@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
   roomDetail: {
     fontWeight: "500",
     color: "grey",
-    fontSize: "20px",
+    fontSize: "15px",
   },
   chair: {
     color: "red",
@@ -37,6 +37,16 @@ const useStyles = makeStyles(() => ({
   btn: {
     backgroundColor: "green",
     color: "#FFF",
+  },
+  alert: {
+    textAlign: "center",
+    fontSize: "13px",
+    fontWeight: "400",
+    marginBottom: "5px",
+    "& span": {
+      color: "red",
+      fontSize: "13px",
+    },
   },
 }));
 
@@ -93,7 +103,7 @@ export default function DetailMovieInRoom({ detailRoom }) {
         </Typography>
         <hr />
         <Box className={classes.chair}>
-          Ghế:
+          Ghế:{" "}
           {listBookingChair.map((item, index) => (
             <span className={classes.chairNumber} key={index}>
               {item.stt}
@@ -102,16 +112,24 @@ export default function DetailMovieInRoom({ detailRoom }) {
         </Box>
         <hr />
       </Box>
+      <Box>
+        <Typography className={classes.alert}>
+          Vé đã mua không thể đổi hoặc hoàn tiền
+          <br />
+          Mã vé sẽ được gửi qua <span>ZMS</span> (tin nhắn Zalo) <br /> và{" "}
+          <span>Email</span> đã nhập
+        </Typography>
 
-      <Button
-        disabled={listBookingChair.length > 0 ? false : true}
-        fullWidth
-        variant="contained"
-        onClick={handleOnClick}
-        className={classes.btn}
-      >
-        Đặt vé
-      </Button>
+        <Button
+          disabled={listBookingChair.length > 0 ? false : true}
+          fullWidth
+          variant="contained"
+          onClick={handleOnClick}
+          className={classes.btn}
+        >
+          Đặt vé
+        </Button>
+      </Box>
     </>
   );
 }
