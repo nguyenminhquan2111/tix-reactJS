@@ -99,7 +99,7 @@ export default function Auth(props) {
   return (
     <AuthContainer>
       <CardStyled className={classes.root}>
-        <TitleAuth>Sign In</TitleAuth>
+        <TitleAuth>Đăng Nhập</TitleAuth>
         <CardContent>
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
             <TextField
@@ -131,7 +131,7 @@ export default function Auth(props) {
               color="primary"
               fullWidth="true"
             >
-              SUBMIT
+              Đăng nhập
             </ButtonStyled>
           </form>
         </CardContent>

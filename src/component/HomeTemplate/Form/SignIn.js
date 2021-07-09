@@ -110,11 +110,11 @@ export default function SignIn(props) {
         </div>
 
         <Button type="submit" variant="contained" className="buttonForm">
-          Submit
+          Đăng nhập
         </Button>
         <Link to={"/"}>
           <Button variant="contained" className="buttonForm">
-            Back To Home
+            Về trang chủ
           </Button>
         </Link>
       </form>
