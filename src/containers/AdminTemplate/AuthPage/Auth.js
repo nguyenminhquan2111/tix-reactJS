@@ -106,7 +106,7 @@ export default function Auth(props) {
               className={classes.textField}
               onChange={(e) => setTaiKhoan(e.target.value)}
               id="outlined-basic"
-              label="Username"
+              label="Tài khoản"
               variant="outlined"
               required
               fullWidth
@@ -118,7 +118,7 @@ export default function Auth(props) {
               className={classes.textField}
               onChange={(e) => setMatKhau(e.target.value)}
               id="outlined-basic"
-              label="Password"
+              label="Mật khẩu"
               variant="outlined"
               required
               fullWidth
