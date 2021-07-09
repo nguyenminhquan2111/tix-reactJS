@@ -10,6 +10,7 @@ import { actGetListMovieComing } from "redux/actions/movieActions";
 import { actGetCinemaBrand } from "redux/actions/movieActions";
 import Footer from "./../../../component/HomeTemplate/Footer/Footer";
 import MovieApp from "component/HomeTemplate/HomePageComponent/MovieApp/MovieApp";
+import Loader from "component/Loader";
 export default function HomePage() {
   const state = useSelector((state) => {
     return {
@@ -29,15 +30,16 @@ export default function HomePage() {
   }, []);
 
   const { listMovie, listMovieComing, listCinemaBrand } = state;
-
-  return (
-    <>
-      <Banner listMovie={listMovie} />
-      <ShowingMovie listMovie={listMovie} listMovieComing={listMovieComing} />
-      <Cinema listCinemaBrand={listCinemaBrand} />
-      <ModalComponent />
-      <MovieApp />
-      <Footer />
-    </>
-  );
+  if (listMovie && listMovieComing && listCinemaBrand)
+    return (
+      <>
+        <Banner listMovie={listMovie} />
+        <ShowingMovie listMovie={listMovie} listMovieComing={listMovieComing} />
+        <Cinema listCinemaBrand={listCinemaBrand} />
+        <ModalComponent />
+        <MovieApp />
+        <Footer />
+      </>
+    );
+  return <Loader />;
 }
