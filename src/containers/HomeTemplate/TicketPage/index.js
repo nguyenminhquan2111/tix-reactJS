@@ -26,14 +26,26 @@ export default function TicketPage(props) {
       {isLoading ? (
         <Loader />
       ) : (
-        <Grid container>
-          <Grid item xs={9} style={{ textAlign: "center" }}>
-            <DetailRoom detailRoom={detailTicketRoom} />
+        <>
+          <Grid container>
+            <Grid item xs={9} style={{ textAlign: "center" }}>
+              <DetailRoom detailRoom={detailTicketRoom} />
+            </Grid>
+            <Grid
+              item
+              xs={3}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                padding: "10px",
+                boxShadow: "0 0 15px rgb(0 0 0 / 30%)",
+              }}
+            >
+              <DetailMovieInRoom detailRoom={detailTicketRoom} />
+            </Grid>
           </Grid>
-          <Grid item xs={3}>
-            <DetailMovieInRoom detailRoom={detailTicketRoom} />
-          </Grid>
-        </Grid>
+        </>
       )}
     </>
   );

@@ -7,9 +7,11 @@ import { actGetDetailMovie } from "redux/actions/movieActions";
 import SkeletonCaption from "component/Skeleton/SkeletonCaption";
 import moment from "moment";
 import { useHistory } from "react-router";
+
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import Swal from "sweetalert2";
+
 const Tools = styled.div`
   position: absolute;
   background-color: white;
@@ -117,6 +119,7 @@ const ConfirmContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
+
 const ButtonConfirm = withStyles((theme) => ({
   root: {
     color: "#fff",
@@ -136,6 +139,7 @@ const ButtonConfirm = withStyles((theme) => ({
     backgroundColor: "#4a4a4a",
   },
 }))(Button);
+
 export default function BookingTools(props) {
   let history = useHistory();
   const [click, setClick] = useState({
@@ -305,6 +309,7 @@ export default function BookingTools(props) {
         timer: 2500,
         timerProgressBar: true,
       });
+
       history.push("/login");
     } else {
       if (maLichChieu) {
