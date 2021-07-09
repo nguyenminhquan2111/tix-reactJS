@@ -22,6 +22,13 @@ const Item = styled.div`
       display: block;
     }
   }
+  @media (max-width: 768px) {
+    .buyButton {
+      display: block;
+      margin: 0 auto;
+      width: 173px;
+    }
+  }
 `;
 
 const ItemMedia = styled.div`
@@ -47,6 +54,13 @@ const Image = styled.img`
   }
   @media (min-width: 768px) {
     border-radius: 20px;
+  }
+  @media (max-width: 768px) {
+    display: block;
+    width: unset;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    max-width: 173px;
   }
 `;
 
