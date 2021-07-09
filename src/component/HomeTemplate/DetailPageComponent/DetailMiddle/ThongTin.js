@@ -98,6 +98,11 @@ const ThongTin = styled.div`
       font-size: 0.8rem;
     }
   }
+  @media (max-width: 600px) {
+    .right {
+      padding-left: 0;
+    }
+  }
 `;
 export default function TabPanelThongTin(props) {
   const { movie } = props;
