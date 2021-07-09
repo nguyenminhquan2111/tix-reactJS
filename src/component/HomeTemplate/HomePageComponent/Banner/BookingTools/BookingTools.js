@@ -5,7 +5,11 @@ import styled from "styled-components";
 import _ from "lodash";
 import { actGetDetailMovie } from "redux/actions/movieActions";
 import SkeletonCaption from "component/Skeleton/SkeletonCaption";
-
+import moment from "moment";
+import { useHistory } from "react-router";
+import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
+import Swal from "sweetalert2";
 const Tools = styled.div`
   position: absolute;
   background-color: white;
@@ -113,18 +117,27 @@ const ConfirmContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
-const ButtonConfirm = styled.button`
-  font-size: 0.8rem;
-  color: #fff;
-  background-color: #4a4a4a;
-  padding: 0.2rem 1rem;
-  border-radius: 5px;
-  @media (min-width: 1100px) {
-    font-size: 1rem;
-  }
-`;
-
-export default function BookingTools({ ...props }) {
+const ButtonConfirm = withStyles((theme) => ({
+  root: {
+    color: "#fff",
+    backgroundColor: "#fa5238",
+    border: "0.0625rem solid #949494",
+    borderRadius: "5px",
+    padding: "0.2rem 1rem",
+    transition: " all 0.2s linear",
+    "&:hover": {
+      backgroundColor: "#fb4226",
+      color: "#fff",
+      opacity: "0.8",
+    },
+  },
+  disabled: {
+    color: "#fff !important",
+    backgroundColor: "#4a4a4a",
+  },
+}))(Button);
+export default function BookingTools(props) {
+  let history = useHistory();
   const [click, setClick] = useState({
     movie: false,
     cinema: false,
@@ -141,6 +154,7 @@ export default function BookingTools({ ...props }) {
   });
 
   const [movieId, setMovieId] = useState("");
+  const [maLichChieu, setMaLichChieu] = useState("");
 
   const state = useSelector((state) => {
     return {
@@ -261,20 +275,42 @@ export default function BookingTools({ ...props }) {
       });
     }
     return list.map((item, index) => {
-      item = new Date(item.ngayChieuGioChieu).toLocaleTimeString();
+      let time = moment(item.ngayChieuGioChieu).format("HH:mm A");
+
       return (
         <MenuItem
           key={index}
           onClick={() => {
+            setMaLichChieu(item.maLichChieu);
             setClick({ session: false });
-            // setSession(item);
-            setTitle({ ...title, session: item });
+            setTitle({ ...title, session: time });
           }}
         >
-          {item}
+          {time}
         </MenuItem>
       );
     });
+  };
+
+  const changePage = () => {
+    if (JSON.parse(localStorage.getItem("UserCustomer")) === null) {
+      Swal.fire({
+        width: "400",
+        height: "100",
+        backdrop: "none",
+        showCloseButton: true,
+        icon: "warning",
+        title: "Bạn phải đăng nhập để đặt vé!!!",
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: true,
+      });
+      history.push("/login");
+    } else {
+      if (maLichChieu) {
+        history.push(`/ticket/${maLichChieu}`);
+      }
+    }
   };
 
   return (
@@ -382,7 +418,10 @@ export default function BookingTools({ ...props }) {
       </SelectContainer>
       {/* Confirm S */}
       <ConfirmContainer>
-        <ButtonConfirm disabled={title.session !== "Suất chiếu" ? false : true}>
+        <ButtonConfirm
+          onClick={changePage}
+          disabled={title.session !== "Suất chiếu" ? false : true}
+        >
           MUA VÉ NGAY
         </ButtonConfirm>
       </ConfirmContainer>
