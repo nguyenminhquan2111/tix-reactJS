@@ -149,11 +149,11 @@ export default function SignUp(props) {
           variant="contained"
           className="buttonForm"
         >
-          Submit
+          Đăng ký
         </Button>
         <Link to={"/"}>
           <Button variant="contained" className="buttonForm">
-            Back To Home
+            Về trang chủ
           </Button>
         </Link>
       </form>
