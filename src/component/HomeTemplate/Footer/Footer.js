@@ -152,11 +152,11 @@ function Footer() {
             <Left>
               <p className="title">TIX</p>
               <Grid container>
-                <Grid xs={6}>
+                <Grid item xs={6}>
                   <a href="#">FAQ</a>
                   <a href="#">Brand Guidelines</a>
                 </Grid>
-                <Grid xs={6}>
+                <Grid item xs={6}>
                   <a href="#">Thỏa thuận sử dụng</a>
                   <a href="#">Chính sách bảo mật</a>
                 </Grid>
@@ -172,7 +172,7 @@ function Footer() {
           <Grid item xs={4}>
             <Right>
               <Grid container>
-                <Grid xs={6}>
+                <Grid item xs={6}>
                   <p className="title">MOBIE APP</p>
                   <a href="#">
                     <img src="/images/android-logo.png" />
@@ -181,7 +181,7 @@ function Footer() {
                     <img src="/images/apple-logo.png" />
                   </a>
                 </Grid>
-                <Grid xs={6}>
+                <Grid item xs={6}>
                   <p className="title">SOCIAL</p>
                   <a href="#">
                     <img src="/images/facebook-logo.png" />
@@ -200,7 +200,7 @@ function Footer() {
           <Grid item xs={4} sm={6}>
             <Left>
               <Grid container>
-                <Grid xs={12} className="Tix">
+                <Grid item xs={12} className="Tix">
                   <a href="#">Thỏa thuận sử dụng</a>
                   <a href="#">Chính sách bảo mật</a>
                 </Grid>
@@ -211,7 +211,7 @@ function Footer() {
           <Grid item xs={4}>
             <Right>
               <Grid container>
-                <Grid xs={12} className="DoiTac">
+                <Grid item xs={12} className="DoiTac">
                   <a href="#">
                     <img src="/images/facebook-logo.png" />
                   </a>
@@ -232,10 +232,10 @@ function Footer() {
           className="container__2"
           style={{ justifyContent: "space-between" }}
         >
-          <Grid sx={4}>
-            <img src="/images/zion-logo.jpg" className="img__left" />
+          <Grid item xs={4}>
+            <img src="/images/zion-logo.jpg" className="img__left" alt="" />
           </Grid>
-          <Grid sx={4}>
+          <Grid item xs={4}>
             <span className="title">
               TIX – SẢN PHẨM CỦA CÔNG TY CỔ PHẦN ZION
             </span>
@@ -255,10 +255,11 @@ function Footer() {
               Email: <a href="mailto:support@tix.vn">support@tix.vn</a>
             </span>
           </Grid>
-          <Grid sx={4}>
+          <Grid item xs={4}>
             <img
               src="/images/d1e6bd560daa9e20131ea8a0f62e87f8.png"
               className="img__right"
+              alt=""
             />
           </Grid>
         </Grid>

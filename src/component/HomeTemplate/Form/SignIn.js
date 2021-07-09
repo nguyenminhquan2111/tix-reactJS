@@ -8,11 +8,12 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { actLogin } from "redux/actions/userActions";
 import Container from "@material-ui/core/Container";
 import Loader from "component/Loader";
+import TextField from "@material-ui/core/TextField";
 
 export default function SignIn(props) {
   const dispatch = useDispatch();
   const [state, setState] = useState({ taiKhoan: "", matKhau: "" });
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
   const handleChangeChecked = (event) => {
     setChecked(event.target.checked);
   };
@@ -75,12 +76,28 @@ export default function SignIn(props) {
     <div>
       <form onSubmit={handleLogin}>
         <div className="inputContainer">
-          <p className="title">USERNAME</p>
-          <input name="taiKhoan" onChange={handleOnChange} />
+          <TextField
+            onChange={handleOnChange}
+            name="taiKhoan"
+            label="Tài khoản"
+            variant="filled"
+            required
+            fullWidth
+            size="small"
+          />
         </div>
-        <div>
-          <p className="title">PASSWORD</p>
-          <input type="password" name="matKhau" onChange={handleOnChange} />
+        <div className="inputContainer">
+          <TextField
+            type="password"
+            onChange={handleOnChange}
+            name="matKhau"
+            label="Mật khẩu"
+            variant="filled"
+            required
+            fullWidth
+            type={checked ? "text" : "password"}
+            size="small"
+          />
         </div>
         <div className="checkBoxContainer">
           <Checkbox
@@ -89,7 +106,7 @@ export default function SignIn(props) {
             color="primary"
             inputProps={{ "aria-label": "secondary  checkbox" }}
           />
-          <span className="checkBoxContent">Keep me Signed in</span>
+          <span className="checkBoxContent">Hiện mật khẩu</span>
         </div>
 
         <Button type="submit" variant="contained" className="buttonForm">

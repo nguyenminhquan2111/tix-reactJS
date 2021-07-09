@@ -5,6 +5,8 @@ import styled from "styled-components";
 import _ from "lodash";
 import { actGetDetailMovie } from "redux/actions/movieActions";
 import SkeletonCaption from "component/Skeleton/SkeletonCaption";
+import moment from "moment";
+import { useHistory } from "react-router";
 
 const Tools = styled.div`
   position: absolute;
@@ -124,7 +126,8 @@ const ButtonConfirm = styled.button`
   }
 `;
 
-export default function BookingTools({ ...props }) {
+export default function BookingTools(props) {
+  let history = useHistory();
   const [click, setClick] = useState({
     movie: false,
     cinema: false,
@@ -141,6 +144,7 @@ export default function BookingTools({ ...props }) {
   });
 
   const [movieId, setMovieId] = useState("");
+  const [maLichChieu, setMaLichChieu] = useState("");
 
   const state = useSelector((state) => {
     return {
@@ -261,20 +265,31 @@ export default function BookingTools({ ...props }) {
       });
     }
     return list.map((item, index) => {
-      item = new Date(item.ngayChieuGioChieu).toLocaleTimeString();
+      let time = moment(item.ngayChieuGioChieu).format("HH:mm A");
+
       return (
         <MenuItem
           key={index}
           onClick={() => {
+            setMaLichChieu(item.maLichChieu);
             setClick({ session: false });
-            // setSession(item);
-            setTitle({ ...title, session: item });
+            setTitle({ ...title, session: time });
           }}
         >
-          {item}
+          {time}
         </MenuItem>
       );
     });
+  };
+
+  const changePage = () => {
+    if (JSON.parse(localStorage.getItem("UserCustomer")) === null) {
+      history.push("/login");
+    } else {
+      if (maLichChieu) {
+        history.push(`/ticket/${maLichChieu}`);
+      }
+    }
   };
 
   return (
@@ -382,7 +397,10 @@ export default function BookingTools({ ...props }) {
       </SelectContainer>
       {/* Confirm S */}
       <ConfirmContainer>
-        <ButtonConfirm disabled={title.session !== "Suất chiếu" ? false : true}>
+        <ButtonConfirm
+          onClick={changePage}
+          disabled={title.session !== "Suất chiếu" ? false : true}
+        >
           MUA VÉ NGAY
         </ButtonConfirm>
       </ConfirmContainer>

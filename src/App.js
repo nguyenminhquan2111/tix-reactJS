@@ -40,6 +40,7 @@ function App() {
       <Switch>
         {renderRoutesHome(routesHome)}
         {renderRoutesAdmin(routesAdmin)}
+        <Route path="/admin" component={Auth} />
         <Route path="/ticket/:maLichChieu" component={TicketPage} />
         <Route path="/auth" component={Auth} />
         <Route path="/login" component={Form} />

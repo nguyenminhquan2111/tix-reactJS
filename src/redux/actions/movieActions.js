@@ -128,7 +128,76 @@ export const actHandleModal = (res, link = null) => {
     else dispatch(actCloseModal());
   };
 };
+export const actFetchListMovie = () => {
+  return (dispatch) => {
+    dispatch(actFetchListMovieRequest());
+    axios({
+      url: URL_GET_LIST_MOVIE,
+      method: "GET",
+    })
+      .then((result) => {
+        console.log(result.data);
+        dispatch(actFetchListMovieSuccess(result.data));
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(actFetchListMovieFailed(error));
+      });
+  };
+};
+export const actDeleteMovie = (movie) => {
+  const userAdmin = JSON.parse(localStorage.getItem("UserAdmin"));
+  return axios({
+    method: "DELETE",
+    url: URL_DELETE_MOVIE(movie.maPhim),
+    data: movie.maPhim,
+    headers: {
+      Authorization: `Bearer ${userAdmin.accessToken}`,
+    },
+  });
+};
+export const actAddMovie = (form_data) => {
+  const userAdmin = JSON.parse(localStorage.getItem("UserAdmin"));
+
+  return axios({
+    method: "POST",
+    url: URL_ADD_MOVIE,
+    data: form_data,
+    headers: {
+      Authorization: `Bearer ${userAdmin.accessToken}`,
+    },
+  });
+};
+export const actEditMovie = (form_data) => {
+  const userAdmin = JSON.parse(localStorage.getItem("UserAdmin"));
+
+  return axios({
+    method: "POST",
+    url: URL_UPDATE_MOVIE,
+    data: form_data,
+    headers: {
+      Authorization: `Bearer ${userAdmin.accessToken}`,
+    },
+  });
+};
 //actions
+const actFetchListMovieRequest = () => {
+  return {
+    type: ActionType.FETCH_LIST_MOVIE_REQUEST,
+  };
+};
+const actFetchListMovieSuccess = (data) => {
+  return {
+    type: ActionType.FETCH_LIST_MOVIE_SUCCESS,
+    payload: data,
+  };
+};
+const actFetchListMovieFailed = (error) => {
+  return {
+    type: ActionType.FETCH_LIST_MOVIE_FAILED,
+    payload: error,
+  };
+};
 const actOpenModal = (link) => {
   return {
     type: ActionType.OPEN_MODAL,
