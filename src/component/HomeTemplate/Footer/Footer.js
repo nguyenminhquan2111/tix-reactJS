@@ -153,12 +153,12 @@ function Footer() {
               <p className="title">TIX</p>
               <Grid container>
                 <Grid item xs={6}>
-                  <a href="#">FAQ</a>
-                  <a href="#">Brand Guidelines</a>
+                  <a href="https://www.cgv.vn/">FAQ</a>
+                  <a href="https://www.cgv.vn/">Brand Guidelines</a>
                 </Grid>
                 <Grid item xs={6}>
-                  <a href="#">Thỏa thuận sử dụng</a>
-                  <a href="#">Chính sách bảo mật</a>
+                  <a href="https://www.cgv.vn/">Thỏa thuận sử dụng</a>
+                  <a href="https://www.cgv.vn/">Chính sách bảo mật</a>
                 </Grid>
               </Grid>
             </Left>

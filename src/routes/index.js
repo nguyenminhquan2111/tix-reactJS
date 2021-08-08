@@ -2,7 +2,7 @@ import DashboardMovie from "containers/AdminTemplate/DashboardMoviePage/Dashboar
 import Dashboard from "containers/AdminTemplate/DashboardUserPage/Dashboard";
 import DetailPage from "../containers/HomeTemplate/DetailPage";
 import HomePage from "../containers/HomeTemplate/HomePage";
-
+import DashboardTheaterManager from "../containers/AdminTemplate/DashboardTheaterManagerPage/DashboardTheaterManager";
 const routesHome = [
   {
     exact: true,
@@ -26,6 +26,11 @@ const routesAdmin = [
     exact: false,
     path: "/admin/dashboard-movie",
     component: DashboardMovie,
+  },
+  {
+    exact: false,
+    path: "/admin/dashboard-theater-manager",
+    component: DashboardTheaterManager,
   },
 ];
 export { routesHome, routesAdmin };

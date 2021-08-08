@@ -79,6 +79,10 @@ const Appbar = (props) => {
       title: "Dashboard Movie",
       pageURL: "/admin/dashboard-movie",
     },
+    {
+      title: "Dashboard TheaterManager",
+      pageURL: "/admin/dashboard-theater-manager",
+    },
   ];
   return (
     <div className={classes.root}>

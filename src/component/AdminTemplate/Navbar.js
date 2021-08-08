@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonLogout: {
     background: "#212121",
-    marginTop: "100px",
+
     color: "#fff !important",
     "&:hover": {
       backgroundColor: "#fb4226 !important",
@@ -53,10 +53,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "8rem",
   },
   leftUp1: {
-    marginLeft: "-9px",
-    marginBottom: "30px",
-    marginTop: "10px",
     textDecoration: "none",
+    maxWidth: "12rem",
+    margin: "auto",
+    marginBottom: "1rem",
   },
   menu: {
     zIndex: 4,
@@ -101,15 +101,25 @@ function Navbar() {
           </NavLink>
         </div>
 
-        <div className={classes.leftUp2}>
+        <div className={classes.leftUp1}>
           <NavLink
             style={{ textDecoration: "none" }}
             to="/admin/dashboard-movie"
             exact
           >
             <Button className={classes.button} variant="contained">
-              {" "}
               DashBoard Movie
+            </Button>
+          </NavLink>
+        </div>
+        <div className={classes.leftUp1}>
+          <NavLink
+            style={{ textDecoration: "none" }}
+            to="/admin/dashboard-theater-manager"
+            exact
+          >
+            <Button className={classes.button} variant="contained">
+              DashBoard TheaterManager
             </Button>
           </NavLink>
         </div>
